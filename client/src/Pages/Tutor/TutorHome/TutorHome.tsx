@@ -1,14 +1,18 @@
-import Navbar from "../../../Components/Tutor/TutorHome/Navbar"
-
-
+import React from 'react'
+import Navbar from '../../../Components/Tutor/TutorHome/Navbar'
 
 function TutorHome() {
   return (
-    <div>
-        <Navbar/>
-       
-      
-    </div>
+    <div className=' dark:bg-black'>
+      <Navbar/>
+  
+  <h1>PYTHON</h1>
+
+
+   
+
+</div>
+
   )
 }
 

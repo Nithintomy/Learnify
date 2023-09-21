@@ -1,5 +1,5 @@
 import asyncHandler from 'express-async-handler'
-import lessonModel from "../../model/lessonModel"
+import lessonModel from "../../model/lesson"
 import { Request,Response } from 'express'
 
     const addLesson =asyncHandler(async(req:Request,res:Response)=>{

@@ -17,8 +17,8 @@ function Login() {
   const [emailErr,setEmailErr]=useState("")
   const [passErr,setPassErr] =useState("")
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
   const navigate = useNavigate();
+  const CLIENT_ID= import.meta.env.VITE_CLIENT_ID || '';
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,11 +39,12 @@ function Login() {
         console.log(response.data, "data here");
         localStorage.setItem("token", JSON.stringify(response.data.token));
         localStorage.setItem("user",JSON.stringify(response.data.user))
+      
         dispatch(login(response.data));
         setTimeout(() => {
           navigate("/");
         }, 2000);
-        toast.success("User created successfully");
+        toast.success("User Logged In");
       })
       .catch((error) => {
         toast.error(error.response.data.message);
@@ -52,7 +53,7 @@ function Login() {
 
   return (
    
-        <GoogleOAuthProvider clientId="164369348447-fpdvkvekc46tmvpo77b2f319u0f59mos.apps.googleusercontent.com">
+        <GoogleOAuthProvider clientId={CLIENT_ID}>
       <section className="bg-gray-50 dark:bg-gray-900">
         <ToastContainer />
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
@@ -67,47 +68,7 @@ function Login() {
                 Sign in to your account
               </h2>
             </div>
-            {/* google Login */}
           
-              <GoogleLogin
-                onSuccess={(credentialResponse) => {
-                  console.log(credentialResponse);
-                  axios.post(`${UserBaseUrl}/googleSignIn`,
-                  credentialResponse
-                  ).then((res)=>{
-                    if(!res.data.success){
-                      if(res.data.message==="user doesnot Exist"){
-                        toast.error(res.data.message)
-                        setEmailErr(res.data.message)
-                      }
-                    }
-                    if(res.data.message==="Login success"){
-                      toast.success("Login Success")
-                      localStorage.setItem("jwtToken",JSON.stringify(res.data.token))
-                      localStorage.setItem("user",JSON.stringify(res.data.user))
-                      window.location.href = "/";
-                    }
-
-                  }).catch((err)=>{
-                    toast.error(err?.message)
-                    if(err?.message==="Request failed with status code 400"){
-                      setEmailErr("User does not Exist")
-                    }else{
-                      setEmailErr(err?.message)
-                    }
-                  })    
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                  setEmailErr("Login Failed")
-                }}
-                type="standard"
-                size="large"
-                text="continue_with"
-                shape="square"
-              />
-              
-            
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
               <form className="space-y-6" onSubmit={(e) => handleSubmit(e)}>
@@ -139,12 +100,11 @@ function Login() {
                       Password
                     </label>
                     <div className="text-sm">
-                      <a
-                        href="#"
+                      <Link to='/forget-password'
                         className="font-semibold text-indigo-600 hover:text-indigo-500"
                       >
                         Forgot password?
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <div className="mt-2">
@@ -168,6 +128,57 @@ function Login() {
                   </button>
                 </div>
               </form>
+
+                 {/* google Login */}
+          
+              <div className="ml-24 mt-5">    
+              <GoogleLogin 
+            
+                onSuccess={(credentialResponse) => {
+                  console.log(credentialResponse);
+                  axios.post(`${UserBaseUrl}/googleSignIn`,
+                  credentialResponse
+                  ).then((res)=>{
+                    console.log(res,"response ondo")
+                    if(!res.data.success){
+                      if(res.data.message==="User does not exist"){
+                        toast.error(res.data.message)
+                        setEmailErr(res.data.message)
+                      }
+                    }
+                    if(res.data.message==="login successfully"){
+                      toast.success("Login Success")
+                      console.log(res.data,"data vanilla")
+                      localStorage.setItem("jwtToken",JSON.stringify(res.data.token))
+                      localStorage.setItem("user",JSON.stringify(res.data))
+                      dispatch(login(res.data));
+                      console.log(res.data)
+                      setTimeout(() => {
+                        navigate("/");
+                      }, 2000);
+                    
+                    }
+
+                  }).catch((err)=>{
+                    toast.error(err?.message)
+                    if(err?.message==="Request failed with status code 400"){
+                      setEmailErr("User does not Exist")
+                    }else{
+                      setEmailErr(err?.message)
+                    }
+                  })    
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                  setEmailErr("Login Failed")
+                }}
+                type="standard"
+                size="large"
+                text="continue_with"
+                shape="square"
+              />
+              
+              </div>
 
               <p className="mt-10 text-center text-sm text-gray-500">
                 Not a member?

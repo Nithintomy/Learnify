@@ -1,7 +1,7 @@
 import express from 'express'
-import { tutorLogin, tutorRegister } from '../../controller/tutorController/tutorController';
+import { tutorLogin, tutorLogout, tutorRegister } from '../../controller/tutorController/tutorController';
 import { addCourses,getCourses } from '../../controller/tutorController/addCourse';
-import { addCategory } from '../../controller/tutorController/addCategory';
+import { addCategory, getAllCategory } from '../../controller/tutorController/addCategory';
 import { addLesson } from '../../controller/tutorController/addLesson';
 
 const tutorRouter = express.Router();
@@ -12,17 +12,24 @@ tutorRouter.post('/register',tutorRegister)
 //tutor Login
 tutorRouter.post('/login',tutorLogin)
 
+//tutor Logout
+tutorRouter.put('/logout',tutorLogout)
+
 //tutor addCategory
 tutorRouter.post('/addCategory',addCategory)
 
+//tutor getCategory
+
+tutorRouter.get('/Allcategory',getAllCategory)
+
 //tutor addCourses
-tutorRouter.post('/addCourses',addCourses)
+tutorRouter.post('/addCourse',addCourses)
 
 //tutor can view Courses
-tutorRouter.get('/courses',getCourses)
+tutorRouter.get('/courses/:id',getCourses)
 
 //tutor can add Lessons
-tutorRouter.post('/addLessons',addLesson)
+tutorRouter.post('/addLessons',addLesson) 
 
 // tutor can a get Lessons
 

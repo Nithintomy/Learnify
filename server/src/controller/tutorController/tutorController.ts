@@ -10,6 +10,7 @@ const tutorRegister = async(req:Request,res:Response)=>{
       console.log(req.body)
 
       const tutorExist =await TutorModel.findOne({tutorEmail})
+      
       const phoneExist =await TutorModel.findOne({phone})
 
       if(tutorExist || phoneExist){
@@ -55,15 +56,18 @@ const tutorRegister = async(req:Request,res:Response)=>{
 
 const tutorLogin =async(req:Request,res:Response)=>{
     const {tutorEmail,password}=req.body
-    console.log(req.body)
+  
     try {
        
-       
+        const tutor = await TutorModel.findOneAndUpdate(
+        {tutorEmail},
+        {isOnline:true},
+        {new:true}
+        )
+       console.log(tutor,"I am tutor")
 
-        const tutor = await TutorModel.findOne({tutorEmail})
-       
-
-        if(!tutor){
+       if(!tutor){
+            console.log("hello")
             return res.status(400).json({message:"No Tutor Found"})
 
         }
@@ -96,4 +100,25 @@ const tutorLogin =async(req:Request,res:Response)=>{
 }
 
 
-export {tutorRegister,tutorLogin}
+const tutorLogout =async(req:Request,res:Response)=>{
+
+    try {
+        const tutorid =req.params.id;
+
+
+        const tutor =await TutorModel.findById({_id:tutorid},{isOnline:false},{new:true}) 
+
+        if(!tutor){
+            res.status(404).json({message:"Tutor Not Found"})
+        }
+
+        return res.status(200).json({message:"Tutor Logged Out Successfully"})        
+    } catch (error) {
+        res.status(500).json({message:"Server Error"})
+     
+    }
+
+
+}
+
+export {tutorRegister,tutorLogin,tutorLogout}

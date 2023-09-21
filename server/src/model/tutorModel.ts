@@ -11,6 +11,7 @@ interface TUTOR extends Document {
     courses: mongoose.Schema.Types.ObjectId;
     createdAt: Date;
     updatedAt: Date;
+    isOnline: boolean; 
     matchPassword(enteredPassword: string): Promise<boolean>;
 }
 
@@ -49,6 +50,10 @@ const TutorSchema = new Schema<TUTOR>({
         required: true,
         default: Date.now,
     },
+    isOnline:{
+        type:Boolean,
+        default:false
+    }
 }, { timestamps: true });
 
 TutorSchema.methods.matchPassword = async function (enteredPassword: string) {

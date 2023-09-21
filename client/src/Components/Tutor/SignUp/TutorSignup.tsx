@@ -1,3 +1,4 @@
+import React from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import {useState} from 'react'
 import {toast,ToastContainer } from 'react-toastify'
@@ -32,6 +33,7 @@ function SignUp() {
             toast.error("Require All fields")
             return
         }
+        
 
         if (!isStrongPassword(password)) {
             toast.error("password Must be atleast 8 characters")

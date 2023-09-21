@@ -1,6 +1,6 @@
 import mongoose, {Schema,Document, Model,model } from "mongoose";
 
-interface Category extends Document {
+export interface Category extends Document {
     title:string,
     description:string,
     photo:string[],
@@ -8,7 +8,7 @@ interface Category extends Document {
     updatedAt:Date
 }
 
-const categorySchema =new mongoose.Schema({
+const categorySchema =new Schema<Category>({
     title:{
         type:String,
         required:true
@@ -22,10 +22,12 @@ const categorySchema =new mongoose.Schema({
     }],
     createdAt:{
         type: Date,
+        required:true,
         default:Date.now
     },
     updatedAt:{
         type:Date,
+        required:true,
         default:Date.now
     }
 },{timestamps:true})

@@ -10,14 +10,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@heroicons/react": "^2.0.18",
     "@material-tailwind/react": "^2.1.1",
+    "@mui/icons-material": "^5.14.9",
+    "@mui/material": "^5.14.9",
     "@popperjs/core": "^2.11.8",
     "@react-oauth/google": "^0.11.1",
     "@reduxjs/toolkit": "^1.9.5",
+    "@types/react-router-dom": "^5.3.3",
     "add": "^2.0.6",
     "alpinejs": "^3.13.0",
     "axios": "^1.5.0",
+    "cloudinary": "^1.40.0",
     "react": "^18.2.0",
     "react-auth-kit": "^2.12.6",
     "react-dom": "^18.2.0",
@@ -30,18 +36,22 @@
   },
   "devDependencies": {
     "@types/alpinejs": "^3.7.2",
+    "@types/mongoose": "^5.11.97",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
+    "@vitejs/plugin-react-swc": "^3.3.2",
     "autoprefixer": "^10.4.15",
+    "dotenv": "^16.3.1",
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "postcss": "^8.4.29",
     "tailwindcss": "^3.3.3",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "typescript": "^5.2.2",
+    "vite": "^4.4.5",
+    "vite-plugin-rewrite-all": "^1.0.1"
   }
 }

@@ -1,0 +1,20 @@
+.toast-container.down-to-top {
+    top: auto;
+    bottom: 0;
+    flex-direction: column-reverse;
+  }
+  
+  .toastify-content {
+  
+    animation: downToTop 0.2s ease;
+  
+    @keyframes downToTop {
+      from {
+        transform: translateY(100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+  }
+  

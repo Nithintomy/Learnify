@@ -3,7 +3,7 @@ import mongoose,{Schema,Document,model,Model} from "mongoose";
 import bcrypt from 'bcrypt';
 
 //structure of a student document in monodb
-interface Student extends Document {
+export interface Student extends Document {
     studentName:string,
     studentEmail:string,
     phone:number,
@@ -13,6 +13,7 @@ interface Student extends Document {
     createAt:Date,
     updatedAt:Date,
     isBlocked:boolean,
+    verifyToken:string,
     matchPassword(enteredPassword:string):Promise<boolean>
 
 }
@@ -30,14 +31,16 @@ const userSchema = new Schema<Student>({
     },
     phone:{
         type:Number,
-        required:true
+        unique: true,
+        max: 999999999999, 
     },
     password:{
         type:String,
-        required:true
+        min:8
     },
     photo:[{
-        type:String
+        type:String,
+        default:'',
     }],
     courses:{
         type:mongoose.Schema.Types.ObjectId,
@@ -54,6 +57,9 @@ const userSchema = new Schema<Student>({
         required:true,
         default:Date.now
     },
+    verifyToken:{
+        type:String
+    }
 },{timestamps:true})
 
 

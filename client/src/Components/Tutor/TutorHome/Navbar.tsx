@@ -1,39 +1,58 @@
+import React, { useEffect } from "react";
 import mainlogo from "../../../assets/main-logo.jpg";
 import { useSelector ,useDispatch,} from "react-redux";
-import { selectTutor } from "../../../features/tutorSlice/tutorSlice";
+import { login, selectTutor } from "../../../features/tutorSlice/tutorSlice";
 import {useState} from 'react'
 import {logout} from "../../../features/tutorSlice/tutorSlice";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 function Navbar() {
   const tutor = useSelector(selectTutor);
   console.log(tutor, "tutor vanuu")
   const dispatch = useDispatch();
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [showCourseDropdown, setShowCourseDropdown] = useState(false);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
   const navigate =useNavigate()
 
-  const handleUserClick = () => {
-    setShowDropdown(!showDropdown);
+  const handleCourseClick = () => {
+    setShowCourseDropdown(!showCourseDropdown);
   };
 
+  const handleUserClick = () => {
+    setShowUserDropdown(!showUserDropdown);
+  };
+  
+  
   const handleLogout = () => {
     // Dispatch the logout action
     dispatch(logout());
-    // Hide the dropdown
-    setShowDropdown(false);
+    // Hide both dropdowns
+    setShowCourseDropdown(false);
+    setShowUserDropdown(false);
     navigate('/tutorLogin')
   };
+  
+  useEffect(() => {
+    const storedUserData = localStorage.getItem("tutorData");
+    if (storedUserData) {
+      const parsedUserData = JSON.parse(storedUserData);
+      console.log(parsedUserData,"tutorData")
+      dispatch(login(parsedUserData));
+    }
+  }, [dispatch]);
+  
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a href="" className="flex items-center">
+          <Link to="" className="flex items-center">
             <img src={mainlogo} className="h-16 mr-3" />
             <span className="text-2xl font-semibold whitespace-nowrap dark:text-white">
               LEARNIFY
             </span>
-          </a>
+          </Link>
 
           <div className="flex items-center md:order-2">
             <button
@@ -68,33 +87,59 @@ function Navbar() {
           >
             <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               <li>
-                <a
-                  className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                <Link to="/tutorHome"
+                  className="text-md font-semibold  text-left text-black uppercase  hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500  dark:hover:text-white md:dark:hover:bg-transparent"
                   aria-current="page"
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                <Link to="/my_courses" className="text-md font-semibold  text-left text-black uppercase  hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500  dark:hover:text-white md:dark:hover:bg-transparent">
                   My Courses
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="block py-2 pl-3 pr-4 text-gray-900 rounded hover-bg-gray-100 md:hover-bg-transparent md:hover-text-blue-700 md:p-0 dark-text-white md:dark-hover-text-blue-500 dark:hover-bg-gray-700 dark:hover-text-white md:dark-hover-bg-transparent dark-border-gray-700">
+                <Link to="/my_students" className="text-md font-semibold  text-left text-black uppercase  hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500  dark:hover:text-white md:dark:hover:bg-transparent">
                   Students
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="block py-2 pl-3 pr-4 text-gray-900 rounded hover-bg-gray-100 md:hover-bg-transparent md:hover-text-blue-700 md:p-0 dark-text-white md:dark-hover-text-blue-500 dark:hover-bg-gray-700 dark:hover-text-white md:dark-hover-bg-transparent dark-border-gray-700">
+                <Link to="/channel" className="text-md font-semibold  text-left text-black uppercase  hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500  dark:hover:text-white md:dark:hover:bg-transparent">
                   Channel
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="block py-2 pl-3 pr-4 text-gray-900 rounded hover-bg-gray-100 md:hover-bg-transparent md:hover-text-blue-700 md:p-0 dark-text-white md:dark-hover-text-blue-500 dark:hover-bg-gray-700 dark:hover-text-white md:dark-hover-bg-transparent dark-border-gray-700">
-                  Create Course
-                </a>
-              </li>
+              <Link
+                to=""
+                className={`text-md font-semibold text-left text-black uppercase hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white md:dark:hover:bg-transparent ${
+                  showCourseDropdown ? "hover:text-blue-700" : ""
+                }`}
+                onClick={handleCourseClick}
+              >
+                Course
+              </Link>
+              {showCourseDropdown && (
+                <ul className="absolute z-10 mt-2 bg-white border border-gray-300 rounded-lg shadow-lg dark:bg-gray-800">
+                  <li>
+                    <Link
+                      to="/Add_Course"
+                      className="block w-full px-4 py-2 text-left text-black hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
+                      Create Course
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/Add_Lesson"
+                      className="block w-full px-4 py-2 text-left text-black hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
+                      Add Lesson
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </li>
             </ul>
 
             {tutor ? (
@@ -106,7 +151,7 @@ function Navbar() {
                 >
                   {tutor.name}
                 </span>
-                {showDropdown && (
+                {showUserDropdown && (
                   <div className="absolute z-10 mt-2 bg-white border border-gray-300 rounded-lg shadow-lg dark:bg-gray-800">
                     <button
                       type="button"

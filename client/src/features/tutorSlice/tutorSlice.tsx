@@ -22,14 +22,17 @@ const tutorSlice = createSlice({
     reducers:{
         login:(state,action:PayloadAction<Tutor | null>)=>{
             state.tutor =action.payload
+            localStorage.setItem("tutorData", JSON.stringify(action.payload));
 
         },
         signup:(state,action:PayloadAction<Tutor | null>)=>{
             state.tutor =action.payload
 
+
         },
         logout:(state)=>{
             state.tutor =null
+            localStorage.removeItem("tutorData");
 
         }
     }

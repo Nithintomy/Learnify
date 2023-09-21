@@ -1,3 +1,4 @@
+import React from "react";
 import {
     Card,
     CardHeader,
@@ -11,8 +12,8 @@ import {
    
   export function CourseCard() {
     return (
-        <div className="mt-5 ml-10">
-      <Card className="w-full max-w-[16rem]  shadow-lg ">
+        <div className="mt-5 ml-12">
+      <Card className="w-full max-w-[18rem]  shadow-lg   dark:bg-black  dark:text-white ">
         <CardHeader floated={false} color="blue-gray">
           <img
             src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
@@ -37,8 +38,8 @@ import {
           </IconButton>
         </CardHeader>
         <CardBody>
-          <div className="mb-1 flex items-center justify-between">
-            <Typography variant="h5" color="blue-gray" className="font-medium">
+          <div className="mb-1 flex items-center justify-between   dark:bg-black  dark:text-white">
+            <Typography variant="h5" color="blue-gray" className="font-medium   dark:bg-black  dark:text-white">
               Wooden House, Florida
             </Typography>
             <Typography
@@ -61,21 +62,21 @@ import {
               5.0
             </Typography>
           </div>
-          <Typography color="gray">
+          <Typography className="dark:bg-black  dark:text-white">
             Enter a freshly updated and thoughtfully furnished peaceful home
             
           </Typography>
           <div className="group mt-2 inline-flex flex-wrap items-center gap-3">
 
             <Tooltip content="And +20 more">
-              <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
+              <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3  dark:bg-black  dark:text-white transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
                 +20
               </span>
             </Tooltip>
           </div>
         </CardBody>
         <CardFooter className="pt-1">
-          <Button size="lg" fullWidth={true}>
+          <Button size="lg" fullWidth={true} style={{cursor:'pointer'}}>
             Enroll Now
           </Button>
         </CardFooter>

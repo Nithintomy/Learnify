@@ -1,106 +1,92 @@
-import React from "react";
-import {
-  Typography,
-  Button,
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
-  Avatar,
-} from "@material-tailwind/react";
-import {
-  ChevronDownIcon,
-  InboxArrowDownIcon,
-  LifebuoyIcon,
-  PowerIcon,
-} from "@heroicons/react/24/outline";
+import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../../features/adminSlice/adminSlice"
 
-// profile menu component
-const profileMenuItems = [
-  {
-    label: "Inbox",
-    icon: InboxArrowDownIcon,
-  },
-  {
-    label: "Help",
-    icon: LifebuoyIcon,
-  },
-  {
-    label: "Sign Out",
-    icon: PowerIcon,
-  },
-];
-
-export function ProfileMenu() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+function ProfileMenu() {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const closeMenu = () => setIsMenuOpen(false);
-
   const handleSignOut = () => {
     dispatch(logout());
-    navigate('/admin')
-    console.log("Not Working")
+    navigate('/admin');
+    setIsDropdownOpen(false);
+  };
 
-    closeMenu();
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   return (
-    <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
-      <MenuHandler>
-        <Button
-          variant="text"
-          color="blue-gray"
-          className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
-        >
-          <Avatar
-            variant="circular"
-            size="sm"
-            alt="tania andrew"
-            className="border border-gray-900 p-0.5"
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-          />
-          <ChevronDownIcon
-            strokeWidth={2.5}
-            className={`h-3 w-3 transition-transform ${
-              isMenuOpen ? "rotate-180" : ""
-            }`}
-          />
-        </Button>
-      </MenuHandler>
-      <MenuList className="p-1">
-        {profileMenuItems.map(({ label, icon }, key) => {
-          const isLastItem = key === profileMenuItems.length - 1;
-          return (
-            <MenuItem
-              key={label}
-              onClick={isLastItem ? handleSignOut : closeMenu}
-              className={`flex items-center gap-2 rounded ${
-                isLastItem
-                  ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-                  : ""
-              }`}
+    <div>
+      <nav className="bg-white border-gray-200 dark:bg-gray-900">
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+          <div className="flex items-center md:order-2">
+            <button
+              type="button"
+              className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+              onClick={toggleDropdown}
             >
-              {React.createElement(icon, {
-                className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
-                strokeWidth: 2,
-              })}
-              <Typography
-                as="span"
-                variant="small"
-                className="font-normal"
-                color={isLastItem ? "red" : "inherit"}
-              >
-                {label}
-              </Typography>
-            </MenuItem>
-          );
-        })}
-      </MenuList>
-    </Menu>
+              <span className="sr-only">Open user menu</span>
+              <img
+                className="w-8 h-8 rounded-full"
+                src="/docs/images/people/profile-picture-3.jpg"
+                alt="user photo"
+              />
+            </button>
+
+            {isDropdownOpen && (
+              <div className="z-50 absolute mt-2 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
+                <div className="px-4 py-3">
+                  <span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
+                  <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
+                    name@flowbite.com
+                  </span>
+                </div>
+                <ul>
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Dashboard
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Settings
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Earnings
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-red-500 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-red-200 dark:hover:text-red-500"
+                      onClick={handleSignOut}
+                    >
+                      Sign out
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+      </nav>
+    </div>
   );
 }
+
+export default ProfileMenu;

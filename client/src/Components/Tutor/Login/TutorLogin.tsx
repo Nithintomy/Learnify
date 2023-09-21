@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState ,useEffect} from "react";
 import { toast,ToastContainer } from "react-toastify";
 import axiosInstance from "../../../Axios/axios";
@@ -24,6 +25,10 @@ function TutorLogin() {
       if(trimmedEmail ==='' || trimmedPassword===''){
         return toast.error("Please Fill all required Fields")
       }
+      
+    if (trimmedPassword.length < 8) {
+      return toast.error('Password must be at least 8 characters long');
+    }
 
       try {
         const response = await axiosInstance.post('/tutor/login',{
@@ -31,7 +36,13 @@ function TutorLogin() {
           password :trimmedPassword
           
         })
-        dispatch(login(response.data))
+
+        const tutorData =response.data
+
+        localStorage.setItem('tutorData',JSON.stringify(tutorData))
+        localStorage.setItem('token',JSON.stringify(tutorData.token))
+
+        dispatch(login(tutorData))
                 setTimeout(()=> {
                 navigate('/tutorHome');
                 }, 2000)

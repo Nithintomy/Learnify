@@ -7,6 +7,7 @@ interface Course extends Document{
     coursedescription:string,
     category:mongoose.Schema.Types.ObjectId,
     photo:string,
+    courseFee:number,   
     tutor:string,
     createdAt:Date,
     updatedAt:Date
@@ -29,8 +30,12 @@ const coursemodel =new mongoose.Schema({
     category:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"categoryCollection",
-        required:true
+        
 
+    },
+    courseFee:{
+        type:Number,
+        required:true
     },
     isApproved:{
         type:Boolean,
@@ -42,7 +47,8 @@ const coursemodel =new mongoose.Schema({
     }],
     tutor:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"tutorCollection"
+        ref:"tutorCollection",
+        required:true
     },
     createdAt:{
         type:Date,

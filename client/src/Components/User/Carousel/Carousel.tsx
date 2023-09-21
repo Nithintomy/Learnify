@@ -23,7 +23,7 @@ const AutoCarousel: React.FC = () => {
   const totalSlides = 3; // Replace with the actual number of slides
 
   return (
-    <div className="w-4/5 mx-auto"> {/* Adjust width as needed */}
+    <div className="w-4/5 mx-auto mt-4"> {/* Adjust width as needed */}
       <Carousel
         showArrows={true}
         infiniteLoop={true}

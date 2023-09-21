@@ -3,6 +3,7 @@ import express from 'express'
 const adminRouter = express.Router()
 
 import {adminLogin, blockStudent, getStudentDetails, getTutorDetails, unblockStudent} from '../../controller/AdminController/adminController'
+import { addCategory, getAllCategory } from '../../controller/tutorController/addCategory'
 
 //admin Login
 adminRouter.post('/adminLogin',adminLogin)
@@ -14,10 +15,16 @@ adminRouter.get('/getAllStudents',getStudentDetails)
 adminRouter.get('/getAllTutor',getTutorDetails)
 
 //user block 
-adminRouter.put('/blockStudents:/id',blockStudent)
+adminRouter.put('/blockStudents/:id',blockStudent)
+
+//add category
+
+adminRouter.post('/addCategory',addCategory)
+
+adminRouter.get('/getallcategory',getAllCategory)
 
 //user Unblock
-adminRouter.put('/unBlockStudents:/id',unblockStudent)
+adminRouter.put('/unBlockStudents/:id',unblockStudent)
 
 
 export default adminRouter;
