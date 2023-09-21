@@ -7,7 +7,7 @@ function My_courses() {
     <div>
       <Navbar />
       <div className="px-3 lg:px-3 flex flex-wrap">
-        <Courses /> h
+        <Courses /> 
       </div>
     </div>
   )
