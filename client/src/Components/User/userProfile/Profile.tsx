@@ -87,6 +87,8 @@ function UserProfile() {
     }
   };
 
+  console.log(user,"mdsamds")
+
   return (
     <>
     <ToastContainer/>
@@ -96,7 +98,7 @@ function UserProfile() {
             {user ? (
               <img
                 className="w-24 h-24 mb-3 rounded-full shadow-lg"
-                src={user.photo}
+                src={user.user.photo}
                 alt=""
               />
               
@@ -108,14 +110,13 @@ function UserProfile() {
               />
             )}
           
-            <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-              {user.name}
-            </h5>
-            <span className="text-sm text-gray-500 dark:text-gray-400">
-             {user.email}
+           
+           
+            <span className="text-sm text-black dark:text-gray-400">
+             {user.user.studentName}
             </span>
             <span className="text-sm text-gray-500 dark:text-gray-400">
-             {user.phone}
+             {user.user.phone}
             </span>
 
             <div className="flex mt-4 space-x-3 md:mt-6">
@@ -156,7 +157,7 @@ function UserProfile() {
                 type="text"
                 id="username"
                 className="w-2/3 rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 text-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value={user.name}
+                value={user.user.studentName}
               />
             </div>
 
@@ -168,7 +169,7 @@ function UserProfile() {
                 type="text"
                 id="email"
                 className="w-2/3 rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 text-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value={user.email}
+                value={user.user.studentEmail}
               />
             </div>
 
@@ -180,7 +181,7 @@ function UserProfile() {
                 type="text"
                 id="address"
                 className="w-2/3 rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 text-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value={user.phone}
+                value={user.user.phone}
               />
             </div>
             {/* Add more fields here */}

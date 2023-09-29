@@ -50,6 +50,8 @@ function Navbar() {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
+ 
+
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-black">
@@ -104,6 +106,7 @@ function Navbar() {
                   aria-current="page"
                 >
                   Home
+                
                 </Link>
               </li>
               <li>

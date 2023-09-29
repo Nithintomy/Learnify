@@ -19,11 +19,14 @@ declare global {
 const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { token } = req.body;
+    console.log('Token received:', token);
+
+    console.log(token,"hey token")
     if (!token) {
       return res.status(401).json({ message: 'Token not provided' });
     }
-    const cleanedToken = token.replace(/"/g, ''); 
-    const decodedToken = jwt.verify(cleanedToken, secretKey) as any;
+
+    const decodedToken = jwt.verify(token, secretKey) as any;
     console.log('Token is valid:', decodedToken);
 
     req.decodedToken = decodedToken;

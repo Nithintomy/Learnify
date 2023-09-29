@@ -38,7 +38,7 @@ const userSlice =createSlice({
               // Removing the user data from localStorage when logging out
               localStorage.removeItem("userData");
         }
-    }
+    } 
 })
 
 
