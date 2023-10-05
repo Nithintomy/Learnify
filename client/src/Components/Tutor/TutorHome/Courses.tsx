@@ -11,8 +11,8 @@ import {
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
-import axios from 'axios';
-import { TutorBaseUrl } from '../../../Api';
+import axios from "axios";
+import { TutorBaseUrl } from "../../../Api";
 
 interface Course {
   _id: string;
@@ -28,7 +28,6 @@ interface Course {
 
 interface CourseResponse {
   AllCourses: Course[];
-  
 }
 
 function Courses() {
@@ -36,19 +35,17 @@ function Courses() {
   const tutor = localStorage.getItem("tutorData");
   const tutor_Details = tutor ? JSON.parse(tutor) : null;
   const tutor_id = tutor_Details ? tutor_Details._id : null;
-  
 
   useEffect(() => {
     axios
       .get<CourseResponse>(`${TutorBaseUrl}/courses/${tutor_id}`)
       .then((response) => {
-      
         console.log("Courses data:", response.data);
         setCourses(response.data.AllCourses);
       })
       .catch((error) => {
         toast.error(error.message);
-        console.error(error); 
+        console.error(error);
       });
   }, []);
 
@@ -61,30 +58,27 @@ function Courses() {
         courses.map((course, index) => (
           <Card className="mt-6 w-96" key={course._id}>
             <CardHeader color="blue-gray" className="relative h-56">
-              <img
-                src={`${course.photo}`}
-                alt="card-image"
-              />
+              <img src={`${course.photo}`} alt="card-image" />
             </CardHeader>
             <CardBody>
               <Typography variant="h5" color="blue-gray" className="mb-2">
                 {course.courseName}
               </Typography>
-              <Typography>
-                {course.coursedescription}
-              </Typography>
+              <Typography>{course.coursedescription}</Typography>
             </CardBody>
             <Typography>
-         <span className="font-bold">{course.courseduration} hrs</span>
-          </Typography>
+              <span className="font-bold">{course.courseduration} hrs</span>
+            </Typography>
             <CardFooter className="pt-0">
-              <Button>Read More</Button>
+              <Link to={`/singleView/${course._id}`}>
+                <Button>Read More</Button>
+              </Link>
             </CardFooter>
           </Card>
         ))
       )}
     </div>
-  )
+  );
 }
 
 export default Courses;

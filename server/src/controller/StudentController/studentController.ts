@@ -363,12 +363,12 @@ const Tutors = async (req: Request, res: Response) => {
 };
 
 const studentProfile = async (req: Request, res: Response) => {
-  console.log(req.decodedToken.user_id, "decodeToken");
+  console.log("hhhhhhhhhhhhhhhhh")
   const { image } = req.body;
-  const userId = req.decodedToken.user_id;
-
+  const userId = req.params.id.trim();
+  console.log(userId)
   try {
-    const user = await studentModel.findById(userId);
+    const user = await studentModel.findById({_id:userId});
     console.log(user, "user");
 
     if (!user) {
@@ -385,6 +385,32 @@ const studentProfile = async (req: Request, res: Response) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
+const updateProfile =async (req:Request,res:Response)=>{
+  try {
+    const userId = req.params.id;
+    const { studentName, studentEmail, phone} = req.body;
+
+
+    const user = await studentModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    user.studentName = studentName;
+    user.studentEmail = studentEmail;
+    user.phone = phone;
+
+    await user.save();
+
+    return res.status(200).json({ message: 'Profile updated successfully', user });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+
+}
 
 const studentLogout = async (req: Request, res: Response) => {
   try {
@@ -412,5 +438,6 @@ export {
   sendPasswordLink,
   ResetPassword,
   studentProfile,
+  updateProfile,
   Tutors,
 };

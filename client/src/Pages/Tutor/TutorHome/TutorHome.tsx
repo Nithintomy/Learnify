@@ -6,8 +6,7 @@ function TutorHome() {
     <div className=' dark:bg-black'>
       <Navbar/>
   
-  <h1>PYTHON</h1>
-
+  <h1>DASHBOARD</h1>
 
    
 

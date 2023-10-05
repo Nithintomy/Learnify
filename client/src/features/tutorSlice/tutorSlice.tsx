@@ -25,11 +25,6 @@ const tutorSlice = createSlice({
             localStorage.setItem("tutorData", JSON.stringify(action.payload));
 
         },
-        signup:(state,action:PayloadAction<Tutor | null>)=>{
-            state.tutor =action.payload
-
-
-        },
         logout:(state)=>{
             state.tutor =null
             localStorage.removeItem("tutorData");
@@ -39,6 +34,6 @@ const tutorSlice = createSlice({
 
 })
 
-export const {login,signup,logout} =tutorSlice.actions
+export const {login,logout} =tutorSlice.actions
 export const selectTutor =(state:{tutor:TutorState})=>state.tutor.tutor
 export default tutorSlice.reducer;

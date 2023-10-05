@@ -1,8 +1,8 @@
 import express from 'express'
 import { tutorLogin, tutorLogout, tutorRegister } from '../../controller/tutorController/tutorController';
-import { addCourses,getCourses } from '../../controller/tutorController/addCourse';
+import { addCourses,getCourseById,getCourses,updateCourse} from '../../controller/tutorController/addCourse';
 import { addCategory, getAllCategory } from '../../controller/tutorController/addCategory';
-import { addLesson } from '../../controller/tutorController/addLesson';
+import { addLesson, getLesson } from '../../controller/tutorController/addLesson';
 
 const tutorRouter = express.Router();
 
@@ -32,5 +32,13 @@ tutorRouter.get('/courses/:id',getCourses)
 tutorRouter.post('/addLessons',addLesson) 
 
 // tutor can a get Lessons
+tutorRouter.get('/getLessons/:courseId',getLesson)
+
+
+tutorRouter.get('/getCourse/:courseId',getCourseById);
+
+//updating the course 
+tutorRouter.put('/updateCourse/:courseId',updateCourse)
+
 
 export default tutorRouter;

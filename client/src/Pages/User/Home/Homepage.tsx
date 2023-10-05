@@ -5,8 +5,9 @@ import Navbar from "../../../Components/User/Navbar/Navbar"
 import { useDispatch,useSelector  } from "react-redux";
 import { login } from "../../../features/tutorSlice/tutorSlice";
 import { selectUser } from '../../../features/userSlice/userSlice';
-import HomeCards from '../../../Components/User/HomeCards/HomeCards';
+
 import Footer from '../../../Components/User/Footer/Footer';
+import { CourseCard } from '../../../Components/User/Card/cards';
 
 
 
@@ -34,10 +35,8 @@ function Homepage() {
       <p className="text-4xl font-medium text-gray-900  dark:text-white ml-12 mt-9 mb-4" >Let's start learning<span className="text-orange-lighter-900">,{userName}</span></p>
 
         <div className='px-3 lg:px-3 '>
-              <HomeCards/>
-              <HomeCards/>
-              <HomeCards/>
-              <HomeCards/>
+        <CourseCard />
+            
         </div>
 
 

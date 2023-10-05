@@ -26,7 +26,6 @@ function Add_course() {
   const [price, setPrice] = useState(0);
   const [category, setCategory] = useState("");
   const [categoryOptions, setCategoryOptions] = useState<Category[]>([]);
-
   const [photo, setPhoto] = useState<File | null>(null);
   const [cloudanaryURL, setCloudanaryURL] = useState("");
 
@@ -143,12 +142,10 @@ function Add_course() {
   
 
   return (
-    <div className="w-full">
-      <ToastContainer />
-      <form
-       className="bg-white shadow-md rounded mb-4"
-       onSubmit={handleSubmit} 
-      >
+<div className="flex items-center justify-center bg-blue-gray-100 ">
+      <div className="bg-white shadow-md p-8 mt-3 w-full max-w-md rounded-lg">
+        <ToastContainer />
+        <form className="bg-white shadow-md rounded mb-4" onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Course Name
@@ -160,7 +157,7 @@ function Add_course() {
             onChange={(e) => setCourseName(e.target.value)}
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-2">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Course Duration
           </label>
@@ -171,8 +168,8 @@ function Add_course() {
             placeholder="Duration"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+        <div className="mb-2">
+          <label className="block text-gray-700 text-sm font-bold mb-3">
             Course Price
           </label>
           <input
@@ -182,18 +179,16 @@ function Add_course() {
             placeholder="Price"
           />
         </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-7">
+       
+          <label className="block text-gray-700 text-sm font-bold mb-3">
             Description
           </label>
           <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
           onChange={(e)=>setDescription(e.target.value)}
           />
           
-        </div>
-
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-7">
+        <div >
+          <label className="block text-gray-700 text-sm font-bold mb-3">
             Category
           </label>
           <select
@@ -210,7 +205,7 @@ function Add_course() {
           </select>
         </div>
 
-        <div className="mb-6">
+        <div className="mb-3">
           <label className="block text-gray-700 text-sm font-bold mb-7">
             Image
           </label>
@@ -237,6 +232,7 @@ function Add_course() {
           </button>
         </div>
       </form>
+      </div>
     </div>
   );
 }

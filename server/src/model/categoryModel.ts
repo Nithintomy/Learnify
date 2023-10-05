@@ -34,6 +34,6 @@ const categorySchema =new Schema<Category>({
 
 // const categoryModel= mongoose.model("categoryCollection",categorySchema)
 
-const categoryModel:Model<Category> =model<Category>("categoryCollection",categorySchema)
+const categoryModel:Model<Category> =model<Category>("categoryModel",categorySchema)
 
 export default categoryModel

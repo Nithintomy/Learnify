@@ -17,6 +17,10 @@ function UserProfile() {
 
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  console.log(user.user._id,'OOONBIIIIIIIIIIIIIIIIIIIIII');
+  const id=user.user._id
+  
+  
 
   useEffect(() => {
     // Save the image URL to localStorage whenever it changes
@@ -67,7 +71,9 @@ function UserProfile() {
           console.log(data);
 
           if (data.url) {
-            axios.post(`${UserBaseUrl}/studentProfile`, { image: data.url, token: localStorage.getItem('token') }).then((res)=> {
+            console.log(localStorage.getItem('token'),"token");
+            axios.put(`${UserBaseUrl}/studentProfile/${id}`, { image: data.url })
+            .then((res)=> {
               console.log(res.data, "hehehe")
             }).catch((err)=> {
               console.log(err)
@@ -96,11 +102,11 @@ function UserProfile() {
         <div className="bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800">
           <div className="flex flex-col items-center p-6">
             {user ? (
-              <img
-                className="w-24 h-24 mb-3 rounded-full shadow-lg"
-                src={user.user.photo}
-                alt=""
-              />
+             <img
+             className="w-24 h-24 mb-3 rounded-full shadow-lg"
+             src={user.photo || "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/a9adeb42419075.57cc3f77ecae2.png"}
+             alt=""
+           />
               
             ) : (
               <img

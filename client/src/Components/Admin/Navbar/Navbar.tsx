@@ -62,7 +62,7 @@ function NavList() {
         color="blue-gray"
         className="text-lg text-black dark:text-gray-400 uppercase font-semibold  mr-16"
       >
-        <Link to="/" className="flex items-center hover:text-blue-500 transition-colors">
+        <Link to="/CourseViews" className="flex items-center hover:text-blue-500 transition-colors">
           Courses
         </Link>
       </Typography>

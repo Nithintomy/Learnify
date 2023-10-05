@@ -1,6 +1,6 @@
 import express from 'express'
-import {studentLogin,studentSignUp,verify_otp,studentLogout,sendPasswordLink,ResetPassword,GoogleSignin,studentProfile,Tutors, GoogleSignUp} from '../../controller/StudentController/studentController'
-import { allCourses } from '../../controller/StudentController/AllCourses';
+import {studentLogin,studentSignUp,verify_otp,studentLogout,sendPasswordLink,ResetPassword,GoogleSignin,studentProfile,updateProfile,Tutors, GoogleSignUp} from '../../controller/StudentController/studentController'
+import { allCourses,getCourseById } from '../../controller/StudentController/AllCourses';
 import { allLessons } from '../../controller/StudentController/AllLessons';
 import verifyToken from '../../middleware/VerifyToken';
 
@@ -34,10 +34,14 @@ studentRouter.post('/googleSignUp',GoogleSignUp)
 studentRouter.get('/allTutors',Tutors)
 
 //student Profile
-studentRouter.post('/studentProfile',verifyToken,studentProfile)
+studentRouter.put('/studentProfile/:id',studentProfile)
+
+studentRouter.put('/updateProfile/:id',updateProfile)
 
 //get All Courses
 studentRouter.get('/allCourses',allCourses)
+
+studentRouter.get('/getCourse/:courseId',getCourseById);
 
 
 //get All Lesson

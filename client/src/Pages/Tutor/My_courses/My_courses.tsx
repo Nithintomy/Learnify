@@ -6,7 +6,7 @@ function My_courses() {
   return (
     <div>
       <Navbar />
-      <div className="px-3 lg:px-3 flex flex-wrap">
+      <div className="px-3 lg:px-3 flex flex-wrap  m-8">
         <Courses /> 
       </div>
     </div>

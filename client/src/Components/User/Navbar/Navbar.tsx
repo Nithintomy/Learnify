@@ -102,7 +102,7 @@ function Navbar() {
               <li>
                 <Link
                   to="/"
-                  className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700  dark:text-white dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   aria-current="page"
                 >
                   Home
@@ -111,7 +111,7 @@ function Navbar() {
               </li>
               <li>
                 <Link
-                  to=""
+                  to="/TutorView"
                   className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700  dark:text-white dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Tutors
@@ -120,7 +120,7 @@ function Navbar() {
               <li>
                 <Link
                   to=""
-                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover-bg-gray-100 md:hover-bg-transparent md:hover-text-blue-700 md:p-0 dark:text-white md:dark-hover-text-blue-500 dark:hover-bg-gray-700 dark:hover-text-white md:dark-hover-bg-transparent dark-border-gray-700"
+                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700  dark:text-white dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Courses
                 </Link>
@@ -128,7 +128,7 @@ function Navbar() {
               <li>
                 <Link
                   to=""
-                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover-bg-gray-100 md:hover-bg-transparent md:hover-text-blue-700 md:p-0 dark:text-white md:dark-hover-text-blue-500 dark:hover-bg-gray-700 dark:hover-text-white md:dark-hover-bg-transparent dark-border-gray-700"
+                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700  dark:text-white dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Community
                 </Link>
@@ -136,7 +136,7 @@ function Navbar() {
               <li>
                 <Link
                   to=""
-                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover-bg-gray-100 md:hover-bg-transparent md:hover-text-blue-700 md:p-0 dark:text-white md:dark-hover-text-blue-500 dark:hover-bg-gray-700 dark:hover-text-white md:dark-hover-bg-transparent dark-border-gray-700"
+                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700  dark:text-white dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Contact
                 </Link>
@@ -151,7 +151,7 @@ function Navbar() {
                     <img
                       onClick={handleUserClick}
                       className="w-10  h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer"
-                      src={user.photo}
+                      src={user.photo || "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/a9adeb42419075.57cc3f77ecae2.png"}                   
                       alt="Bordered avatar"
                     />
                   </span>

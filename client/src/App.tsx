@@ -11,6 +11,8 @@ import Login from "./Components/User/Login/Login"
 import ResetPassword from "./Components/User/Login/ResetPassword"
 import ForgotPassword from "./Components/User/Login/ForgotPassword"
 import UserDetails from "./Pages/Admin/UserDetails/UserDetails"
+import TutorView from './Pages/User/Tutors/TutorView'
+
 import AdminTutorDetails from './Pages/Admin/TutorDetails/AdminTutorDetails'
 import TutorHome from './Pages/Tutor/TutorHome/TutorHome'
 import My_courses from './Pages/Tutor/My_courses/My_courses'
@@ -23,6 +25,12 @@ import Add_Lessons from './Pages/Tutor/Add_Courses/Add_Lessons'
 import UserOtp from './Components/User/SignUp/Otp'
 import AddCategory from './Pages/Admin/Category/AddCategory'
 import AllCategory from './Pages/Admin/Category/AllCategory'
+import SinglePage from './Pages/Tutor/SinglePage/SinglePages'
+import CourseViews from './Pages/Admin/CoursesView/CourseViews'
+import SingleView from './Pages/User/SinglePage/SingleView'
+
+
+
 
 
 
@@ -50,6 +58,8 @@ function App() {
         <Route path="/forget-password" element={<ForgotPassword/>}/>
         <Route path='/userProfile' element={<UserProfile/>}/>
         <Route path="/reset-password/:id/:token" element={<ResetPassword/>} />
+        <Route path='/singlePage/:courseId' element={<SingleView/>}/>
+        <Route path='/TutorView' element={<TutorView/>} />
 
         {/* Tutor side */}
         
@@ -57,9 +67,10 @@ function App() {
         <Route path="/tutorLogin" element={<TutorLogin/>}/>
         <Route path="/tutorHome" element={<TutorHome/>}/>
         <Route path='/my_courses' element={<My_courses/>}/>
+        <Route path='/singleView/:courseId' element={<SinglePage/>}/>
         <Route path='/my_students' element={<My_students/>}/>
         <Route path='/Add_Course' element={<Add_courses/>}/>
-        <Route path='/Add_Lesson' element={<Add_Lessons/>}/>
+        <Route path='/Add_Lesson' element={<Add_Lessons/>}/> 
 
 
         {/* admin side  */}
@@ -70,7 +81,7 @@ function App() {
         <Route path='/admin_tutorList' element={<AdminTutorDetails/>}/>
         <Route path='/admincategory' element={<AllCategory/>}/>
         <Route path='/addCategory' element={<AddCategory/>}/>
-        
+        <Route path='/CourseViews' element={<CourseViews/>}/>
         <Route path="*" element={<h1>Page Not Found</h1>}/>
       </Routes>
     </Router>

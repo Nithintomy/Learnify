@@ -79,5 +79,5 @@ const userSchema = new Schema<Student>({
 
 // const studentModel = mongoose.model('studentCollection',userSchema)
 
-const studentModel:Model<Student> = mongoose.model<Student>('studentCollection',userSchema)
+const studentModel:Model<Student> = mongoose.model<Student>('studentModel',userSchema)
 export default studentModel

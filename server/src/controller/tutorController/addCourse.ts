@@ -60,6 +60,8 @@ const getCourses =asyncHandler(async(req:Request,res:Response)=>{
     try {
         const { id } = req.params;
 
+        console.log(id)
+
         const AllCourses = await courseModel.find({tutor:id}).populate('tutor').populate('courseName').populate('category')
 
         console.log("Get All Courses 1",AllCourses)
@@ -76,4 +78,58 @@ const getCourses =asyncHandler(async(req:Request,res:Response)=>{
 
 })
 
-export {addCourses,getCourses}
+const getCourseById =asyncHandler(async(req:Request,res:Response)=>{
+
+  console.log( req.params,"params")
+
+  try {
+      const { courseId } = req.params;
+
+      console.log(courseId)
+
+
+      const course = await courseModel.findById(courseId).populate('tutor');
+     
+
+      console.log("Course Details",course)
+
+      if(course){
+        res.status(200).json(course);
+      }
+      
+  } catch (error) {
+      res.status(500) //internal server error
+      throw error;
+      
+  }
+
+})
+
+// update Course Data
+const updateCourse = asyncHandler(async (req: Request, res: Response) => {
+  try {
+    const courseId = req.params.courseId;
+    console.log(courseId,"courseId")
+    const updatedCourseData = req.body; 
+    console.log(updatedCourseData,"updated data")
+
+    // Find the course by its ID and update it
+    const course = await courseModel.findByIdAndUpdate(
+      courseId,
+      updatedCourseData,
+      { new: true }
+    );
+
+    if (course) {
+      res.status(200).json(course);
+    } else {
+      res.status(404).json({ message: "Course not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+
+export {addCourses,getCourses,getCourseById,updateCourse}

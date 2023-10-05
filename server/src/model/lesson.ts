@@ -3,11 +3,11 @@ import mongoose, { Model, model } from "mongoose";
 interface Lesson extends Document{
     title:string,
     courseName:string,
-    description:string,
     duration:number,
+    description:string,
     category:string,
     video:string[],
-    tutorName:string
+    tutorId:mongoose.Schema.Types.ObjectId
 
 }
 
@@ -18,10 +18,11 @@ const lessonSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    courseName:{
-        type:String,
-        required:true
+    courseId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'courseModel'
     },
+   
     description:{
         type : String,
         required:true
@@ -30,18 +31,23 @@ const lessonSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
-    category:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"CategoryCollection",
-        required:true
+    categoryId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'categorycollection',
+        required: true,
     },
     video:[{
         type:String,
         required:true
     }],
-    tutorName:{
+    tutorId:{
        type:mongoose.Schema.Types.ObjectId,
-       ref:"tutorCollection"
+       ref:"tutorModel"
+    },
+    isApproved:{
+        type:Boolean,
+        default:false
+
     },
     createdAt:{
         type:Date,
@@ -57,8 +63,7 @@ const lessonSchema = new mongoose.Schema({
 },{timestamps:true})
 
 
-// const lessonModel =mongoose.model("lessonCollection",lessonSchema)
 
-const lessonModel:Model<Lesson> =mongoose.model<Lesson>('lessonCollection',lessonSchema)
+const lessonModel:Model<Lesson> =mongoose.model<Lesson>('lessonModel',lessonSchema)
 
 export default lessonModel

@@ -29,17 +29,18 @@ const coursemodel =new mongoose.Schema({
     },
     category:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"categoryCollection",
+        ref:"categoryModel",
         
 
     },
+
     courseFee:{
         type:Number,
         required:true
     },
     isApproved:{
         type:Boolean,
-        default:true
+        default:false
     },
     photo:[{
         type:String
@@ -47,9 +48,13 @@ const coursemodel =new mongoose.Schema({
     }],
     tutor:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"tutorCollection",
+        ref:"tutorModel",
         required:true
     },
+    lessons: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'lessonModel',
+      }],
     createdAt:{
         type:Date,
         default:Date.now
@@ -63,8 +68,7 @@ const coursemodel =new mongoose.Schema({
 })
 
 
-// const courseModel =mongoose.model("courseCollection",coursemodel)
 
-const courseModel:Model<Course> = mongoose.model<Course>("courseCollection",coursemodel)
+const courseModel:Model<Course> = mongoose.model<Course>("courseModel",coursemodel)
 
  export default courseModel

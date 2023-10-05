@@ -70,5 +70,5 @@ TutorSchema.pre<TUTOR>('save', async function (next) {
 });
 
 // Define the model using the model function and export it
-const TutorModel: Model<TUTOR> = model<TUTOR>('tutorCollection', TutorSchema);
+const TutorModel: Model<TUTOR> = model<TUTOR>('tutorModel', TutorSchema);
 export default TutorModel;

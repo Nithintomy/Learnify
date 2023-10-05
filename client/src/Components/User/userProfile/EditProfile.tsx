@@ -1,4 +1,8 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+import { UserBaseUrl } from '../../../Api';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUser } from '../../../features/userSlice/userSlice';
 
 interface EditProfileModalProps {
   isOpen: boolean;
@@ -9,8 +13,12 @@ function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
-    address: '',
+    phone: '',
   });
+
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const id=user.user._id
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -19,9 +27,30 @@ function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
     setFormData({ ...formData, [name]: value });
   };
 
+
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onClose(); // Close the modal after submitting
+
+    const updatedData = {
+      studentName: formData.username,
+      studentEmail: formData.email,   
+      phone: formData.phone,      
+    };
+    axios
+      .put(`${UserBaseUrl}/updateProfile/${id}`, updatedData)
+      .then((response) => {
+        if (response.status === 200) {
+          onClose(); 
+         
+        } else {
+         
+        }
+      })
+      .catch((error: any) => {
+        console.error('Error updating profile:', error);
+        // Handle errors here
+      });
   };
 
   return (
@@ -81,17 +110,19 @@ function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="address" className="block text-sm font-medium">
+            <label className="block text-sm font-medium">
               Phone
             </label>
-            <textarea
-              id="address"
-              name="address"
-              value={formData.address}
+            <input
+              type="tel"
+              id="email"
+              name="email"
+              value={formData.phone}
               onChange={handleChange}
               className="w-full border rounded-lg px-3 py-2 mt-1"
             />
           </div>
+          
           {/* Add more form fields here */}
           <div className="flex justify-end">
             <button
