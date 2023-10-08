@@ -5,7 +5,9 @@ import { selectUser } from "../../../features/userSlice/userSlice";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { login, logout } from "../../../features/userSlice/userSlice";
-
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Badge, IconButton } from "@mui/material";
+import { addToCart } from "../../../features/userSlice/cartSlice";
 
 function Navbar() {
   const user = useSelector(selectUser);
@@ -14,9 +16,7 @@ function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [theme, setTheme] = useState("light");
 
-  
 
-  
   const handleUserClick = () => {
     setShowDropdown(!showDropdown);
   };
@@ -26,14 +26,13 @@ function Navbar() {
     dispatch(logout());
     // Hide the dropdown
     setShowDropdown(false);
-   
   };
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("userData");
     if (storedUserData) {
       const parsedUserData = JSON.parse(storedUserData);
-      console.log(parsedUserData,"userData")
+      console.log(parsedUserData, "userData");
       dispatch(login(parsedUserData));
     }
   }, [dispatch]);
@@ -49,8 +48,6 @@ function Navbar() {
   const handleThemeSwitch = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
-
- 
 
   return (
     <div>
@@ -106,7 +103,6 @@ function Navbar() {
                   aria-current="page"
                 >
                   Home
-                
                 </Link>
               </li>
               <li>
@@ -146,12 +142,24 @@ function Navbar() {
             {user ? (
               // Show user's name and handle click for dropdown
               <>
+                
+                
+                  <IconButton >
+                    <ShoppingCartIcon />
+                    <span className="absolute right-0 top-0 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">5
+    </span>
+                  </IconButton>
+                
+
                 <div className="relative z-20">
                   <span className="ml-3">
                     <img
                       onClick={handleUserClick}
                       className="w-10  h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer"
-                      src={user.photo || "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/a9adeb42419075.57cc3f77ecae2.png"}                   
+                      src={
+                        user.photo ||
+                        "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/a9adeb42419075.57cc3f77ecae2.png"
+                      }
                       alt="Bordered avatar"
                     />
                   </span>

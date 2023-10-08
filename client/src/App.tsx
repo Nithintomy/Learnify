@@ -28,6 +28,12 @@ import AllCategory from './Pages/Admin/Category/AllCategory'
 import SinglePage from './Pages/Tutor/SinglePage/SinglePages'
 import CourseViews from './Pages/Admin/CoursesView/CourseViews'
 import SingleView from './Pages/User/SinglePage/SingleView'
+import CartMenu from './Components/User/CartMenu/CartMenu'
+import NotFound from './Components/NotFound'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import PaymentSuccess from './Components/User/Payment/PaymentSuccess'
+
 
 
 
@@ -50,6 +56,7 @@ function App() {
 
   return (
     <Router>
+        <ToastContainer/> 
       <Routes>
         <Route path="/" element={<Homepage/>}/>
         <Route path="/login" element={<Login/>}/>
@@ -60,6 +67,9 @@ function App() {
         <Route path="/reset-password/:id/:token" element={<ResetPassword/>} />
         <Route path='/singlePage/:courseId' element={<SingleView/>}/>
         <Route path='/TutorView' element={<TutorView/>} />
+        <Route path='/cart' element={<CartMenu/>}/>
+        <Route path='/paymentSuccess' element={<PaymentSuccess/>}/>
+        
 
         {/* Tutor side */}
         
@@ -82,7 +92,8 @@ function App() {
         <Route path='/admincategory' element={<AllCategory/>}/>
         <Route path='/addCategory' element={<AddCategory/>}/>
         <Route path='/CourseViews' element={<CourseViews/>}/>
-        <Route path="*" element={<h1>Page Not Found</h1>}/>
+        <Route path="*" element={<NotFound/>}/>
+  
       </Routes>
     </Router>
   )

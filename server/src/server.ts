@@ -5,8 +5,12 @@ import tutorRouter from './Routes/TutorRouter/tutorRouter';
 import adminRouter from './Routes/AdminRouter/adminRouter';
 import dotenv from 'dotenv'
 import cors from 'cors'
+import paymentRouter from './Routes/PaymentRouter/Payment';
+
 
 dotenv.config(); // Load environment variables from .env file
+
+
 
 
 const app = express();
@@ -20,5 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/student',studentRouter)
 app.use('/tutor',tutorRouter)
 app.use('/admin',adminRouter)
+app.use('/api/checkout',paymentRouter)
+
 
 app.listen(PORT, () => console.log(`Server is running on Port ${PORT}`));

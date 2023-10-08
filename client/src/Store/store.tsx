@@ -1,14 +1,16 @@
 import {configureStore} from '@reduxjs/toolkit'
-import userSlice from '../features/userSlice/userSlice'
-import tutorSlice from '../features/tutorSlice/tutorSlice' 
-import courseSlice from '../features/tutorSlice/courseSlice'
+import userReducer from '../features/userSlice/userSlice'
+import tutorReducer from '../features/tutorSlice/tutorSlice' 
+import courseReducer from '../features/tutorSlice/courseSlice'
+import cartReducer from '../features/userSlice/cartSlice'
 
 
 
 export default configureStore({
     reducer:{
-        user:userSlice,
-        tutor:tutorSlice,
-        course:courseSlice
+        user:userReducer,
+        tutor:tutorReducer,
+        course:courseReducer,
+        cart:cartReducer,
     }
 })

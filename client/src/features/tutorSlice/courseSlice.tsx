@@ -8,7 +8,13 @@ export interface Course {
   courseFee: number;
   courseduration: number;
   photo: string;
-  tutor: string;
+  tutor: {
+    _id: string; 
+    phone:number;
+    tutorEmail:string;
+    tutorName:string;
+    
+  };
   tutorName: string;
   lessons: Lesson[];
 }
@@ -23,18 +29,7 @@ export interface Lesson {
   updatedAt:string
 }
 
- export interface EditedCourse {
-  _id: string;
-  courseName: string;
-  coursedescription: string;
-  courseFee: number;
-  courseduration: number;
-  photo: string;
-  tutor: string;
-  tutorName: string;
-  lessons: Lesson[];
-}
-
+ 
 
 // Defining the types of state
 interface CourseState {
@@ -57,7 +52,7 @@ const courseSlice = createSlice({
     setLessons: (state, action: PayloadAction<Lesson[]>) => {
       state.lessons = action.payload;
     },
-    updateCourseDetails:(state,action: PayloadAction<EditedCourse>)=>{
+    updateCourseDetails:(state,action: PayloadAction<Course>)=>{
       const editedCourse = action.payload;
       state.courseDetails ={...state.courseDetails ,...editedCourse}
     }
