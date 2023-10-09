@@ -15,7 +15,7 @@ function SinglePageView() {
   const { courseId } = useParams();
   const dispatch = useDispatch();
   const courseDetails = useSelector(selectCourse);
-  const userData = JSON.parse(localStorage.getItem("userData") || '{}'); 
+  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
   const handleAddToCart = (courseDetails: Course | null) => {
     dispatch(addToCart(courseDetails));
   };
@@ -43,66 +43,67 @@ function SinglePageView() {
       });
   }, [courseId, dispatch]);
 
-  console.log("myr courseid",courseDetails?._id)
-  console.log("myr tutorid",courseDetails?.tutor)
-  console.log("myr courseid")
-  
+
+
+  console.log("myr courseid", courseDetails?._id);
+  console.log("myr tutorid", courseDetails?.tutor);
+  console.log("myr courseid");
+
   const checkoutHandler = async () => {
     const amount = courseDetails?.courseFee;
 
-    console.log(amount, "amount");
-
-    console.log("courseDetails?._id",courseDetails?._id)
+   
 
     const requestData = {
-    
-      studentId:userData?.user._id,
+      studentId: userData?.user._id,
       courseId: courseDetails?._id,
       tutorId: courseDetails?.tutor?._id,
+      amount 
     };
 
 
     try {
+      const {
+        data: { key },
+      } = await axios.get(`${BaseUrl}/api/checkout/getKey`);
 
-      const {data:{key}} =await axios.get(`${BaseUrl}/api/checkout/getKey`)
-
-      const { data:{order} } = await axios.post(`${BaseUrl}/api/checkout/payment`, {
-        amount,
+      const {
+        data: { order },
+      } = await axios.post(`${BaseUrl}/api/checkout/payment`, {
+        amount: amount,
       });
 
       var options = {
         key, // Enter the Key ID generated from the Dashboard
         amount: order.amount,
         currency: "INR",
-        name: userData.studentName ,
+        name: userData.studentName,
         description: "Razorpay",
         image: userData.photo,
-        order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-        callback_url: `${BaseUrl}/api/checkout/verifyPayment?
-        studentId=${requestData.studentId}
-        &courseId=${requestData.courseId}
-        &tutorId=${requestData.tutorId}
-        &amount=${amount}`,
+        order_id: order.id,
+        body: JSON.stringify({ requestData }),
+  
+        callback_url: `${BaseUrl}/api/checkout/verifyPayment?studentId=${requestData.studentId}&courseId=${requestData.courseId}&tutorId=${requestData.tutorId}&amount=${requestData.amount}`, // Include the amount in the callback URL
+  
         prefill: {
-            name: userData.studentName,
-            email:userData.studentEmail,
-            contact:userData.phone 
+          name: userData.studentName,
+          email: userData.studentEmail,
+          contact: userData.phone,
         },
         notes: {
-            address: "Razorpay Corporate Office"
+          address: "Razorpay Corporate Office",
         },
         theme: {
-            color: "#000000"
-        }
-    };
-     // Check if the element exists
-     const razor = new window.Razorpay(options);
-     
-     razor.open();
-        
+          color: "#000000",
+        },
+      };
+      // Check if the element exists
+      const razor = new window.Razorpay(options);
 
-      
-    } catch (error) {}
+      razor.open();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -139,8 +140,6 @@ function SinglePageView() {
 
         <button
           onClick={() => {
-  
-
             if (userData) {
               checkoutHandler();
               console.log("hai");

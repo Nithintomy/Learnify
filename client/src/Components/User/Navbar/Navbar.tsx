@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { login, logout } from "../../../features/userSlice/userSlice";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Badge, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { addToCart } from "../../../features/userSlice/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const user = useSelector(selectUser);
@@ -15,6 +16,7 @@ function Navbar() {
   const dispatch = useDispatch();
   const [showDropdown, setShowDropdown] = useState(false);
   const [theme, setTheme] = useState("light");
+  const nav = useNavigate()
 
 
   const handleUserClick = () => {
@@ -24,6 +26,7 @@ function Navbar() {
   const handleLogout = () => {
     // Dispatch the logout action
     dispatch(logout());
+    nav('/login')
     // Hide the dropdown
     setShowDropdown(false);
   };
@@ -157,7 +160,7 @@ function Navbar() {
                       onClick={handleUserClick}
                       className="w-10  h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer"
                       src={
-                        user.photo ||
+                        user?.user?.photo ||
                         "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/a9adeb42419075.57cc3f77ecae2.png"
                       }
                       alt="Bordered avatar"
@@ -177,6 +180,7 @@ function Navbar() {
                         type="button"
                         className="block w-full px-4 py-2 text-left text-red-600 hover:bg-red-100 hover:text-red-800 dark:bg-white dark:hover:text-white"
                         onClick={handleLogout}
+
                       >
                         Logout
                       </button>

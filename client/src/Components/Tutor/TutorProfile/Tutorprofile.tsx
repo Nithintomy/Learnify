@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import EditProfileModal from './EditProfile';
+import EditTutorProfile from './EditTutorProfile';
 import { ToastContainer, toast } from 'react-toastify';
-import axios from 'axios';
-import { UserBaseUrl } from '../../../Api';
+
 import { useDispatch, useSelector } from "react-redux";
-import { updateProfileImage,selectUser  } from "../../../features/userSlice/userSlice";
+import { selectTutor } from '../../../features/tutorSlice/tutorSlice';
+import axios from 'axios';
+import { TutorBaseUrl } from '../../../Api';
+import { updateProfileImage } from '../../../features/tutorSlice/tutorSlice';
 
 
 
-function UserProfile() {
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+
+function Tutorprofile() {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState<string | null>(localStorage.getItem("profileImageUrl") || null);
   const [imageFile, setImageFile] = useState<File | null>(null);
 
+  
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+  const tutor = useSelector(selectTutor);
+
+  const id=tutor?._id
 
 
-  const id=user?.user?._id
-  
-  
+  console.log(tutor,"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+  console.log(tutor?._id ,'OOONBIIIIIIIIIIIIIIIIIIIIII');
 
   useEffect(() => {
     // Save the image URL to localStorage whenever it changes
@@ -32,26 +37,25 @@ function UserProfile() {
   }, [imageUrl]);
 
 
+  
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+
+    if (selectedFile) {
+      setImageFile(selectedFile);
+     
+    }
+  };
+  
+
+
+
   const openEditModal = () => {
     setIsEditModalOpen(true);
   };
 
   const closeEditModal = () => {
     setIsEditModalOpen(false);
-  };
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
-  
-    if (selectedFile) {
-      const allowedFormats = ["image/jpeg", "image/png", "image/gif"];
-  
-      if (allowedFormats.includes(selectedFile.type)) {
-        setImageFile(selectedFile);
-      } else {
-        toast.error("Only image formats (JPEG, PNG, GIF) are allowed.");
-      }
-    }
   };
 
   const submitImage = () => {
@@ -76,9 +80,9 @@ function UserProfile() {
 
           if (data.url) {
             console.log(localStorage.getItem('token'),"token");
-            axios.put(`${UserBaseUrl}/studentProfile/${id}`, { image: data.url })
+            axios.put(`${TutorBaseUrl}/tutorProfile/${id}`, { image: data.url })
             .then((res)=> {
-              console.log(res.data, "hehehe")
+              console.log(res.data, "heheheeeeeeeeeeeee")
             }).catch((err)=> {
               console.log(err)
             })
@@ -97,22 +101,21 @@ function UserProfile() {
     }
   };
 
-  console.log(user,"mdsamds")
 
+ 
   return (
     <>
     <ToastContainer/>
       <div className="w-full max-w-2xl mx-auto mt-12">
         <div className="bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800">
-          
           <div className="flex flex-col items-center p-6">
-            {user ? (
+            {tutor ? (
              <img
              className="w-24 h-24 mb-3 rounded-full shadow-lg"
-             src={imageUrl || user.user.photo}
+             src={ imageUrl || tutor.photo}
              alt=""
-           />
-              
+           />          
+        
             ) : (
               <img
                 className="w-24 h-24 mb-3 rounded-full shadow-lg"
@@ -124,11 +127,14 @@ function UserProfile() {
            
            
             <span className="text-sm text-black dark:text-gray-400">
-             {user?.user?.studentName}
+             {tutor?.email}
             </span>
             <span className="text-sm text-gray-500 dark:text-gray-400">
-            {user?.user?.phone}
+            {tutor?.phone}
             </span>
+
+
+          
 
             <div className="flex mt-4 space-x-3 md:mt-6">
               <button
@@ -139,7 +145,7 @@ function UserProfile() {
               >
                 Edit Profile
               </button>
-              <EditProfileModal
+              <EditTutorProfile
                 isOpen={isEditModalOpen}
                 onClose={closeEditModal}
               />
@@ -158,6 +164,8 @@ function UserProfile() {
               </label>
             </div>
           </div>
+    
+
 
           <div className="p-4 space-y-4">
             <div className="flex items-center">
@@ -168,7 +176,7 @@ function UserProfile() {
                 type="text"
                 id="username"
                 className="w-2/3 rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 text-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value=  {user?.user?.studentName || ''}
+                value=  {tutor?.name}
               />
             </div>
 
@@ -180,7 +188,7 @@ function UserProfile() {
                 type="text"
                 id="email"
                 className="w-2/3 rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 text-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value={user?.user?.studentEmail || ''}
+                value={tutor?.email}
               />
             </div>
 
@@ -192,7 +200,7 @@ function UserProfile() {
                 type="text"
                 id="address"
                 className="w-2/3 rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 text-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value={user?.user?.phone || ''}
+                value={tutor?.phone}
               />
             </div>
             {/* Add more fields here */}
@@ -203,4 +211,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default Tutorprofile;

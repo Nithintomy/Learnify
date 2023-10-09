@@ -121,4 +121,63 @@ const tutorLogout =async(req:Request,res:Response)=>{
 
 }
 
-export {tutorRegister,tutorLogin,tutorLogout}
+const updateTutorProfile =async(req:Request,res:Response)=>{
+
+    try {
+        const tutorId = req.params.id;
+        const { tutorName, tutorEmail, phone} = req.body;
+    
+    
+        const tutor = await TutorModel.findById(tutorId);
+    
+        if (!tutor) {
+          return res.status(404).json({ message: 'User not found' });
+        }
+    
+        tutor.tutorName = tutorName;
+        tutor.tutorEmail = tutorEmail;
+        tutor.phone = phone;
+    
+        await tutor.save();
+
+        console.log(tutor,"tooooooooooooooooter")
+    
+        return res.status(200).json({ message: 'Profile updated successfully', tutor });
+      } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+    
+    }
+
+const TutorProfile = async (req: Request, res: Response) => { 
+    console.log("hhhhhhhhhhhhhhhhh")
+    const { image } = req.body;
+    const tutorId = req.params.id.trim();
+    console.log(tutorId,"ndbsDJFewfe")
+    try {
+      const tutor = await TutorModel.findById({_id:tutorId});
+      console.log(tutor, "user");
+  
+      if (!tutor) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      tutor.photo = image;
+  
+      await tutor.save();
+  console.log(tutor,"tu")
+      return res.status(200).json({ message: "Profile picture updated", tutor });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  };
+  
+
+  
+  
+
+
+
+export {tutorRegister,tutorLogin,tutorLogout,TutorProfile,updateTutorProfile}

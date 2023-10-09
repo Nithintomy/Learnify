@@ -30,15 +30,25 @@ const userSlice = createSlice({
         localStorage.setItem("userData", JSON.stringify(state.user));
       }
     },
+    updateUserDetails: (state, action: PayloadAction<any>) => {
+      // Update the user's details
+      if (state.user) {
+        state.user.studentName = action.payload.studentName;
+        state.user.studentEmail = action.payload.studentEmail;
+        state.user.phone = action.payload.phone;
+        localStorage.setItem("userData", JSON.stringify(state.user));
+      }
+    },
     logout: (state) => {
       state.user = ''
       state.token = null;    
       localStorage.removeItem("userData");
+      localStorage.removeItem('profileImageUrl');
     }
   }
 })
 
-export const { login, logout, signup, updateProfileImage } = userSlice.actions;
+export const { login, logout, signup, updateProfileImage,updateUserDetails } = userSlice.actions;
 export const selectUser = (state: { user: UserState }) => state.user.user
 
 export default userSlice.reducer;

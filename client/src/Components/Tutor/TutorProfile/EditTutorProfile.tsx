@@ -1,25 +1,28 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { UserBaseUrl } from "../../../Api";
+import { TutorBaseUrl } from "../../../Api";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser, updateUserDetails } from "../../../features/userSlice/userSlice";
-import { login } from "../../../features/tutorSlice/tutorSlice";
+import { selectTutor ,updateTutorDetails} from "../../../features/tutorSlice/tutorSlice";
+
 
 interface EditProfileModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
+function EditTutorProfile({ isOpen, onClose }: EditProfileModalProps) {
+  
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
+    tutorName: "",
+    tutorEmail: "",
     phone: "",
   });
 
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
-  const id = user?.user?._id;
+  const tutor = useSelector(selectTutor);
+  const id = tutor?._id;
+
+  console.log("id",id)
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -32,27 +35,25 @@ function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
     e.preventDefault();
 
     const updatedData = {
-      studentName: formData.username,
-      studentEmail: formData.email,
+      tutorName: formData.tutorName,
+      tutorEmail: formData.tutorEmail,
       phone: formData.phone,
     };
 
 
     axios
 
-      .put(`${UserBaseUrl}/updateProfile/${id}`, updatedData)
+      .put(`${TutorBaseUrl}/updateTutorProfile/${id}`, updatedData)
       .then((response) => {
-        console.log(response);
-        
-        if (response.data.tutor) {
-          console.log(response.data.tutor);
-          console.log('fcgddfexer');
-          
-          
-          dispatch(login(response.data.tutor));
+        console.log("resssssssssssssssssssssssssponse")
+        if (response.status === 200) {
+          console.log("response .staue .................")
+
+          console.log(response,"reeeeeeeeeeeeeeeeeeeeeee")
+          dispatch(updateTutorDetails(response.data.tutor));
           onClose();
+  
         } else {
-          console.log("data not found")
         }
       })
       .catch((error: any) => {
@@ -97,9 +98,9 @@ function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
             </label>
             <input
               type="text"
-              id="username"
-              name="username"
-              value={formData.username}
+              id="tutorName"
+              name="tutorName"
+              value={formData.tutorName}
               onChange={handleChange}
               className="w-full border rounded-lg px-3 py-2 mt-1"
             />
@@ -110,9 +111,9 @@ function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
             </label>
             <input
               type="email"
-              id="email"
-              name="email"
-              value={formData.email}
+              id="tutorEmail"
+              name="tutorEmail"
+              value={formData.tutorEmail}
               onChange={handleChange}
               className="w-full border rounded-lg px-3 py-2 mt-1"
             />
@@ -146,4 +147,7 @@ function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
   );
 }
 
-export default EditProfileModal;
+
+
+
+export default EditTutorProfile

@@ -59,7 +59,7 @@ const TutorSchema = new Schema<TUTOR>({
 TutorSchema.methods.matchPassword = async function (enteredPassword: string) {
     return await bcrypt.compare(enteredPassword, this.password);
 };
-    
+     
 TutorSchema.pre<TUTOR>('save', async function (next) {
     if (!this.isModified('password')) {
         return next();

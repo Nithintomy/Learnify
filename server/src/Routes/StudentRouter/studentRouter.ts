@@ -38,6 +38,7 @@ studentRouter.put('/studentProfile/:id',studentProfile)
 
 studentRouter.put('/updateProfile/:id',updateProfile)
 
+
 //get All Courses
 studentRouter.get('/allCourses',allCourses)
 

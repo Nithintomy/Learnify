@@ -51,6 +51,11 @@ function SignUp() {
       return;
     }
 
+    if (!/^\d{10}$/.test(phone)) {
+      toast.error("Invalid phone number. It must contain exactly 10 digits.");
+      return;
+    }
+
     try {
       console.log("before axios call");
       const response = await axiosInstance.post("/student/register", {

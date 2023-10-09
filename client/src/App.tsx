@@ -33,11 +33,7 @@ import NotFound from './Components/NotFound'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import PaymentSuccess from './Components/User/Payment/PaymentSuccess'
-
-
-
-
-
+import TutorProfile from './Pages/Tutor/TutorProfile/TutorProfile'
 
 
 
@@ -81,6 +77,7 @@ function App() {
         <Route path='/my_students' element={<My_students/>}/>
         <Route path='/Add_Course' element={<Add_courses/>}/>
         <Route path='/Add_Lesson' element={<Add_Lessons/>}/> 
+        <Route path='/tutorProfile' element={<TutorProfile/>}/>
 
 
         {/* admin side  */}

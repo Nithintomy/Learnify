@@ -13,6 +13,7 @@ const UserOtp: React.FC = () => {
   const [error, setError] = useState<string>("");
   const dispatch = useDispatch();
   const [timer, setTimer] = useState<number>(60);
+  const [otpSent, setOtpSent] = useState(false); // Track whether OTP has been sent
 
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -20,11 +21,11 @@ const UserOtp: React.FC = () => {
     }, 1000);
 
     if (timer === 0) {
-      navigate("/signup");
+      clearInterval(countdown);
     }
 
     return () => clearInterval(countdown);
-  }, [timer, navigate]);
+  }, [timer]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,14 +41,14 @@ const UserOtp: React.FC = () => {
       if (response.status === 200) {
         toast.success("Signup successful");
         const userdata = response.data;
-
+        
         localStorage.setItem("userData", JSON.stringify(userdata));
         localStorage.setItem("userToken", JSON.stringify(userdata.token));
 
         dispatch(signup(userdata));
        
          setTimeout(() => {
-          
+            
             navigate("/");
          }, 2000);
       } else {
@@ -63,6 +64,30 @@ const UserOtp: React.FC = () => {
     }
   };
 
+  const handleResendOTP = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/student/signup_verify",
+        {
+          otp,
+         
+        }
+      );
+  
+      if (response.status === 200) {
+        toast.success("New OTP Sent Successfully");
+      } else {
+        toast.error("Failed to send new OTP");
+      }
+    } catch (error) {
+      console.error("An error occurred while resending OTP:", error);
+      toast.error("An error occurred");
+    }
+  
+    setOtpSent(true);
+    setTimer(60); 
+  };
+  
   useEffect(() => {
     if (localStorage.getItem("userData")) {
       navigate("/");
@@ -93,11 +118,22 @@ const UserOtp: React.FC = () => {
                 Submit
               </button>
             </form>
-            {error && (
-              <div className="mt-4 text-red-500">{error}</div>
-            )}
+            {error && <div className="mt-4 text-red-500">{error}</div>}
             <div className="mt-4">
-              Redirecting to signup page in {timer} seconds...
+              {timer === 0 ? (
+                <p>
+                  <button
+                    onClick={handleResendOTP}
+                    className={`text-blue-500 underline ${
+                      otpSent ? "blurred" : ""
+                    }`}
+                  >
+                    Resend OTP
+                  </button>
+                </p>
+              ) : (
+                <p>Redirecting to signup page in {timer} seconds...</p>
+              )}
             </div>
           </div>
         </div>

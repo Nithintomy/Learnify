@@ -5,8 +5,10 @@ import orderModel from '../../model/orderModel';
 
 
 const checkout = async(req: Request, res: Response) => {
-
-  try {
+  
+  
+  
+  try { 
     if (!process.env.RAZORPAY_API_KEY) {
       console.error("RAZORPAY_API_KEY is not defined in the .env");
       process.exit(1);
@@ -21,7 +23,7 @@ const checkout = async(req: Request, res: Response) => {
         amount: Number(req.body.amount * 100),  // amount in the smallest currency unit
         currency: "INR",
         receipt: crypto.randomBytes(10).toString("hex")
-        
+         
       };
      const order =await instance.orders.create(options)
      console.log(order)
@@ -38,29 +40,32 @@ const checkout = async(req: Request, res: Response) => {
 };
 
 const verifyPayment = async(req: Request, res: Response) => {
-  console.log("verify payment")
-  console.log(req.body)
-  const {  courseId, tutorId ,studentId} = req.body.requestData;
+  console.log(req.query,"myrgtfaf")
+  const { courseId, tutorId, studentId, amount } = req.query;
+
+  // Now you can use these variables in your logic
+
   try {
     const {razorpay_order_id,razorpay_payment_id,razorpay_signature} =req.body
     const body =razorpay_order_id + "|" + razorpay_payment_id;
 
     const crypto = require('crypto')
     const expectedSignature =crypto.createHmac('sha256',process.env.RAZORPAY_API_SECRET)
-                                .update(body.toString())
+                                 .update(body.toString())
                                 .digest('hex')
 
      const isAuthentic = expectedSignature === razorpay_signature;
 
-     if(isAuthentic){
+     if(isAuthentic){ 
       //database to save the order
       console.log(req.body,"haaaa")
-      const order = await orderModel.create({
-        studentId, 
-        courseId,   
-        tutorId,     
-        amount: req.body.amount / 100, 
-      });
+   const order = await orderModel.create({
+  studentId, 
+  courseId,   
+  tutorId,     
+  amount,
+});
+
       console.log("Order saved:", order);
 
       res.redirect(`http://localhost:3000/paymentSuccess?reference=${razorpay_payment_id}`)
