@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AdminNavbar } from "../Navbar/Navbar";
 import axios from "axios";
 import { AdminBaseUrl } from "../../../Api";
 
@@ -46,7 +45,7 @@ const CategoryList: React.FC = () => {
           {categories.map((category, index) => (
             <tr
               key={category._id}
-              className={index % 2 === 0 ? "bg-gray-100" : ""}
+              className="bg-gray-100"
             >
               <td className="px-4 py-2">{index + 1}</td>
               <td className="px-4 py-2">{category.title}</td>

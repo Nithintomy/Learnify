@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface Tutor {
+export interface Tutor {
   _id: string;
   name: string;
   email: string;

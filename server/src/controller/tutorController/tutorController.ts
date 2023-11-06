@@ -1,6 +1,9 @@
-import { Request,Response } from "express";
+import { Request,Response, response } from "express";
 import TutorModel from "../../model/tutorModel";
 import generateToken from "../../Utils/generateToken";
+import studentModel from "../../model/userModel";
+import courseModel from "../../model/Courses";
+import orderModel from "../../model/orderModel";
 //student register 
 
 const tutorRegister = async(req:Request,res:Response)=>{
@@ -174,10 +177,40 @@ const TutorProfile = async (req: Request, res: Response) => {
     }
   };
   
+  const getStudentDetails = async (req:Request,res:Response)=>{
+    try {
+      const studentData =await studentModel.find().exec()
+    
+
+      if(studentData){
+          res.status(200).json({
+            studentData
+          })
+      }else{
+          return res.status(400).json({
+              message:"no users Found"
+          })
+
+      }
+  } catch (error) {
+      console.log(error)
+  }
+
+
+  }
+
+  const getStudentByCourses = async (req: Request, res: Response) => {
+    const { tutorId } = req.params;
+    try {
+      
+    } catch (error) {
+      res.status(500).json({ error: "Unable to fetch students" });
+    }
+  }
 
   
   
 
 
 
-export {tutorRegister,tutorLogin,tutorLogout,TutorProfile,updateTutorProfile}
+export {tutorRegister,tutorLogin,tutorLogout,TutorProfile,updateTutorProfile,getStudentDetails,getStudentByCourses}

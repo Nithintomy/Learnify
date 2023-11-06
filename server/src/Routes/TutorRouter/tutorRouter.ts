@@ -1,5 +1,5 @@
 import express from 'express'
-import { tutorLogin, tutorLogout, tutorRegister ,TutorProfile,updateTutorProfile} from '../../controller/tutorController/tutorController';
+import { tutorLogin, tutorLogout, tutorRegister ,TutorProfile,updateTutorProfile,getStudentDetails,getStudentByCourses} from '../../controller/tutorController/tutorController';
 import { addCourses,getCourseById,getCourses,updateCourse} from '../../controller/tutorController/addCourse';
 import { addCategory, getAllCategory } from '../../controller/tutorController/addCategory';
 import { addLesson, getLesson } from '../../controller/tutorController/addLesson';
@@ -18,8 +18,14 @@ tutorRouter.put('/logout',tutorLogout)
 //tutor addCategory
 tutorRouter.post('/addCategory',addCategory)
 
-//tutor getCategory
+//tutor getAll students 
+tutorRouter.get('/getAllStudents',getStudentDetails)
 
+//get students of specific tutor
+
+tutorRouter.get('/tutor/:tutorId',getStudentByCourses)
+
+//tutor getCategory
 tutorRouter.get('/Allcategory',getAllCategory)
 
 //tutor addCourses
@@ -47,4 +53,4 @@ tutorRouter.put('/tutorProfile/:id',TutorProfile)
 tutorRouter.put('/updateTutorProfile/:id',updateTutorProfile)
 
 
-export default tutorRouter;
+export default tutorRouter; 

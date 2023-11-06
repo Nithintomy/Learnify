@@ -32,6 +32,8 @@ function UserProfile() {
   }, [imageUrl]);
 
 
+
+
   const openEditModal = () => {
     setIsEditModalOpen(true);
   };
@@ -109,7 +111,7 @@ function UserProfile() {
             {user ? (
              <img
              className="w-24 h-24 mb-3 rounded-full shadow-lg"
-             src={imageUrl || user.user.photo}
+             src={imageUrl || user?.user?.photo} 
              alt=""
            />
               
@@ -124,10 +126,10 @@ function UserProfile() {
            
            
             <span className="text-sm text-black dark:text-gray-400">
-             {user?.user?.studentName}
+            {user?.studentName || user?.user?.studentName}
             </span>
             <span className="text-sm text-gray-500 dark:text-gray-400">
-            {user?.user?.phone}
+            {user?.phone || user?.user?.phone}
             </span>
 
             <div className="flex mt-4 space-x-3 md:mt-6">
@@ -168,7 +170,7 @@ function UserProfile() {
                 type="text"
                 id="username"
                 className="w-2/3 rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 text-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value=  {user?.user?.studentName || ''}
+                value={user?.studentName || user?.user?.studentName}
               />
             </div>
 
@@ -180,7 +182,7 @@ function UserProfile() {
                 type="text"
                 id="email"
                 className="w-2/3 rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 text-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value={user?.user?.studentEmail || ''}
+                value={user?.studentEmail || user?.user?.studentEmail} 
               />
             </div>
 
@@ -192,7 +194,7 @@ function UserProfile() {
                 type="text"
                 id="address"
                 className="w-2/3 rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 text-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value={user?.user?.phone || ''}
+                value={user?.phone || user?.user?.phone}
               />
             </div>
             {/* Add more fields here */}

@@ -117,6 +117,7 @@ function Add_course() {
         photo: cloudanaryURL,
         courseFee: price,
         tutor: parsedUserData._id,
+        category: category,
       }).then((response) => {
         console.log(response.data);
         toast.success('Course added successfully');

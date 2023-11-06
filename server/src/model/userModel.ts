@@ -5,11 +5,13 @@ import bcrypt from 'bcrypt';
 //structure of a student document in monodb
 export interface Student extends Document {
     studentName:string,
+    studentRole: string,
     studentEmail:string,
     phone:number,
     password:string,
     photo:string[],
     courses:mongoose.Schema.Types.ObjectId,
+    chats: mongoose.Schema.Types.ObjectId[]
     createAt:Date,
     updatedAt:Date,
     isBlocked:boolean,
@@ -23,6 +25,11 @@ const userSchema = new Schema<Student>({
     studentName:{
         type:String,
         required:true
+    },
+    studentRole: {
+        type: String, 
+        required: true,
+        default: "student", 
     },
     studentEmail:{
         type:String,
@@ -40,12 +47,18 @@ const userSchema = new Schema<Student>({
     },
     photo:[{
         type:String,
-        default:'',
+        default:"https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/a9adeb42419075.57cc3f77ecae2.png",
     }],
     courses:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"CourseModel"
+        ref:"courseModel"
     },
+    chats: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "ChatModel"
+        }
+    ],
     isBlocked:{
         type:Boolean,
         required:true,

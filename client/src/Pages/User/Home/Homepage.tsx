@@ -14,7 +14,9 @@ import { CourseCard } from '../../../Components/User/Card/cards';
 function Homepage() {
   const dispatch =useDispatch()
   const user = useSelector(selectUser);
-  const userName =user?user.name:''
+  console.log(user,"userrrrr")
+  const userName =user?.user?.studentName
+  console.log(userName,"namem")
  
   useEffect(() => {
     const storedUserData = localStorage.getItem('userData');
@@ -32,7 +34,8 @@ function Homepage() {
       <Navbar/>
       <Carousel/>  
       
-      <p className="text-4xl font-medium text-gray-900  dark:text-white ml-12 mt-9 mb-4" >Let's start learning<span className="text-orange-lighter-900">,{userName}</span></p>
+      
+      <h1 className="text-4xl font-bold text-gray-800 dark:text-white ml-24 m-14">Let's start learning,<span className="text-black text-3xl font-bold ml-4">{userName}</span></h1>
 
         <div className='px-3 lg:px-3 '>
         <CourseCard />

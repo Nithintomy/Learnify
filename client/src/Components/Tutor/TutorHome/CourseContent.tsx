@@ -11,10 +11,7 @@ function CourseContent() {
         <Lessons />
       </div>
 
-      {/* Right side with black background */}
-      <div className="w-1/3 bg-black  text-lg">
-           <h3 className='text-white text-center pt-5 font-serif'>Tutor Details</h3>
-      </div>
+      
     </div>
   );
 }

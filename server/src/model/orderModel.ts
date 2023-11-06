@@ -1,9 +1,10 @@
 import mongoose, { Schema,Document,Model,model} from "mongoose";
+import { Course } from "./Courses";
 
 
 interface ORDER extends Document{
     studentId :mongoose.Schema.Types.ObjectId
-    courseId:mongoose.Schema.Types.ObjectId
+    courseId:mongoose.Schema.Types.ObjectId | Course
     tutorId:mongoose.Schema.Types.ObjectId
     status:string
     amount:number
@@ -23,7 +24,7 @@ const orderSchema = new Schema<ORDER>({
     courseId:{
         type:mongoose.Schema.Types.ObjectId,
         required:true,
-        ref:"courseModel"
+        ref:"courseModel",
     },
     tutorId:{
         type:mongoose.Schema.Types.ObjectId,
@@ -56,6 +57,6 @@ const orderSchema = new Schema<ORDER>({
 
 )
 
-const orderModel :Model<ORDER> =model<ORDER>("orderModel",orderSchema)
+const orderModel :Model<ORDER> =mongoose.model<ORDER>("orderModel",orderSchema)
 
 export default orderModel

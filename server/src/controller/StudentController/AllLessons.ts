@@ -1,23 +1,32 @@
 import { Request,Response } from "express"
 import lessonModel from "../../model/lesson"
+import courseModel from "../../model/Courses";
 
 const allLessons =async(req:Request,res:Response)=>{
 
+    console.log("lesson lu keri")
+
+
     try {
+        const courseId = req.params.courseId;
 
-        const lessons = await lessonModel.find()
-
-        if(lessons){
-            res.status(201).json({lessons})
-        }else{
-            res.status(400).json({message:"Not valid"})
+        console.log(courseId,"courseId match naoo")
+    
+        const lessons = await lessonModel.find({ courseId });
+    
+        if (lessons) {
+            console.log(lessons,"lesson ondu")
+          res.status(200).json(lessons);
+        } else {
+          res.status(404).json({ message: "Lessons not found" });
         }
-        
-    } catch (error) {
-        console.log(error)
-        
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
+      }
+
     }
-}
+
 
 
 export {allLessons}

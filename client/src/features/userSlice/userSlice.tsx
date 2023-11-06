@@ -6,16 +6,15 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  user: '',
-  token: null,
-}
+  user: {}, 
+  token: localStorage.getItem("token") || null,
+};
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
     login: (state, action: PayloadAction<any | null>) => {
-      console.log(action.payload, "payload here")
       state.user = action.payload;
       state.token = action.payload?.token || null;
       localStorage.setItem("userData", JSON.stringify(action.payload));
@@ -36,14 +35,15 @@ const userSlice = createSlice({
         state.user.studentName = action.payload.studentName;
         state.user.studentEmail = action.payload.studentEmail;
         state.user.phone = action.payload.phone;
+      
         localStorage.setItem("userData", JSON.stringify(state.user));
       }
     },
+    
     logout: (state) => {
-      state.user = ''
+      state.user = {}
       state.token = null;    
-      localStorage.removeItem("userData");
-      localStorage.removeItem('profileImageUrl');
+      localStorage.clear(); 
     }
   }
 })

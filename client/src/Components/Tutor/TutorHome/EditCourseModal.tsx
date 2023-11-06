@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { EditedCourse,Course } from "../../../features/tutorSlice/courseSlice";
+import React, { useEffect, useState } from 'react';
+import { EditedCourse, Course } from '../../../features/tutorSlice/courseSlice';
+import { toast } from 'react-toastify'; // Import react-toastify
 
 interface EditCourseModalProps {
   isOpen: boolean;
   onClose: () => void;
-  courseDetails: Course | null; // Replace with your actual Course type
+  courseDetails: Course | null;
   onSave: (editedCourse: EditedCourse) => void;
 }
 
@@ -23,7 +24,7 @@ function EditCourseModal({
   });
 
   // Populate the form data with the current course details when the modal opens
-  React.useEffect(() => {
+  useEffect(() => {
     if (isOpen && courseDetails) {
       setFormData({
         courseName: courseDetails.courseName,
@@ -31,7 +32,6 @@ function EditCourseModal({
         courseFee: courseDetails.courseFee,
         courseduration: courseDetails.courseduration,
         photo: courseDetails.photo,
-        
       });
     }
   }, [isOpen, courseDetails]);
@@ -43,18 +43,41 @@ function EditCourseModal({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Form validation
+    if (formData.courseName.trim() === '') {
+      toast.error('Course Name is required');
+      return;
+    }
+
+    if (formData.coursedescription.trim() === '') {
+      toast.error('Course Description is required');
+      return;
+    }
+
+    if (formData.courseFee <= 0) {
+      toast.error('Course Fee must be greater than 0');
+      return;
+    }
+
+    if (formData.courseduration <= 0) {
+      toast.error('Course Duration must be greater than 0');
+      return;
+    }
+
     const editedCourse: EditedCourse = {
-    _id: courseDetails?._id || '',
-    courseName: formData.courseName,
-    coursedescription: formData.coursedescription,
-    courseFee: formData.courseFee,
-    courseduration: formData.courseduration,
-    photo: formData.photo,
-    lessons: [],  
+      _id: courseDetails?._id || '',
+      courseName: formData.courseName,
+      coursedescription: formData.coursedescription,
+      courseFee: formData.courseFee,
+      courseduration: formData.courseduration,
+      photo: formData.photo,
+      lessons: [],
     };
     onSave(editedCourse);
-    onClose(); 
+    onClose();
   };
+
 
   return (
     <div
@@ -156,7 +179,7 @@ function EditCourseModal({
               type="submit"
               className="bg-blue-500 text-white rounded-lg px-4 py-2"
             >
-              Save
+             Update
             </button>
           </div>
         </form>

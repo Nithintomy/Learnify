@@ -105,17 +105,16 @@ function Tutorprofile() {
  
   return (
     <>
-    <ToastContainer/>
+      <ToastContainer/>
       <div className="w-full max-w-2xl mx-auto mt-12">
         <div className="bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800">
           <div className="flex flex-col items-center p-6">
             {tutor ? (
-             <img
-             className="w-24 h-24 mb-3 rounded-full shadow-lg"
-             src={ imageUrl || tutor.photo}
-             alt=""
-           />          
-        
+              <img
+                className="w-24 h-24 mb-3 rounded-full shadow-lg"
+                src={imageUrl || tutor.photo}
+                alt=""
+              />
             ) : (
               <img
                 className="w-24 h-24 mb-3 rounded-full shadow-lg"
@@ -123,31 +122,25 @@ function Tutorprofile() {
                 alt=""
               />
             )}
-          
-           
-           
+            
             <span className="text-sm text-black dark:text-gray-400">
-             {tutor?.email}
+              {tutor?.email}
             </span>
             <span className="text-sm text-gray-500 dark:text-gray-400">
-            {tutor?.phone}
+              {tutor?.phone}
             </span>
-
-
-          
-
+            
             <div className="flex mt-4 space-x-3 md:mt-6">
               <button
                 className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                onClick={() => {
-                  openEditModal();
-                }}
+                onClick={openEditModal}
               >
                 Edit Profile
               </button>
               <EditTutorProfile
                 isOpen={isEditModalOpen}
                 onClose={closeEditModal}
+                tutor={tutor} // Pass the tutor data to the edit modal
               />
               <label>
                 <input
@@ -176,7 +169,7 @@ function Tutorprofile() {
                 type="text"
                 id="username"
                 className="w-2/3 rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 text-sm p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value=  {tutor?.name}
+                value=  {tutor?.name }
               />
             </div>
 

@@ -57,11 +57,12 @@ function SingleView() {
     <div className="flex flex-col md:flex-row bg-gradient-to-r from-black via-gray-600 to-deep-orange-500 hover:bg-opacity-80 dark:bg-gray-800 dark:hover:bg-opacity-80 shadow-lg rounded-lg overflow-hidden">
       {/* Right Side: Course Image */}
       <div className="md:w-1/2">
-        <img
-          src={courseDetails?.photo}
-          alt="Course Image"
-          className="object-cover w-full h-96 md:h-auto md:w-full"
-        />
+      <img
+    src={courseDetails?.photo}
+    alt="Course Image"
+    className="object-cover"
+    style={{ width: '200vh', height: '400px' }}
+  />
       </div>
 
       {/* Left Side: Course Details */}

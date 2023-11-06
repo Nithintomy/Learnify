@@ -2,31 +2,38 @@ import React from "react";
 import mainlogo from "../../../assets/main-logo.jpg";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../../../features/userSlice/userSlice";
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { login, logout } from "../../../features/userSlice/userSlice";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { IconButton } from "@mui/material";
-import { addToCart } from "../../../features/userSlice/cartSlice";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { selectCartCount } from "../../../features/userSlice/cartSlice";
+
+
 
 function Navbar() {
   const user = useSelector(selectUser);
+  const count =useSelector(selectCartCount)
   console.log(user, "user vanuu");
   const dispatch = useDispatch();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [theme, setTheme] = useState("light");
-  const nav = useNavigate()
-
+  const nav = useNavigate();
 
   const handleUserClick = () => {
     setShowDropdown(!showDropdown);
   };
 
+  const handleMobileMenuToggle = () => {
+    setShowMobileMenu(!showMobileMenu);
+  };
+
   const handleLogout = () => {
     // Dispatch the logout action
     dispatch(logout());
-    nav('/login')
+    nav("/login");
     // Hide the dropdown
     setShowDropdown(false);
   };
@@ -67,13 +74,13 @@ function Navbar() {
             </span>
           </a>
 
-          <div className="flex items-center md:order-2">
+          {/* Hamburger menu button for mobile */}
+          <div className="md:hidden">
             <button
-              data-collapse-toggle="navbar-user"
               type="button"
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-              aria-controls="navbar-user"
-              aria-expanded="false"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              onClick={handleMobileMenuToggle}
+              aria-expanded={showMobileMenu}
             >
               <span className="sr-only">Open main menu</span>
               <svg
@@ -95,7 +102,9 @@ function Navbar() {
           </div>
 
           <div
-            className="flex items-center justify-between w-full md:flex-row md:space-x-8 md:w-auto md:order-1"
+            className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${
+              showMobileMenu ? "block" : "hidden"
+            }`}
             id="navbar-user"
           >
             <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-black md:dark:bg-black dark:border-black">
@@ -118,44 +127,46 @@ function Navbar() {
               </li>
               <li>
                 <Link
-                  to=""
+                  to="/courses"
                   className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700  dark:text-white dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Courses
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   to=""
                   className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700  dark:text-white dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Community
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
-                  to=""
+                  to="/enrolled-courses"
                   className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700  dark:text-white dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
-                  Contact
+                  Enrolled Courses
                 </Link>
               </li>
             </ul>
 
             {user ? (
-              // Show user's name and handle click for dropdown
               <>
-                
-                
-                  <IconButton >
-                    <ShoppingCartIcon />
-                    <span className="absolute right-0 top-0 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">5
-    </span>
-                  </IconButton>
-                
+              <li className="ml-4 " style={{ listStyle: 'none' }}>
+               <Link to='/cart'>
+               <IconButton >
+                  <ShoppingCartIcon className={theme === 'dark' ? 'text-white' : ''} />
+                  <span className="absolute right-0 top-0 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">
+                    {count}
+                  </span>
+                </IconButton>
+               </Link>
 
-                <div className="relative z-20">
-                  <span className="ml-3">
+              </li>
+
+                <div className="relative z-20 ml-10 mr-10 mb-5">
+                  <span className="ml-5">
                     <img
                       onClick={handleUserClick}
                       className="w-10  h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer"
@@ -180,14 +191,13 @@ function Navbar() {
                         type="button"
                         className="block w-full px-4 py-2 text-left text-red-600 hover:bg-red-100 hover:text-red-800 dark:bg-white dark:hover:text-white"
                         onClick={handleLogout}
-
                       >
                         Logout
                       </button>
                     </div>
                   )}
                 </div>
-              </>
+                </>
             ) : (
               <div className="md:ml-12 space-x-2.5">
                 <Link to="/login">
@@ -221,7 +231,8 @@ function Navbar() {
                 <label className="swap swap-rotate">
                   {theme === "dark" ? (
                     <button
-                      className="bg-blue-500 hover:bg-blue-700 inline-flex items-center rounded-full bg-neutral-800 px-1 pb-2 pt-2.5 text-xs font-medium uppercase  leading-normal dark:active:shadow-[0_8px_9px_-4px_rgba(3,2,2,0.3),0_4px_18px_0_rgba(3,2,2,0.2)]"
+                      className="bg-blue-500 hover:bg-blue-700 inline-flex items-center 
+                      rounded-full bg-neutral-800 px-1 pb-2 pt-2.5 text-xs font-medium uppercase  leading-normal dark:active:shadow-[0_8px_9px_-4px_rgba(3,2,2,0.3),0_4px_18px_0_rgba(3,2,2,0.2)]"
                       onClick={handleThemeSwitch}
                       style={{ cursor: "pointer" }}
                     >

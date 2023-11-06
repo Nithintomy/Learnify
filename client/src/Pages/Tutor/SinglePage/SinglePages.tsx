@@ -17,7 +17,7 @@ function SinglePages() {
     
         <CourseContent/>
 
-        <Rating/>
+       
     </div>
   )
 }

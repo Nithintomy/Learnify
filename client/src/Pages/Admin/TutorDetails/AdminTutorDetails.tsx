@@ -6,7 +6,7 @@ import TutorTable from '../../../Components/Admin/TutorTable/TutorTable'
 
 function AdminTutorDetails() {
   return (
-    <div>
+    <div className="bg-blue-gray-700 h-screen">
         <AdminNavbar/>
        
         <div className="mt-5 px-2 lg:px-0">

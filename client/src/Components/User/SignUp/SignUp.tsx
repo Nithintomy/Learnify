@@ -64,7 +64,16 @@ function SignUp() {
         phone: trimmedPhone,
         password: trimmedpassword,
       });
-      navigate('/user_otp');
+  
+      if (response.status === 200) {
+        setTimeout(() => {
+          toast.success(response.data.message);
+          navigate("/user_otp", { state: { studentEmail: studentEmail } });
+          
+        }, 1000);
+      } else {
+        toast.error("Error registering user");
+      }
     } catch (error: any) {
       console.log(error);
       toast.error(error.response.data.message);
@@ -73,7 +82,7 @@ function SignUp() {
 
   return (
     <div>
-      <GoogleOAuthProvider clientId={CLIENT_ID}>
+      {/* <GoogleOAuthProvider clientId={CLIENT_ID}> */}
         <section className="bg-primary-900 ">
           <ToastContainer />
           <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
@@ -87,7 +96,7 @@ function SignUp() {
                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
                   Sign In
                 </h1>
-                <div className="ml-16">
+                {/* <div className="ml-16">
                 <GoogleLogin
                 
                   onSuccess={(credentialResponse) => {
@@ -119,7 +128,7 @@ function SignUp() {
                   text="continue_with"
                   shape="square"
                 />
-                </div>
+                </div> */}
                 <form
                   className="space-y-4 md:space-y-6 "
                   onSubmit={(e) => handleSubmit(e)}
@@ -225,7 +234,7 @@ function SignUp() {
             </div>
           </div>
         </section>
-      </GoogleOAuthProvider>
+      {/* </GoogleOAuthProvider> */}
     </div>
   );
 }

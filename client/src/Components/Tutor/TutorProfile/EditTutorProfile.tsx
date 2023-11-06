@@ -2,27 +2,27 @@ import axios from "axios";
 import React, { useState } from "react";
 import { TutorBaseUrl } from "../../../Api";
 import { useDispatch, useSelector } from "react-redux";
-import { selectTutor ,updateTutorDetails} from "../../../features/tutorSlice/tutorSlice";
+import { Tutor, selectTutor ,updateTutorDetails} from "../../../features/tutorSlice/tutorSlice";
 
 
 interface EditProfileModalProps {
   isOpen: boolean;
   onClose: () => void;
+  tutor: Tutor | null; 
 }
 
 function EditTutorProfile({ isOpen, onClose }: EditProfileModalProps) {
   
-  const [formData, setFormData] = useState({
-    tutorName: "",
-    tutorEmail: "",
-    phone: "",
-  });
-
   const dispatch = useDispatch();
   const tutor = useSelector(selectTutor);
   const id = tutor?._id;
 
-  console.log("id",id)
+  const [formData, setFormData] = useState({
+    tutorName: tutor?.name || "", // Initialize with tutor's name or empty string
+    tutorEmail: tutor?.email || "", // Initialize with tutor's email or empty string
+    phone: tutor?.phone || "", // Initialize with tutor's phone or empty string
+  });
+
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

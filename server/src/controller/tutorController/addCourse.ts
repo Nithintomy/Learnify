@@ -12,7 +12,7 @@ const addCourses =asyncHandler(async(req:Request,res:Response)=>{
     console.log("I m adding course")
 
     try {
-        const {courseName,courseduration,coursedescription,photo,courseFee,tutor} =req.body;
+        const {courseName,courseduration,coursedescription,photo,courseFee,tutor,category} =req.body;
         console.log(req.body,"Body data")
 
     const course = await courseModel.create({
@@ -21,7 +21,8 @@ const addCourses =asyncHandler(async(req:Request,res:Response)=>{
         coursedescription,
         photo,
         courseFee,
-        tutor
+        tutor,
+        category
   
     })
   await course.save()

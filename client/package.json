@@ -34,7 +34,11 @@
     "react-redux": "^8.1.2",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.15.0",
+    "react-spinners": "^0.13.8",
     "react-toastify": "^9.1.3",
+    "recharts": "^2.9.0",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
     "sweetalert2": "^11.7.31"
   },
   "devDependencies": {
@@ -43,6 +47,7 @@
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@types/react-modal": "^3.16.1",
+    "@types/socket.io": "^3.0.2",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
@@ -53,6 +58,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "postcss": "^8.4.29",
+    "react-rating-stars-component": "^2.2.0",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.2.2",
     "vite": "^4.4.5",

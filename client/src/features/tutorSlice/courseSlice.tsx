@@ -2,7 +2,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // Define custom types for Course and Lesson
 export interface Course {
+  category: any;
   _id: string;
+  courseId:string;
   courseName: string;
   coursedescription: string;
   courseFee: number;

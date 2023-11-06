@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectLesson } from '../../../features/tutorSlice/courseSlice';
-import VideoPlayer from './VideoPlayer'; // Import the VideoPlayer component
+import VideoPlayer from './VideoPlayer';
 
 function Accordion() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [showVideoModal, setShowVideoModal] = useState<boolean>(false); // State to control video modal
-  const [currentVideoUrl, setCurrentVideoUrl] = useState<string>(''); // Store the current video URL
+  const [showVideoModal, setShowVideoModal] = useState<boolean>(false);
+  const [currentVideoUrl, setCurrentVideoUrl] = useState<string>('');
   const lessons = useSelector(selectLesson);
 
   const toggleAccordion = (index: number) => {
@@ -23,6 +23,8 @@ function Accordion() {
   };
 
   const handleCloseVideoModal = () => {
+    console.log("hai")
+    window.location.reload()
     setCurrentVideoUrl('');
     setShowVideoModal(false);
   };
@@ -55,10 +57,10 @@ function Accordion() {
               <p className="text-gray-700">{lesson.description}</p>
               <p>Duration: {lesson.duration} minutes</p>
               <p>Category: {lesson.category}</p>
-              {/* Button to play the video */}
+              {/* Improved button styling */}
               <button
                 onClick={() => handlePlayClick(lesson.video, index)}
-                className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg"
+                className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg focus:outline-none"
               >
                 Play Now
               </button>

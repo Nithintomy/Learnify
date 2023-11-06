@@ -4,11 +4,13 @@ import mongoose, { Schema, Document, model, Model } from 'mongoose';
 
 interface TUTOR extends Document {
     tutorName: string;
+    tutorRole: string
     tutorEmail: string;
     phone: number;
     password: string;
     photo: string[];
     courses: mongoose.Schema.Types.ObjectId;
+    chats: mongoose.Schema.Types.ObjectId[];
     createdAt: Date;
     updatedAt: Date;
     isOnline: boolean; 
@@ -19,6 +21,11 @@ const TutorSchema = new Schema<TUTOR>({
     tutorName: {
         type: String,
         required: true,
+    },
+    tutorRole: {
+        type: String, 
+        required: true,
+        default: "tutor", 
     },
     tutorEmail: {
         type: String,
@@ -36,10 +43,17 @@ const TutorSchema = new Schema<TUTOR>({
     photo: [{
         type: String,
     }],
+    
     courses: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'courseModel',
     },
+    chats: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "ChatModel",
+        },
+    ],
     createdAt: {
         type: Date,
         required: true,
@@ -60,7 +74,7 @@ TutorSchema.methods.matchPassword = async function (enteredPassword: string) {
     return await bcrypt.compare(enteredPassword, this.password);
 };
      
-TutorSchema.pre<TUTOR>('save', async function (next) {
+TutorSchema.pre<TUTOR>('save', async function (next) { 
     if (!this.isModified('password')) {
         return next();
     }
@@ -70,5 +84,5 @@ TutorSchema.pre<TUTOR>('save', async function (next) {
 });
 
 // Define the model using the model function and export it
-const TutorModel: Model<TUTOR> = model<TUTOR>('tutorModel', TutorSchema);
+const TutorModel: Model<TUTOR> =mongoose.model<TUTOR>('tutorModel', TutorSchema);
 export default TutorModel;

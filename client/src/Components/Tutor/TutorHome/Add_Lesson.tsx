@@ -108,7 +108,7 @@ function Add_Lesson() {
       return;
     }
 
-    if (title.length < 3 || title.length > 20) {
+    if (title.length < 3 || title.length > 40) {
       toast.error("Title must be between 3 and 20 characters.");
       return;
     }

@@ -1,9 +1,9 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { UserBaseUrl } from "../../../Api";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser, updateUserDetails } from "../../../features/userSlice/userSlice";
-import { login } from "../../../features/tutorSlice/tutorSlice";
+import { ToastContainer, toast } from "react-toastify";
 
 interface EditProfileModalProps {
   isOpen: boolean;
@@ -21,6 +21,17 @@ function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
   const user = useSelector(selectUser);
   const id = user?.user?._id;
 
+  // Populate the form data when the user data changes
+  useEffect(() => {
+    if (user && user.user) {
+      setFormData({
+        username: user.user.studentName,
+        email: user.user.studentEmail,
+        phone: user.user.phone,
+      });
+    }
+  }, [user]);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -28,8 +39,36 @@ function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
     setFormData({ ...formData, [name]: value });
   };
 
+  const isValidForm = () => {
+    const { username, email, phone } = formData;
+
+    // Basic validation for username (at least 5 characters)
+    if (username.length < 5) {
+      toast.error("Username must be at least 5 characters.");
+      return false;
+    }
+
+    // Basic validation for email (you can add more complex email validation)
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      toast.error("Invalid email address.");
+      return false;
+    }
+
+    // Basic validation for phone (exactly 10 digits)
+    if (!/^\d{10}$/.test(phone)) {
+      toast.error("Phone number must be 10 digits.");
+      return false;
+    }
+
+    return true; // All validations passed
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!isValidForm()) {
+      return;
+    }
 
     const updatedData = {
       studentName: formData.username,
@@ -37,27 +76,25 @@ function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
       phone: formData.phone,
     };
 
-
     axios
-
       .put(`${UserBaseUrl}/updateProfile/${id}`, updatedData)
       .then((response) => {
         console.log(response);
-        
-        if (response.data.tutor) {
-          console.log(response.data.tutor);
-          console.log('fcgddfexer');
-          
-          
-          dispatch(login(response.data.tutor));
+
+        if (response.data.user) {
+          console.log(response.data.user);
+          console.log('Profile updated successfully');
+
+          // You can dispatch the updated user data to Redux here
+          dispatch(updateUserDetails(response.data.user));
+
           onClose();
         } else {
-          console.log("data not found")
+          console.log("data not found");
         }
       })
       .catch((error: any) => {
         console.error("Error updating profile:", error);
-        
       });
   };
 
@@ -91,6 +128,7 @@ function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
           </button>
         </div>
         <form onSubmit={handleSubmit}>
+          <ToastContainer />
           <div className="mb-4">
             <label htmlFor="username" className="block text-sm font-medium">
               Username
@@ -131,7 +169,6 @@ function EditProfileModal({ isOpen, onClose }: EditProfileModalProps) {
             />
           </div>
 
-          {/* Add more form fields here */}
           <div className="flex justify-end">
             <button
               type="submit"

@@ -4,11 +4,13 @@ import { createSlice,PayloadAction } from "@reduxjs/toolkit";
 
 interface AdminState {
     admin :any  //any 
+    token: string | null;
 
 }
 
 const initialState :AdminState={
-    admin:''
+    admin: null,
+    token: localStorage.getItem("token") || null,
 }
 
 const adminSlice =createSlice({
@@ -16,19 +18,21 @@ const adminSlice =createSlice({
     initialState,
     reducers:{
         login:(state,action: PayloadAction<any | null>)=>{
-            console.log(action.payload,"payload here")
             state.admin =action.payload
+            state.token = action.payload?.token || null;
+            localStorage.setItem("adminData", JSON.stringify(action.payload));
         },
        
         logout:(state)=>{
-            state.admin =''
+            state.admin ={}
+            localStorage.clear(); 
         }
     }
 })
 
 
 export const {login,logout} =adminSlice.actions;
-export const selectUser =(state:{admin: AdminState})=>state.admin.admin
+export const selectAdmin =(state:{admin: AdminState})=>state.admin.admin
 
 
 export default adminSlice.reducer;

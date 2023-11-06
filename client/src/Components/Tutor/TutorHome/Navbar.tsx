@@ -118,10 +118,10 @@ function Navbar() {
               </li>
               <li>
                 <Link
-                  to="/channel"
+                  to="/tutorChats"
                   className="text-md font-semibold text-left text-white uppercase hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
-                  Channel
+                  Chats
                 </Link>
               </li>
               <li>
@@ -164,7 +164,7 @@ function Navbar() {
                     onClick={handleUserClick}
                     className="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 cursor-pointer"
                     src={
-                      tutor.photo ||
+                      tutor?.photo ||
                       "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/a9adeb42419075.57cc3f77ecae2.png"
                     }
                     alt="Bordered avatar"

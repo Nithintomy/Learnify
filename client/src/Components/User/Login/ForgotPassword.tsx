@@ -1,6 +1,7 @@
 import React from 'react'
 import {useState} from 'react'
 import {ToastContainer,toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 import { UserBaseUrl } from '../../../Api'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -8,19 +9,28 @@ import { useNavigate } from 'react-router-dom'
 function ForgotPassword() {
 
   const [email,setEmail]=useState('')
-  const [message, setMessage] = useState(false); 
+ 
   const navigate=useNavigate();
   
   const sendLink=async(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
 
-    axios.post(`${UserBaseUrl}/forgot-password`,{email})
-    .then(res=>{
-      console.log("success")
-      if(res.data.Status==="Success"){
-        navigate('/login')
-      
-      }})
+    axios
+  .post(`${UserBaseUrl}/forgot-password`, { email })
+  .then((res) => {
+    console.log("success");
+    if (res.data.Status === "Success") {
+      toast.success("Password reset link sent to your email!");
+      setTimeout(() => {
+        navigate('/login');
+      }, 3000);
+    } else {
+      toast.error(res.data.message);
+    }
+  })
+  .catch((error:any) => {
+    toast.error(error.response.data.message);
+  });
 
   }
 
@@ -38,10 +48,7 @@ function ForgotPassword() {
               </h2>
             </div>
           
-          <div className='ml-6'>
-          {message ? <p style={{color:"#dc2626",fontWeight:"bold"}}>Password Reset Link send successfully in your mail</p>:""}
-          </div>
-  
+         
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
               <form className="space-y-6" onSubmit={sendLink} >
                 <div>

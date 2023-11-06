@@ -5,7 +5,7 @@ import AddCategorys from '../../../Components/Admin/Category/AddCategory'
 function AddCategory() {
   return (
 
-    <div>
+    <div className="bg-blue-gray-700 h-screen">
     <AdminNavbar />
     <div className="mt-5 px-2 lg:px-0">
       <div className="overflow-x-auto">

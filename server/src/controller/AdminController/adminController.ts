@@ -147,10 +147,11 @@ const unblockStudent =async(req:Request,res:Response)=>{
 }
 
 
-
+ 
 export {adminLogin,
     getStudentDetails,
     getTutorDetails,
     getAllCategory,
     blockStudent,
-    unblockStudent}
+    unblockStudent,
+    }

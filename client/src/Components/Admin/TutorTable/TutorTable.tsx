@@ -4,13 +4,19 @@ import { AdminBaseUrl } from '../../../Api'
 import { toast } from 'react-toastify'
 
 
-
+interface Tutor {
+  _id: string;
+  tutorName: string;
+  tutorEmail: string;
+  phone: string;
+  // Add other properties if needed
+}
 
 
 function TutorTable() {
 
 
-    const [tutorDetails,setTutorDetails] =useState([])
+    const [tutorDetails,setTutorDetails] =useState<Tutor[]>([])
  console.log()
     useEffect(() => {
         axios.get(`${AdminBaseUrl}/getAllTutor`)

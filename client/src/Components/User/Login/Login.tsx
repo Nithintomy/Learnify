@@ -38,7 +38,7 @@ function Login() {
       .then((response) => {
         console.log(response.data, "data here");
         localStorage.setItem("token", JSON.stringify(response.data.token));
-        localStorage.setItem("user",JSON.stringify(response.data.user))
+        localStorage.setItem("userData",JSON.stringify(response.data.user))
       
         dispatch(login(response.data));
         setTimeout(() => {
@@ -152,11 +152,9 @@ function Login() {
                       if (res.data.message === "login successfully") {
                         toast.success("Login Success");
                         console.log(res.data, "data vanilla");
-                        localStorage.setItem(
-                          "jwtToken",
-                          JSON.stringify(res.data.token)
-                        );
-                        localStorage.setItem("user", JSON.stringify(res.data));
+                        localStorage.setItem("token", JSON.stringify(res.data.token));
+
+                        localStorage.setItem("userData", JSON.stringify(res.data));
                         dispatch(login(res.data));
                         console.log(res.data);
                         setTimeout(() => {

@@ -67,7 +67,7 @@ function Courses() {
               <Typography>{course.coursedescription}</Typography>
             </CardBody>
             <Typography>
-              <span className="font-bold">{course.courseduration} hrs</span>
+              <span className="font-bold m-6">Duration: {course.courseduration} hrs</span>
             </Typography>
             <CardFooter className="pt-0">
               <Link to={`/singleView/${course._id}`}>

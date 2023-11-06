@@ -1,7 +1,7 @@
 import mongoose,{Schema,Document,Model,model} from "mongoose";
 
 
-interface Course extends Document{
+export interface Course extends Document{
     courseName:string,
     courseduration:number,
     coursedescription:string,
@@ -29,7 +29,8 @@ const coursemodel =new mongoose.Schema({
     },
     category:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"categoryModel",
+        ref: "categoryModel", 
+        required: true
         
 
     },
@@ -51,6 +52,10 @@ const coursemodel =new mongoose.Schema({
         ref:"tutorModel",
         required:true
     },
+    students: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'studentModel',
+      }],
     lessons: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'lessonModel',

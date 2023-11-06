@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { Student } from "../../model/userModel";
 import studentModel from "../../model/userModel";
 import generateToken from "../../Utils/generateToken";
 import jwt, { JwtPayload } from "jsonwebtoken";
@@ -10,7 +9,16 @@ import TutorModel from "../../model/tutorModel";
 
 const globalData = {
   otp: null as null | number, 
-  user: null as null | Student, 
+  newOtp:null as null | number,
+  user: null as null | {
+    studentName: string;
+    studentEmail: string;
+    phone: string;
+    password: string;
+
+  }, 
+
+
 };
 
 const transporter = nodemailer.createTransport({
@@ -21,7 +29,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-//student SugnUp
+//studentSignUp
 const studentSignUp = async (req: Request, res: Response) => {
   try {
     const { studentName, studentEmail, password, phone } = req.body;
@@ -45,48 +53,80 @@ const studentSignUp = async (req: Request, res: Response) => {
       });
     }
 
-    const user = (await studentModel.create({
+    const user = {
       studentName,
       studentEmail,
-      password,
       phone,
-    })) as Student | null
+      password,
+    };
 
     globalData.user = user;
 
+    // Generate OTP and store it in globalData
+    const otp: number = parseInt((Math.random() * 1000000).toString(), 10);
+    globalData.otp = otp;
+
+    const mailOptions = {
+      from: "nithintomy8281@gmail.com",
+      to: studentEmail, // Use studentEmail directly here
+      subject: "Sending Email using Node.js",
+      html:
+        "<h3>OTP for account verification is </h3>" +
+        "<h1 style='font-weight:bold;'>" +
+        otp +
+        "</h1>",
+      text: "That was easy!",
+    };
+
+    transporter.sendMail(mailOptions, function (error: any, info: any) {
+      if (error) {
+        console.error("Error sending OTP email:", error);
+        return res.status(500).json({ message: "Error sending OTP email" });
+      } else {
+        console.log("OTP email sent successfully:", info.response);
+        return res.status(200).json({ message: "OTP sent to your email" });
+      }
+    });
+    
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "An error occurred" });
+  }
+};
 
 
+const resend_otp = async (req: Request, res: Response) => {
+  console.log("i am resending")
+  try {
+    const { studentEmail } = req.body;
+    console.log(studentEmail,"email anney")
 
+    // Generate a new OTP
+    const newOtp: number = parseInt((Math.random() * 1000000).toString(), 10);
+ 
+    globalData.otp = newOtp;
 
-    if (user) {
+    const mailOptions = {
+      from: "nithintomy8281@gmail.com",
+      to: studentEmail,
+      subject: "Resending OTP using Node.js",
+      html:
+        "<h3>New OTP for account verification is </h3>" +
+        "<h1 style='font-weight:bold;'>" +
+        newOtp +
+        "</h1>",
+      text: "That was easy!",
+    };
 
-      const otp: number = parseInt((Math.random() * 1000000).toString(), 10);
-
-      globalData.otp = otp;
-
-      const mailOptions = {
-        from: "nithintomy8281@gmail.com",
-        to: user.studentEmail,
-        subject: "Sending Email using Node.js",
-        html:
-          "<h3>OTP for account verification is </h3>" +
-          "<h1 style='font-weight:bold;'>" +
-          otp +
-          "</h1>",
-        text: "That was easy!",
-      };
-
-      transporter.sendMail(mailOptions, function (error: any, info: any) {
-        if (error) {
-          console.error(error);
-        } else {
-          res.status(200).json({ user });
-          console.log("Verification sent to your email");
-        }
-      });
-    } else {
-      return res.status(400).json({ message: "Invalid user data" });
-    }
+    transporter.sendMail(mailOptions, function (error: any, info: any) {
+      if (error) {
+        console.error("Error sending OTP email:", error);
+        return res.status(500).json({ message: "Error sending OTP email" });
+      } else {
+        console.log("New OTP email sent successfully:", info.response);
+        return res.status(200).json({ message: "New OTP sent to your email" });
+      }
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "An error occurred" });
@@ -96,11 +136,16 @@ const studentSignUp = async (req: Request, res: Response) => {
 
 //verify Otp
 
+
 const verify_otp = async (req: Request, res: Response) => {
+  console.log("i am here");
   try {
     const { otp } = req.body;
+    console.log("otp:", otp);
+    console.log("globalData.otp:", globalData.otp);
 
-    if (otp == globalData.otp) {
+    if (parseInt(otp, 10) === globalData.otp) {
+      console.log("enter if condition");
       const addUser = await studentModel.create(globalData.user);
       const token = generateToken(addUser._id);
       return res.status(200).json({
@@ -111,12 +156,16 @@ const verify_otp = async (req: Request, res: Response) => {
         token,
       });
     } else {
-      res.status(500).json({ message: "Wrong otp" });
+      console.log("else otp case")
+      // Return a 400 status code for incorrect OTP
+      return res.status(400).json({ message: "Wrong otp" });
+    
     }
   } catch (error) {
-    res.status(400).json({ message: "something went wrong" });
+    return res.status(500).json({ message: "something went wrong" });
   }
 };
+
 
 
 const studentLogin = async (req: Request, res: Response) => {
@@ -140,6 +189,7 @@ const studentLogin = async (req: Request, res: Response) => {
 
       return res.json({
         user,
+        token
       });
     } else {
       return res.status(401).json({ message: "Invalid Email and Password" });
@@ -259,13 +309,19 @@ const sendPasswordLink = async (req: Request, res: Response) => {
   console.log(email);
 
   if (!email) {
-    res.status(401).json({ message: "Enter Your Email" });
+   return res.status(401).json({ message: "Enter Your Email" });
   }
 
   try {
     console.log("Hello");
 
     const user = await studentModel.findOne({ studentEmail: email });
+
+    if (!user) {
+      console.log("riiiiii")
+      return res.status(400).json({ message: "Email not found in the database" });
+    }
+
 
     if (user) {
       //generate Token
@@ -401,7 +457,7 @@ const updateProfile =async (req:Request,res:Response)=>{
     user.studentName = studentName;
     user.studentEmail = studentEmail;
     user.phone = phone;
-
+ 
     await user.save();
 
     return res.status(200).json({ message: 'Profile updated successfully', user });
@@ -431,6 +487,7 @@ const studentLogout = async (req: Request, res: Response) => {
 export {
   studentLogin,
   studentSignUp,
+  resend_otp,
   verify_otp,
   GoogleSignin,
   GoogleSignUp,
