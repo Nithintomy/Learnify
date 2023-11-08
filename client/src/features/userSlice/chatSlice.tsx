@@ -21,6 +21,7 @@ const chatSlice = createSlice({
 
 export const { setChatId } = chatSlice.actions;
 
+
 // Specify the type for the state parameter in the selector
 export const selectChatId = (state: { chat: ChatState }) => state.chat.chatId;
 export default chatSlice.reducer;

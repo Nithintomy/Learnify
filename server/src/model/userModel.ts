@@ -36,10 +36,10 @@ const userSchema = new Schema<Student>({
         required:true,
         unique:true   
     },
-    phone:{
-        type:Number,
-        unique: true,
-        max: 999999999999, 
+    phone: {
+        type: Number, 
+        unique: false, 
+        max: 999999999999,  
     },
     password:{
         type:String,

@@ -484,6 +484,20 @@ const studentLogout = async (req: Request, res: Response) => {
   }
 };
 
+const getTutorsById =async (req: Request, res: Response)=>{
+  console.log(req.params.tutorId,"id")
+  console.log("hiohi")
+  try {
+    const tutor = await TutorModel.findById(req.params.tutorId);
+    console.log(tutor,"gfda")
+    res.json(tutor);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch tutor details" });
+  }
+
+}
+
 export {
   studentLogin,
   studentSignUp,
@@ -497,4 +511,5 @@ export {
   studentProfile,
   updateProfile,
   Tutors,
+  getTutorsById
 };

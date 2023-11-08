@@ -21,8 +21,8 @@ function EntrolledSingleView() {
   const courseDetails = location.state.courseDetails;
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [showVideoModal, setShowVideoModal] = useState<boolean>(false);
+  const [showChatModal, setShowChatModal] = useState(false);
   const [currentVideoUrl, setCurrentVideoUrl] = useState<string>('');
-  const [showChat, setShowChat] = useState(false);
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const courseId =courseDetails?.courseId?._id
   const studentId =courseDetails?.studentId
@@ -51,12 +51,11 @@ function EntrolledSingleView() {
     }
   };
 
+
   const toggleChat = () => {
-    setShowChat(!showChat);
+    setShowChatModal(!showChatModal);
   };
-
-
-
+  
   const handlePlayClick = (videoUrl: string, index: number) => {
     setCurrentVideoUrl(videoUrl);
     setShowVideoModal(true);
@@ -172,10 +171,10 @@ function EntrolledSingleView() {
       className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg"
       onClick={toggleChat}
     >
-      Chat with Tutor
+      Chat with Cock
     </button>
 
-    {showChat && <Chat studentId={studentId} tutorId={tutorId} courseId={courseId}/>} 
+    {showChatModal  && <Chat studentId={studentId}/>} 
    
 
   </>

@@ -8,6 +8,7 @@ import categoryModel from "../../model/categoryModel"
 
 //admin Login
 const adminLogin =async(req: Request,res:Response)=>{
+    console.log("enter into itrr")
     
     try {
         const adminEmail = "nithintomy2255@gmail.com"

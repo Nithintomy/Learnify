@@ -1,5 +1,5 @@
 import express from 'express'
-import {studentLogin,studentSignUp,resend_otp,verify_otp,studentLogout,sendPasswordLink,ResetPassword,GoogleSignin,studentProfile,updateProfile,Tutors, GoogleSignUp} from '../../controller/StudentController/studentController'
+import {studentLogin,studentSignUp,resend_otp,verify_otp,studentLogout,sendPasswordLink,ResetPassword,GoogleSignin,studentProfile,updateProfile,Tutors,getTutorsById, GoogleSignUp} from '../../controller/StudentController/studentController'
 import { allCourses,getCourseById,enrolledCourses,ratings,getRatings,checkEnrollmentStatus } from '../../controller/StudentController/AllCourses';
 import { allLessons } from '../../controller/StudentController/AllLessons';
 import { addToCart,RemoveFromCart,getItemsCart } from '../../controller/StudentController/Cart';
@@ -37,6 +37,9 @@ studentRouter.post('/googleSignUp',GoogleSignUp)
 
 //get All Tutors
 studentRouter.get('/allTutors',Tutors) 
+
+//get tutors byId
+studentRouter.get('/tutor/:tutorId',getTutorsById)
 
 //student Profile
 studentRouter.put('/studentProfile/:id',studentProfile)

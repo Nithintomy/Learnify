@@ -42,6 +42,7 @@ import CheckoutPage from "./Components/User/CheckoutPage/CheckoutPage";
 import EntrolledSinglePage from "./Pages/User/EnrolledCourses/EntrolledSinglePage";
 
 import TutorChats from "./Pages/Tutor/TutorChat/TutorChat";
+import TutorSingleView from "./Components/User/TutorsList/TutorSingleView";
 
 
 
@@ -68,7 +69,6 @@ function App() {
           <Route path="/enrolled-courses" element={<EntrolledCourse/>}/>
           <Route path="/cart" element={<CartView/>}/>
           <Route path="/checkout" element={<CheckoutPage/>}/>
-          
           <Route path="/entrolled_singlePage/:courseId" element={<EntrolledSinglePage/>}/>
           </Route>
 
@@ -111,7 +111,7 @@ function App() {
         <Route path="/user_otp" element={<UserOtp />} />
         <Route path="/singlePage/:courseId" element={<SingleView />} />
         <Route path="/TutorView" element={<TutorView />} />
-        <Route path="/tutor_details/:id" element={<TutorDetails />} />
+        <Route path="/tutor_details/:tutorId" element={<TutorDetails />} />
         <Route path="/chat" element={<Chat/>}/>
         <Route path="/courses" element={<CategoriedCourses/>}/>
         {/* <Route path="/singleChat" element={<SingleChat/>}/> */}

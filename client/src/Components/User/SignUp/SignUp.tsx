@@ -81,9 +81,9 @@ function SignUp() {
   };
 
   return (
-    <div>
-      {/* <GoogleOAuthProvider clientId={CLIENT_ID}> */}
-        <section className="bg-primary-900 ">
+    <div className="relative" style={{background:"#ecfeff"}}>
+      <GoogleOAuthProvider clientId={CLIENT_ID}>
+       
           <ToastContainer />
           <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
             <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -96,7 +96,7 @@ function SignUp() {
                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
                   Sign In
                 </h1>
-                {/* <div className="ml-16">
+                <div className="ml-16">
                 <GoogleLogin
                 
                   onSuccess={(credentialResponse) => {
@@ -128,7 +128,7 @@ function SignUp() {
                   text="continue_with"
                   shape="square"
                 />
-                </div> */}
+                </div>
                 <form
                   className="space-y-4 md:space-y-6 "
                   onSubmit={(e) => handleSubmit(e)}
@@ -219,7 +219,7 @@ function SignUp() {
                   </div>
                   <button
                     type="submit"
-                    className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    className="w-full bg-amber-900 py-4 px-4 text-sm font-semibold text-white rounded-md shadow-sm hover:bg-amber-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 focus:ring-opacity-50"
                   >
                     Sign up
                   </button>
@@ -233,8 +233,9 @@ function SignUp() {
               </div>
             </div>
           </div>
-        </section>
-      {/* </GoogleOAuthProvider> */}
+       
+      </GoogleOAuthProvider>
+   
     </div>
   );
 }

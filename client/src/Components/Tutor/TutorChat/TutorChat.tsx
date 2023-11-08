@@ -5,168 +5,74 @@ import { io } from "socket.io-client"; // Import Socket.io
 import { selectTutor } from "../../../features/tutorSlice/tutorSlice";
 import { selectUser } from "../../../features/userSlice/userSlice";
 import { BaseUrl } from "../../../Api";
-import { setChatId, selectChatId } from "../../../features/userSlice/chatSlice";
-import { useDispatch } from "react-redux";
 
 
 interface ChatMessage {
-  text: string;
+  _id: string;
+  content: string;
   sender: string;
-  message: string;
-  role: string;
-  timestamp: number;
+  // Add any other properties you have in your chat message object
+}
+interface Student {
+  _id: string;
+  studentName: string;
+  photo: string;
 }
 
 
-function TutorChat() {
+function Chat() {
   const socket = io("http://localhost:5000");
 
-  const [message, setMessage] = useState("");
-  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
-  const tutor = useSelector(selectTutor);
-
-  const tutorId = tutor?._id;
-  const user = useSelector(selectUser);
-  const chatId = useSelector(selectChatId);
-  const dispatch = useDispatch();
-
-  console.log(chatId, "tutor side chat");
-  
-  const studentId = user?.user?._id;
-
- // Listener for new messages
- socket.on("newMessage", (message) => {
-  console.log("Received new message in chat ID:", message.chatId);
-  setChatHistory((prevChatHistory) => [...prevChatHistory, message]);
-});
-  
-
-useEffect(() => {
-  if (chatId) {
-    // If chatId is already available, join the chat using it.
-    socket.emit('join', chatId);
-    fetchChatHistory(chatId);
-  }
-
-}, []);
-
  
+  const [students, setStudents] = useState([]);
+  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
+  const [newMessage, setNewMessage] = useState("");
+  const [selectedStudentName, setSelectedStudentName] = useState<string>('');
+  const tutor = useSelector(selectTutor)
+  const tutorId = tutor?._id
 
-  const fetchChatHistory = async (chatId: string) => {
-    try {
-      console.log(chatId, "id anney");
-      const response = await axios.get(`${BaseUrl}/api/chat/history/${chatId}`);
-      console.log(studentId, "studid");
-      if (response.status === 200) {
-        console.log("Chat history retrieved:", response.data);
+  useEffect(() => {
+    // Fetch the list of students when the component mounts
+    axios.get(`${BaseUrl}/tutor/getAllStudents`)
+      .then((response) => {
+        setStudents(response.data.studentData);
+      })
+      .catch((error) => {
+        console.error("Error fetching students:", error);
+      });
+  }, []);
+
   
-        // Dispatch the setChatId action with the chatId value on the tutor's side
-        dispatch(setChatId(chatId)); // This should set the chatId for the tutor as well
+
   
-        setChatHistory(response.data);
-      } else {
-        console.error("Error fetching chat history:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error fetching chat history:", error);
-    }
-  };
   
-  console.log(chatHistory, "History");
-
-  const handleSendMessage = async () => {
-    console.log("handleSendMessage called");
-    if (message.trim() === "") {
-      return; // Don't send empty messages
-    }
-    console.log("chatId:", chatId); // Add this line to check the value
-
-    try {
-      // Make an API request to send a message using Axios
-      const response = await axios.post(
-        "http://localhost:5000/api/chat/message",
-        {
-          chatId,
-          sender: tutorId,
-          role: "tutor",
-          recipient: studentId, // Add the recipient field
-          message,
-        }
-      );
-
-      if (response.status === 201) {
-        console.log("Message sent successfully:", response.data);
-      } else {
-        console.error("Error sending message:", response.statusText);
-      }
-      // Emit 'message' event to the server
-      socket.emit("message", { chatId, message });
-    } catch (error) {
-      console.error("Error sending message:", error);
-    }
-
-    // Update the chat history with the sent message
-    const newMessage: ChatMessage = {
-      text: message,
-      sender: "tutor",
-      timestamp: Date.now(),
-      message: "",
-      role: "",
-    };
-    setChatHistory((prevHistory) => [...prevHistory, newMessage]);
-
-    console.log(chatHistory, "history");
-
-    // Clear the input field
-    setMessage("");
-  };
-  const [users] = useState([
-    {
-      name: "User 1",
-      image: "https://via.placeholder.com/40",
-      message: "Hello there!",
-    },
-    {
-      name: "User 2",
-      image: "https://via.placeholder.com/40",
-      message: "Hi, how can I help you?",
-    },
-    {
-      name: "User 3",
-      image: "https://via.placeholder.com/40",
-      message: "Hey!",
-    },
-    {
-      name: "User 4",
-      image: "https://via.placeholder.com/40",
-      message: "Good day!",
-    },
-  ]);
-
   return (
     <div className="flex h-screen">
       {/* Left side with user list */}
       <div className="w-1/3 p-6 border-r border-gray-200">
         <div className="mb-4">
-          <h2 className="text-xl font-semibold">Users</h2>
+          <h2 className="text-xl font-semibold">Students</h2>
           <ul className="mt-2 space-y-4">
-            {/* Display a list of random users */}
-            {users.map((user, index) => (
-              <li key={index} className="flex items-center space-x-3">
-                <img
-                  src={user.image}
-                  alt={`${user.name}'s avatar`}
+      {students.map((student, index) => (
+        <li key={index} 
+        className="flex items-center space-x-3"
+        onClick={()=>handleStudentSelection(student)}
+        >
+        <img
+                  src={student?.photo}
+                  alt={`${student?.studentName}'s avatar`}
                   className="w-8 h-8 rounded-full"
                 />
-                <div>
-                  <h3 className="text-base font-semibold">{user.name}</h3>
-                  <p className="text-sm text-gray-600">{user.message}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <div>
+            <h3 className="text-base font-semibold">{student?.studentName}</h3>
+           
+          </div>
+        </li>
+      ))}
+    </ul>
         </div>
-      </div>
+      </div>  
 
       {/* Right side with user profile and chat interface */}
       <div className="w-2/3 p-6">
@@ -180,35 +86,29 @@ useEffect(() => {
                 </svg>
               </span>
               <img
-                src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144"
-                alt=""
+                src={selectedStudent?.photo || ''} // Display selected student's photo
+                alt={`${selectedStudentName}'s avatar`}
                 className="w-10 sm:w-16 h-10 sm:h-16 rounded-full"
               />
             </div>
             <div className="flex flex-col leading-tight">
               <div className="text-2xl mt-1 flex items-center">
-                <span className="text-gray-700 mr-3">Anderson Vanhron</span>
+                <span className="text-gray-700 mr-3">{selectedStudentName}</span>
               </div>
-              <span className="text-lg text-gray-600">Junior Developer</span>
             </div>
           </div>
         </div>
-        <div
-          id="messages"
-          className={`flex flex-col space-y-4 p-3 overflow-y-auto ${
-            chatHistory.length
-              ? "scrollbar-thumb-blue scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
-              : ""
-          }`}
-        >
-          {/* Display chat messages here */}
-          {chatHistory.map((chatMessage, index) => (
-            <div key={index}>
-              <strong>{chatMessage.role}</strong> {chatMessage.message}
+        <div className="chat-box">
+          {chatHistory.map((message, index) => (
+            <div
+              key={index}
+              className={message.sender === tutorId ? "tutor-message" : "student-message"}
+            >
+              {message.content}
             </div>
           ))}
         </div>
-
+       
         <div className="fixed bottom-0 w-3/5 bg-white border-t-2 border-gray-200 px-4 py-3">
           <div className="relative flex items-center">
             <span className="absolute inset-y-0 flex items-center">
@@ -236,8 +136,8 @@ useEffect(() => {
               type="text"
               placeholder="Write your message!"
               className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
             />
             <div className="absolute right-0 items-center inset-y-0 hidden sm:flex">
               <button
@@ -326,4 +226,5 @@ useEffect(() => {
   );
 }
 
-export default TutorChat;
+export default Chat;
+ 

@@ -1,39 +1,26 @@
-import mongoose, { Schema, Document, Model } from 'mongoose';
+import mongoose from "mongoose";
 
-interface Chat extends Document {
-  participants: mongoose.Schema.Types.ObjectId[];
-  messages: mongoose.Schema.Types.ObjectId[];
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-const chatSchema = new mongoose.Schema({
-  participants: [
+const ChatSchema = new mongoose.Schema(
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'studentModel', // Reference to your student model
+        chatName: {
+            type: String,
+            trim: true
+        },
+       
+        users: [
+          {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "studentModel",
+          }
+        ],
+        latestMessage:
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Message",
+        },
+      
     },
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'tutorModel', // Reference to your tutor model
-    },
-  ],
-  messages: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'ChatMessage', // Reference to your ChatMessage model
-    },
-  ],
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
+    { timestamps: true }
+);
 
-const ChatModel: Model<Chat> = mongoose.model<Chat>('Chat', chatSchema);
-
-export default ChatModel;
+export default mongoose.model("Chat", ChatSchema);

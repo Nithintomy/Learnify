@@ -11,6 +11,7 @@ import {Server} from 'socket.io'
 import ChatRouter from './Routes/ChatRouter/ChatRoute';
 
 
+
 const app = express();
 const server = http.createServer(app);
 export const io = new Server(server, {
@@ -39,18 +40,16 @@ app.use('/tutor',tutorRouter)
 app.use('/admin',adminRouter)
 app.use('/api/checkout',paymentRouter)
 app.use('/api/chat',ChatRouter)
+// app.use('/api/message',messageRouter)
 
 io.on('connection', (socket) => {
   console.log('A user connected');
 
   socket.on('join', (chatId) => {
-    console.log(`User joined chat with ID: ${chatId}`);
     socket.join(chatId);
   });
 
   socket.on('message', (data) => {
-    console.log(`Received a message in chat with ID: ${data.chatId}`);
-    // Ensure that data.chatId is correctly associated with this message
     io.to(data.chatId).emit('newMessage', data);
   });
 
@@ -60,4 +59,3 @@ io.on('connection', (socket) => {
 });
 
 server.listen(PORT, () => console.log(`Server is running on Port ${PORT}`));
-

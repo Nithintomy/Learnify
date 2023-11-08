@@ -1,39 +1,47 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { UserBaseUrl } from "../../../Api";
 
-
-function TutorSingleView() {
-  return (
-
-    <div className="bg-gradient-to-r from-black via-gray-600 to-deep-orange-500 hover:bg-opacity-80 dark:bg-gray-800 dark:hover:bg-opacity-80 min-h-screen">
-      <div className="container mx-auto py-10 px-4">
-        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-8">
-          <div className="text-center">
-           
-            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mt-4">
-              About Me
-            </h1>
-            <p className="text-gray-700 dark:text-gray-400 mt-2">
-              I am a passionate instructor with a strong background in Computer Science. My goal is to help students understand complex concepts in a simple and engaging way. I specialize in teaching Mathematics, Computer Science, and Physics.
-            </p>
-          </div>
-          <div className="mt-6">
-            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Skills</h1>
-            <p className="text-gray-700 dark:text-gray-400">reactjs, nodejs, mongodb, express</p>
-          </div>
-          <div className="mt-6">
-            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Qualification</h1>
-            <p className="text-gray-700 dark:text-gray-400">Bsc computer science</p>
-          </div>
-          <div className="mt-6">
-            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Experience</h1>
-            <p className="text-gray-700 dark:text-gray-400">1 year</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-
+interface TutorDetails {
+  photo: string;
+  tutorName: string;
+  description: string;
+  // Add more properties as needed
 }
 
-export default TutorSingleView
+
+function TutorSingleView({tutorId}:any) {
+
+
+  const [tutorDetails, setTutorDetails] = useState<TutorDetails>({
+    photo: "",
+    tutorName: "",
+    description: "",
+  });
+
+  useEffect(() => {
+    // Fetch tutor details using the tutorId
+    axios
+      .get(`${UserBaseUrl}/tutor/${tutorId}`)
+      .then((response) => {
+        console.log(response,"tutorById");
+        setTutorDetails(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [tutorId]);
+  return (
+    <div className="bg-brown-400 p-10 flex flex-col items-center justify-center rounded-lg shadow-lg">
+  <div className="mx-auto w-32 h-32 bg-white rounded-full overflow-hidden">
+    <img className="w-full h-full object-cover" src={tutorDetails.photo} alt={tutorDetails.tutorName} />
+  </div>
+  <h2 className="text-white text-2xl font-bold mt-4 p-4">{tutorDetails?.tutorName}</h2>
+  <p className="text-white text-sm p-4">Email: {tutorDetails?.tutorEmail}</p>
+  <p className="text-white text-sm">Phone: {tutorDetails?.phone}</p>
+  {/* Add more fields as needed to display the tutor's details */}
+</div>
+  )
+}
+
+export default TutorSingleView;

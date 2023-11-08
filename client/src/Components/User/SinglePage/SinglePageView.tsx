@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AvgStarRating from "./AvgStarRating";
 import { BaseUrl, TutorBaseUrl, UserBaseUrl } from "../../../Api";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCourse,
@@ -203,9 +203,11 @@ function SinglePageView() {
             </p>
           </div>
           {isEnrolled ? (
-            <button className="bg-green-500 text-white font-semibold py-2 px-4 rounded-lg">
-              Enrolled
-            </button>
+           <Link to="/enrolled-courses">
+           <button className="bg-green-500 text-white font-semibold py-2 px-4 rounded-lg">
+             Enrolled
+           </button>
+         </Link>
           ) : (
             <>
               <button
