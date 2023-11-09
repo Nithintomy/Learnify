@@ -105,7 +105,7 @@ function UserProfile() {
     <>
     <ToastContainer/>
       <div className="w-full max-w-2xl mx-auto mt-12">
-        <div className="bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800">
+        <div className="bg-white border border-gray-200 rounded-lg shadow-md dark:bg-black">
           
           <div className="flex flex-col items-center p-6">
             {user ? (

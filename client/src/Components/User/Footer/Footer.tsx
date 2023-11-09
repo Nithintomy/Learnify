@@ -23,7 +23,7 @@ function Footer() {
                           <a href="https://flowbite.com/" className="hover:underline">Learnify</a>
                       </li>
                       <li>
-                          <a href="https://tailwindcss.com/" className="hover:underline">Tailwind CSS</a>
+                          <a href="https://tailwindcss.com/" className="hover:underline">Learnify.website</a>
                       </li>
                   </ul>
               </div>

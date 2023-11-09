@@ -7,7 +7,7 @@ function EntrolledSinglePage() {
     <div>
     <Navbar/>
 
-    <div className="px-3 mt-6">
+    <div className="px-3 mt-40">
        <EntrolledSingleView/> 
        
      </div>

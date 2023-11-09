@@ -8,7 +8,7 @@ function UserProfile() {
 
     <Navbar/>
 
-      <div className='px-3 lg:px-3 '>
+      <div className='px-3 mt-24 lg:px-3 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-black '>
         <Profile/>
            
       </div>

@@ -46,6 +46,7 @@ function SinglePageView() {
    
     setCurrentVideoUrl('');
     setShowVideoModal(false);
+  
   };
   
 

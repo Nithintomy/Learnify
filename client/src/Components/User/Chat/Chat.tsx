@@ -25,8 +25,6 @@ function Chat({studentId}:any) {
   const [newMessage, setNewMessage] = useState("");
   const [selectedStudentName, setSelectedStudentName] = useState("");
   const [chatId,setChatId]=useState([])
- 
-
 
   
   

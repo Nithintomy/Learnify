@@ -41,14 +41,15 @@ const userSlice = createSlice({
     },
     
     logout: (state) => {
-      state.user = {}
-      state.token = null;    
-      localStorage.clear(); 
+      state.user = null;
+      state.token = null;
+      localStorage.clear();
     }
   }
 })
 
 export const { login, logout, signup, updateProfileImage,updateUserDetails } = userSlice.actions;
-export const selectUser = (state: { user: UserState }) => state.user.user
+export const selectUser = (state: { user: UserState }) => state.user.user || null;
+
 
 export default userSlice.reducer;
