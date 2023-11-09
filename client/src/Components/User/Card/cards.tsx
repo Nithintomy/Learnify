@@ -13,9 +13,11 @@ import { UserBaseUrl } from "../../../Api";
 import { ToastContainer, toast } from "react-toastify";
 import { Course } from "../../../features/tutorSlice/courseSlice";
 import { Link } from "react-router-dom";
+import { RingLoader } from 'react-spinners';
 
 export function CourseCard() {
   const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -23,12 +25,19 @@ export function CourseCard() {
       .then((response) => {
         console.log(response.data.allcourse);
         setCourses(response.data.allcourse);
+        setLoading(false)
       })
       .catch((error) => {
         toast.error("Something went wrong");
         console.log(error);
       });
   }, []);
+
+  if (loading) {
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <RingLoader loading={true} color="#000000" speedMultiplier={1} size={150} />
+  </div>
+  }
 
   return (
     <div className="mt-5 flex flex-wrap gap-8">

@@ -13,6 +13,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { TutorBaseUrl } from "../../../Api";
+import { RingLoader } from 'react-spinners';
+
+
 
 interface Course {
   _id: string;
@@ -35,6 +38,7 @@ function Courses() {
   const tutor = localStorage.getItem("tutorData");
   const tutor_Details = tutor ? JSON.parse(tutor) : null;
   const tutor_id = tutor_Details ? tutor_Details._id : null;
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -42,12 +46,19 @@ function Courses() {
       .then((response) => {
         console.log("Courses data:", response.data);
         setCourses(response.data.AllCourses);
+        setLoading(false);
+      
       })
       .catch((error) => {
         toast.error(error.message);
         console.error(error);
       });
   }, []);
+  if (loading) {
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <RingLoader loading={true} color="#000000" speedMultiplier={1} size={150} />
+  </div>
+  }
 
   return (
     <div className="flex flex-wrap">

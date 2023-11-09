@@ -6,7 +6,7 @@ function Add_courses() {
   return (
     <div>
       <Navbar />
-      <div className="flex justify-center items-center bg-blue-gray-100">
+      <div className="flex justify-center items-center bg-orange-100">
         <div className="w-full max-w-4xl p-4">
           <Add_Course />
         </div>

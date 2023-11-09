@@ -45,7 +45,7 @@ function TutorLogin() {
 
         dispatch(login(tutorData))
                 setTimeout(()=> {
-                navigate('/tutorHome');
+                navigate('/tutor_dashboard');
                 }, 2000)
 
         toast.success("Tutor Logged Successfuly")

@@ -138,104 +138,103 @@ function Add_course() {
   }
   
 
-
-  
   
 
   return (
-<div className="flex items-center justify-center bg-blue-gray-100 ">
-      <div className="bg-white shadow-md p-8 mt-3 w-full max-w-md rounded-lg">
+    <div className="flex items-center justify-center h-screen ">
+      <div className="bg-white shadow-md p-8 mt-2 w-full max-w-md rounded-lg">
         <ToastContainer />
-        <form className="bg-white shadow-md rounded mb-4" onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Course Name
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="text"
-            placeholder="Course Name"
-            onChange={(e) => setCourseName(e.target.value)}
-          />
-        </div>
-        <div className="mb-2">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Course Duration
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            onChange={(e) => setDuration(e.target.value)}
-            type="text"
-            placeholder="Duration"
-          />
-        </div>
-        <div className="mb-2">
-          <label className="block text-gray-700 text-sm font-bold mb-3">
-            Course Price
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="number"
-            onChange={(e) => setPrice(Number(e.target.value))}
-            placeholder="Price"
-          />
-        </div>
-       
-          <label className="block text-gray-700 text-sm font-bold mb-3">
-            Description
-          </label>
-          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
-          onChange={(e)=>setDescription(e.target.value)}
-          />
-          
-        <div >
-          <label className="block text-gray-700 text-sm font-bold mb-3">
-            Category
-          </label>
-          <select
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option>Select Category</option>
-            {categoryOptions.map((category) => (
-              <option key={category._id} value={category._id}>
-                {category.title}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="mb-3">
-          <label className="block text-gray-700 text-sm font-bold mb-7">
-            Image
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            type="file"
-            onChange={handleFileChange}
-          />
-          {photo && (
-            <img
-              src={URL.createObjectURL(photo)}
-              alt="Course"
-              style={{ height: "100px", width: "100px" }}
+        <form className="bg-white rounded p-2" onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Course Name
+            </label>
+            <input
+              className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded"
+              type="text"
+              placeholder="Course Name"
+              onChange={(e) => setCourseName(e.target.value)}
             />
-          )}
-        </div>
-
-        <div className="flex items-center justify-between">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Create Course
-          </button>
-        </div>
-      </form>
+          </div>
+          <div className="mb-2">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Course Duration
+            </label>
+            <input
+              className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded"
+              onChange={(e) => setDuration(e.target.value)}
+              type="text"
+              placeholder="Duration"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Course Price
+            </label>
+            <input
+              className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded;"
+              type="number"
+              onChange={(e) => setPrice(Number(e.target.value))}
+              placeholder="Price"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Description
+            </label>
+            <textarea
+              className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded"
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Description"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Category
+            </label>
+            <select
+              className="input-field"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option>Select Category</option>
+              {categoryOptions.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.title}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Image
+            </label>
+            <input
+              className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded"
+              type="file"
+              onChange={handleFileChange}
+            />
+            {photo && (
+              <img
+                src={URL.createObjectURL(photo)}
+                alt="Course"
+                className="mt-2 h-16 w-16 object-cover rounded"
+              />
+            )}
+          </div>
+          <div className="flex items-center justify-center">
+            <button
+              className="w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline border rounded bg-black"
+              type="submit"
+            >
+              Create Course
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
+  
 }
 
 

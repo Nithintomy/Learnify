@@ -1,41 +1,58 @@
 import React, { useEffect, useState  } from "react";
 import axios from "axios";
 import { BaseUrl } from "../../../Api";
+import {io , Socket} from "socket.io-client";
 
 
 interface ChatMessage {
   _id: string;
   content: string;
-  sender: string;
+  sender: Student; 
+  updatedAt: string;
   
 }
 interface Student {
   _id: string;
   studentName: string;
   photo: string;
-  // Add other properties as needed
+ 
 }
 
+let socket : Socket;
 
 function Chat({studentId}:any) {
   // Initialize your states
-  const [students, setStudents] = useState([]);
+  const [students, setStudents] = useState<Student[]>([]);
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const [selectedStudentName, setSelectedStudentName] = useState("");
   const [chatId,setChatId]=useState([])
+  const [socketConnection ,setSocketConnection] = useState<boolean>(false);
+ 
 
-  
-  
+  useEffect(() => {
+    socket = io('http://localhost:5000', { withCredentials: true });
 
+    socket.on('connect', () => {
+      setSocketConnection(true);
+    });
+
+    socket.emit('start', studentId?._id);
+
+    // Cleanup when component unmounts
+    return () => {
+      socket.disconnect();
+    };
+  }, [studentId?._id]);
+  
   useEffect(() => {
     axios
       .get(`${BaseUrl}/tutor/getAllStudents`)
       .then((response) => {
         // Filter out the current user from the list of students
         const filteredStudents = response.data.studentData.filter(
-          (student) => student._id !== studentId._id
+          (student:any) => student._id !== studentId._id
         );
         setStudents(filteredStudents);
       })
@@ -60,9 +77,11 @@ function Chat({studentId}:any) {
         axios
           .get(`${BaseUrl}/api/chat/viewMessages/${response.data.chat._id}`)
           .then((response) => {
-            console.log(response.data, "getchats");
+            console.log(response.data.message, "getchats");
             // Update chatHistory with response data here
             setChatHistory(response.data.message)
+            console.log(chatId,"msg send")
+            socket.emit('join chat' , chatId);
           })
           .catch((error) => {
             console.error("Error fetching chat messages:", error);
@@ -86,14 +105,29 @@ function Chat({studentId}:any) {
       })
       .then((response) => {
         console.log(response,"reespons")
+        if(response.data.message){
+        socket.emit('new chat message' , response.data.message)
         // Update the chat history with the new message
         setChatHistory([...chatHistory, response.data.message]);
         setNewMessage("");
+      
+      }
       })
+
       .catch((error) => {
         console.error("Error sending message:", error);
       });
   };
+
+  useEffect(() => {
+    socket.on('message received', (newMessage: any) => {
+      if (!chatId || chatId !== newMessage?.chat?._id) {
+        return;
+      } else {
+        setChatHistory([...chatHistory, newMessage]);
+      }
+    });
+  }, [chatId, chatHistory]);
 
   return (
     <div className="flex h-screen">
@@ -150,7 +184,7 @@ function Chat({studentId}:any) {
     ) : (
       <div className="text-2xl mt-1">
         Welcome to the chat
-      </div>
+      </div>  
     )}
   </div>
 
@@ -189,9 +223,10 @@ function Chat({studentId}:any) {
 </div>
 
 
+{chatId.length > 1 &&(
 
 
-        <div className="fixed bottom-0 w-3/5 bg-white border-t-2 border-gray-200 px-4 py-3">
+        <div className=" w-5/5 bg-white border-t-2 border-gray-200 px-4 py-3">
           <div className="relative flex items-center">
             <span className="absolute inset-y-0 flex items-center">
               <button
@@ -303,6 +338,8 @@ function Chat({studentId}:any) {
             </div>
           </div>
         </div>
+        )}
+
       </div>
     </div>
   );

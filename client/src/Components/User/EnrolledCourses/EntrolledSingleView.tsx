@@ -4,6 +4,10 @@ import Chat from '../Chat/Chat';
 import axios from 'axios';
 import { UserBaseUrl } from '../../../Api';
 import VideoPlayer from '../../Tutor/TutorHome/VideoPlayer';
+import robot from '../../../assets/robot.gif'
+import { RingLoader } from 'react-spinners';
+
+
 
 
 interface Lesson {
@@ -24,6 +28,7 @@ function EntrolledSingleView() {
   const [showChatModal, setShowChatModal] = useState(false);
   const [currentVideoUrl, setCurrentVideoUrl] = useState<string>('');
   const [lessons, setLessons] = useState<Lesson[]>([]);
+  const [loading, setLoading] = useState(true);
   const courseId =courseDetails?.courseId?._id
   const studentId =courseDetails?.studentId
   const tutorId = courseDetails?.tutorId
@@ -36,9 +41,11 @@ function EntrolledSingleView() {
     axios.get(`${UserBaseUrl}/allLessons/${courseId}`)
     .then((response) => {
       setLessons(response.data);
+      setLoading(false);
     })
     .catch((error) => {
       console.error(error);
+      setLoading(false);
     });
   },[courseId])
 
@@ -67,7 +74,11 @@ function EntrolledSingleView() {
     setCurrentVideoUrl('');
     setShowVideoModal(false);
   };
-
+  if (loading) {
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <RingLoader loading={true} color="#000000" speedMultiplier={1} size={150} />
+  </div>
+  }
 
 
   return (
@@ -166,13 +177,15 @@ function EntrolledSingleView() {
           <VideoPlayer videoUrl={currentVideoUrl} onClose={handleCloseVideoModal} />
         )}
       </div>
-
-<button
-      className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg"
-      onClick={toggleChat}
-    >
-      Chat with Cock
-    </button>
+      <img
+  src={robot}
+  alt="Robot"
+  className="w-1/4 h-1/4 ml-auto cursor-pointer" 
+  onClick={() => {
+    toggleChat();
+    
+  }}
+/>
 
     {showChatModal  && <Chat studentId={studentId}/>} 
    

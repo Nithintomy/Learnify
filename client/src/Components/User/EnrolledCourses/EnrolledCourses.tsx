@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import { RingLoader } from 'react-spinners';
 
 
+
 function EnrolledCourses() {
   const user = useSelector(selectUser);
   const id = user?.user?._id;
@@ -41,6 +42,7 @@ function EnrolledCourses() {
     }
   }, [id]);
 
+  
   if (loading) {
     return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
     <RingLoader loading={true} color="#000000" speedMultiplier={1} size={150} />
@@ -49,7 +51,7 @@ function EnrolledCourses() {
 
   return (
     <div className="mt-5 ml-12 flex flex-col gap-8">
-  <h1 className="text-4xl font-bold text-gray-800">Enrolled Courses</h1>
+  <h1 className="text-3xl font-bold text-gray-800">Enrolled Courses</h1>
   {entrolledCourses && entrolledCourses.length > 0 ? (
    <div className="flex flex-wrap gap-4">
    {entrolledCourses.map((course) => (
@@ -65,7 +67,7 @@ function EnrolledCourses() {
               </div>
               <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
               <IconButton
-                size="xs"
+                size="sm"
                 color="red"
                 variant="text"
                 className="!absolute top-4 right-4 rounded-full"

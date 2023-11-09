@@ -5,9 +5,10 @@ import image from '../../../assets/instructor.jpg';
 import { Button } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
 import { Tutor } from '../../../features/tutorSlice/tutorSlice';
-
+import { RingLoader } from 'react-spinners';
 function TutorCard() {
   const [tutors, setTutors] = useState<Tutor[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -15,11 +16,19 @@ function TutorCard() {
       .then((response) => {
         console.log(response);
         setTutors(response.data.allTutors);
+        setLoading(false)
+
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
+
+  if (loading) {
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <RingLoader loading={true} color="#000000" speedMultiplier={1} size={150} />
+  </div>
+  }
 
   return (
     <div className="flex-shrink-0 w-full p-5">

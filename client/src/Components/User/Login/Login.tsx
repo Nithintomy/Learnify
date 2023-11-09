@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import logo from "../../../assets/stud logo.jpg";
 import { toast, ToastContainer } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { selectUser, login } from "../../../features/userSlice/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../../features/userSlice/userSlice";
+import { useDispatch } from "react-redux";
 import { UserBaseUrl } from "../../../Api";
 import axios from "axios";
 import { GoogleOAuthProvider ,GoogleLogin} from "@react-oauth/google";
@@ -15,7 +15,6 @@ function Login() {
   const [studentEmail, setStudentEmail] = useState("");
   const [studentPassword, setStudentPassword] = useState("");
   const [emailErr,setEmailErr]=useState("")
-  const [passErr,setPassErr] =useState("")
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const CLIENT_ID= import.meta.env.VITE_CLIENT_ID || '';

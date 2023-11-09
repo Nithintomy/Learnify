@@ -5,13 +5,14 @@ import axios from 'axios';
 import { UserBaseUrl } from '../../../Api';
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfileImage,selectUser  } from "../../../features/userSlice/userSlice";
-
+import { RingLoader } from 'react-spinners';
 
 
 function UserProfile() {
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [imageUrl, setImageUrl] = useState<string | null>(localStorage.getItem("profileImageUrl") || null);
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -100,6 +101,12 @@ function UserProfile() {
   };
 
   console.log(user,"mdsamds")
+
+  if (loading) {
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <RingLoader loading={true} color="#000000" speedMultiplier={1} size={150} />
+  </div>
+  }
 
   return (
     <>

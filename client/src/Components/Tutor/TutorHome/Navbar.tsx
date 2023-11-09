@@ -93,7 +93,7 @@ function Navbar() {
             <ul className="flex flex-col md:flex-row font-medium p-4 md:p-0 mt-4 border border-bg-gray-800 rounded-lg bg-bg-gray-800 md:space-x-8 md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               <li>
                 <Link
-                  to="/tutorHome"
+                  to="/tutor_dashboard"
                   className="text-md font-semibold text-left text-white uppercase hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white md:dark:hover:bg-transparent"
                   aria-current="page"
                 >
@@ -116,14 +116,7 @@ function Navbar() {
                   Students
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/tutorChats"
-                  className="text-md font-semibold text-left text-white uppercase hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  Chats
-                </Link>
-              </li>
+              
               <li>
                 <Link
                   to=""

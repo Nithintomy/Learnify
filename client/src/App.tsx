@@ -41,7 +41,6 @@ import CartView from "./Pages/User/Cart/CartView";
 import CheckoutPage from "./Components/User/CheckoutPage/CheckoutPage";
 import EntrolledSinglePage from "./Pages/User/EnrolledCourses/EntrolledSinglePage";
 
-import TutorChats from "./Pages/Tutor/TutorChat/TutorChat";
 import TutorSingleView from "./Components/User/TutorsList/TutorSingleView";
 
 
@@ -76,14 +75,13 @@ function App() {
 
           <Route element={<PrivateRoute userType="tutor" />}>
 
-          <Route path="/tutorHome" element={<TutorHome />} />
+          <Route path="/tutor_dashboard" element={<TutorHome />} />
           <Route path="/my_courses" element={<My_courses />} />
           <Route path="/singleView/:courseId" element={<SinglePage />} />
           <Route path="/my_students" element={<My_students />} />
           <Route path="/Add_Course" element={<Add_courses />} />
           <Route path="/Add_Lesson" element={<Add_Lessons />} />
           <Route path="/tutorProfile" element={<TutorProfile />} />
-          <Route path="/tutorChats" element={<TutorChats/>}/>
           {/* <Route path="/tutorChats/:studentId" element={<TutorChat/>} /> */}
 
          </Route>

@@ -10,7 +10,7 @@ interface CategoryCourseProps {
 export function CategoryCourse({ courses, category }: CategoryCourseProps) {
   return (
     <div className="mt-8 p-4 bg-white rounded-md">
-      <h2 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">
+      <h2 className="text-2xl ml-14 font-semibold mb-2 text-gray-900 dark:text-white">
         {category}
       </h2>
 

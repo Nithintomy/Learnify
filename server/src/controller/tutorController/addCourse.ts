@@ -132,5 +132,21 @@ const updateCourse = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
+const courseCount =async(req:Request,res:Response)=>{
 
-export {addCourses,getCourses,getCourseById,updateCourse}
+  try {
+    const tutorId = req.params.tutorId;
+
+    const courseCount = await courseModel.countDocuments({ tutor: tutorId });
+
+    res.json(courseCount );
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+
+
+}
+
+
+export {addCourses,getCourses,getCourseById,updateCourse,courseCount}

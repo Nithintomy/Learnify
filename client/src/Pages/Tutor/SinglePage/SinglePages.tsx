@@ -1,7 +1,6 @@
 import React from 'react'
 import Navbar from '../../../Components/Tutor/TutorHome/Navbar'
 import SingleView from '../../../Components/Tutor/TutorHome/SingleView'
-import Rating from '../../../Components/Tutor/TutorHome/Rating'
 import CourseContent from '../../../Components/Tutor/TutorHome/CourseContent'
 
 

@@ -12,6 +12,7 @@ import {
 import { Course, Lesson } from "../../../features/tutorSlice/courseSlice";
 import { ToastContainer, toast } from "react-toastify";
 import VideoPlayer from "../../Tutor/TutorHome/VideoPlayer";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -28,6 +29,7 @@ function SinglePageView() {
   const [showVideoModal, setShowVideoModal] = useState<boolean>(false);
   const [currentVideoUrl, setCurrentVideoUrl] = useState<string>('');
   const [lessons, setLessons] = useState<Lesson[]>([]);
+  
 
   const toggleAccordion = (index: number) => {
     if (activeIndex === index) {
@@ -42,13 +44,13 @@ function SinglePageView() {
     setShowVideoModal(true);
   };
 
-  const handleCloseVideoModal = () => {
-   
+  const handleCloseVideoModal = (event:any) => {
+    event.preventDefault();
     setCurrentVideoUrl('');
     setShowVideoModal(false);
-  
+    window.location.reload()
+
   };
-  
 
   const handleAddToCart = () => {
     axios.post(`${UserBaseUrl}/add-to-cart`, {
@@ -58,8 +60,8 @@ function SinglePageView() {
     })
       .then((response) => {
         console.log(response,"added to cart")
-        toast.success("Product added to cart Successfully");
-        setLessons(response.data);
+        toast.success(response.data.message);
+        
        
       })
       .catch((error) => {

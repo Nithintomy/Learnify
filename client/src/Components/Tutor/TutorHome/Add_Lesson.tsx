@@ -153,10 +153,11 @@ function Add_Lesson() {
   };
 
   return (
-    <div className="w-full max-w-lg ">
+    <div className="flex items-center justify-center h-screen ">
+    <div className="bg-white shadow-md p-8 mt-8 w-full max-w-md rounded-lg">
       <ToastContainer />
       <form
-        className="bg-white shadow-md rounded px-8 pt-4 pb-8 mb-4"
+        className="bg-white rounded p-2"
         onSubmit={handleSubmit}
       >
         <div className="mb-4">
@@ -164,7 +165,7 @@ function Add_Lesson() {
             Course Name
           </label>
           <select
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded"
             value={courseName}
             onChange={(e) => setCourseName(e.target.value)}
           >
@@ -181,7 +182,7 @@ function Add_Lesson() {
             Title
           </label>
           <input
-            className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -193,7 +194,7 @@ function Add_Lesson() {
           </label>
           <input
             type="number"
-            className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded"
            
             onChange={(e) => setDuration(Number(e.target.value))}
           />
@@ -203,7 +204,7 @@ function Add_Lesson() {
             Course Description
           </label>
           <input
-            className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded"
             type="text"
             value={description}
             onChange={(e) => setDescripton(e.target.value)}
@@ -231,7 +232,7 @@ function Add_Lesson() {
             Video
           </label>
           <input
-            className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded"
             type="file"
             accept="video/*"
             onChange={handleVideo}
@@ -246,13 +247,14 @@ function Add_Lesson() {
         </div>
         <div className="flex items-center justify-between">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline border rounded bg-black"
             type="submit"
           >
             Add Lesson
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 }

@@ -6,11 +6,11 @@ function Add_Lessons() {
   return (
     <div>
       <Navbar />
-      <div className="flex justify-center items-center bg-blue-gray-100">
-        <div className="w-full max-w-xs p-4">
-          <Add_Lesson />
-        </div>
-      </div>
+      <div className="flex justify-center items-center bg-orange-100">
+  <div className="w-full max-w-4xl p-4 mb-9">
+    <Add_Lesson />
+  </div>
+</div>
     </div>
   );
 }

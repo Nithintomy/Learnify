@@ -4,10 +4,18 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface Course {
   category: any;
   _id: string;
-  courseId:string;
+  courseId: {
+    photo: string;
+    courseName: string;
+    rating: number;
+    coursedescription: string;
+    courseFee: number;
+   
+  };
   courseName: string;
   coursedescription: string;
   courseFee: number;
+  rating: number;
   courseduration: number;
   photo: string;
   tutor: {

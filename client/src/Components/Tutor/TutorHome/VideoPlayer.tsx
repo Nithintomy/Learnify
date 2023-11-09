@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 type VideoPlayerProps = {
   videoUrl: string;
-  onClose: () => void;
+  onClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 function VideoPlayer({ videoUrl, onClose }: VideoPlayerProps) {
@@ -35,10 +35,11 @@ function VideoPlayer({ videoUrl, onClose }: VideoPlayerProps) {
     setIsPlaying(false);
   };
 
-  const handleCloseClick = () => {
-    onClose();
-
+  const handleCloseClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    onClose(event);
   };
+  
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-80 z-50">
