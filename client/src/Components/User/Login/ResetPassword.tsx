@@ -1,6 +1,6 @@
 import React from 'react'
 import {useState} from 'react'
-import {ToastContainer,toast} from 'react-toastify'
+import {ToastContainer} from 'react-toastify'
 import axios from 'axios'
 import {useNavigate, useParams} from 'react-router-dom'
 

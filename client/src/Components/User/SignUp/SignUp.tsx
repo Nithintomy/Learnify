@@ -19,7 +19,6 @@ function SignUp() {
     return password.length >= 8;
   };
   const [emailErr, setEmailErr] = useState("");
-  const [passErr, setPassErr] = useState("");
   const CLIENT_ID = import.meta.env.VITE_CLIENT_ID || "";
   const navigate = useNavigate();
 

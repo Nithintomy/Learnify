@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface Tutor {
   _id: string;
   name: string;
+  tutorName: string;
   email: string;
   phone: string;
   photo: string;

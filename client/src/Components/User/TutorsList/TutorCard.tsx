@@ -6,6 +6,9 @@ import { Button } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
 import { Tutor } from '../../../features/tutorSlice/tutorSlice';
 import { RingLoader } from 'react-spinners';
+
+
+
 function TutorCard() {
   const [tutors, setTutors] = useState<Tutor[]>([]);
   const [loading, setLoading] = useState(true);
@@ -55,7 +58,7 @@ function TutorCard() {
 
             <Link to={`/tutor_details/${tutor?._id}`}>
               <Button
-                size="xs"
+                size="sm"
                 fullWidth={true}
                 style={{ cursor: 'pointer' }}
                 className="text-sm mt-5"

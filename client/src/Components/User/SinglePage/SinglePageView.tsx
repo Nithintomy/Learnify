@@ -14,7 +14,13 @@ import { ToastContainer, toast } from "react-toastify";
 import VideoPlayer from "../../Tutor/TutorHome/VideoPlayer";
 import { useNavigate } from "react-router-dom";
 
-
+interface Rating {
+  user: {
+    studentName: string;
+  };
+  rating: number;
+  comment: string;
+}
 
 
 function SinglePageView() {
@@ -22,7 +28,7 @@ function SinglePageView() {
   const dispatch = useDispatch();
   const courseDetails = useSelector(selectCourse);
   const userData = JSON.parse(localStorage.getItem("userData") || "{}");
-  const [ratings, setRatings] = useState([]);
+  const [ratings, setRatings] = useState<Rating[]>([]);
   const [averageRating, setAverageRating] = useState(0);
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -39,7 +45,7 @@ function SinglePageView() {
     }
   };
 
-  const handlePlayClick = (videoUrl: string, index: number) => {
+  const handlePlayClick = (videoUrl: string,index :number) => {
     setCurrentVideoUrl(videoUrl);
     setShowVideoModal(true);
   };
@@ -98,7 +104,7 @@ function SinglePageView() {
         // Calculate the average rating
         if (response.data.length > 0) {
           const totalRating = response.data.reduce(
-            (acc, rating) => acc + parseFloat(rating.rating),
+            (acc: number, rating: { rating: number }) => acc + rating.rating,
             0
           );
           const avgRating = totalRating / response.data.length;
@@ -174,6 +180,7 @@ function SinglePageView() {
     }
   };
 
+  console.log(lessons,"lessons")
   return (
     <>
       <ToastContainer />
@@ -261,7 +268,7 @@ function SinglePageView() {
               <div className="p-4 bg-white">
                 <p className="text-gray-700">{lesson.description}</p>
                 <p>Duration: {lesson.duration} minutes</p>
-                <p>Category: {lesson.categoryId}</p>
+                
                 <button
                   onClick={() => handlePlayClick(lesson.video[0], index)}
                   className="bg-blue-500 hover-bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg focus:outline-none"

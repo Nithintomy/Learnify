@@ -6,7 +6,8 @@ interface TutorDetails {
   photo: string;
   tutorName: string;
   description: string;
-  // Add more properties as needed
+  tutorEmail: string; 
+  phone: string; 
 }
 
 
@@ -17,6 +18,8 @@ function TutorSingleView({tutorId}:any) {
     photo: "",
     tutorName: "",
     description: "",
+    tutorEmail: "", 
+    phone: "", 
   });
 
   useEffect(() => {

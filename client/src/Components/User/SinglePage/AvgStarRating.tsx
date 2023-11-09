@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaStar, FaRegStar, FaStarHalf } from "react-icons/fa";
 
-function AvgStarRating({ rating }) {
+function AvgStarRating({ rating }:any) {
     const stars = [];
   
     for (let i = 1; i <= 5; i++) {
