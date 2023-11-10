@@ -66,7 +66,7 @@ function Courses() {
       {courses.length === 0 ? (
         <p>No courses available.</p>
       ) : (
-        courses.map((course, index) => (
+        courses.map((course, _) => (
           <Card className="mt-6 w-96" key={course._id}>
             <CardHeader color="blue-gray" className="relative h-56">
               <img src={`${course.photo}`} alt="card-image" />

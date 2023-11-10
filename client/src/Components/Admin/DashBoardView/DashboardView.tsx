@@ -3,7 +3,7 @@
 import React, {  useEffect, useState } from 'react';
 import { FaEllipsisV, FaRegCalendarMinus } from 'react-icons/fa';
 
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import MyPieChart from './PieChart';
 import { AdminBaseUrl } from '../../../Api';
 import axios from 'axios';

@@ -36,8 +36,9 @@ function Chat({studentId}:any) {
 
     socket.on('connect', () => {
       setSocketConnection(true);
+      
     });
-
+    console.log(socketConnection)
     socket.emit('start', studentId?._id);
 
     // Cleanup when component unmounts

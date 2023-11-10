@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AvgStarRating from "./AvgStarRating";
-import { BaseUrl, TutorBaseUrl, UserBaseUrl } from "../../../Api";
+import { BaseUrl, UserBaseUrl } from "../../../Api";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,7 +12,7 @@ import {
 import { Course, Lesson } from "../../../features/tutorSlice/courseSlice";
 import { ToastContainer, toast } from "react-toastify";
 import VideoPlayer from "../../Tutor/TutorHome/VideoPlayer";
-import { useNavigate } from "react-router-dom";
+
 
 interface Rating {
   user: {
@@ -45,7 +45,7 @@ function SinglePageView() {
     }
   };
 
-  const handlePlayClick = (videoUrl: string,index :number) => {
+  const handlePlayClick = (videoUrl: string, _index: number) => {
     setCurrentVideoUrl(videoUrl);
     setShowVideoModal(true);
   };

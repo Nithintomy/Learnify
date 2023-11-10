@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -12,7 +11,6 @@ import axiosInstance from "../../../Axios/axios";
 const UserOtp: React.FC = () => {
   const [otp, setOtp] = useState<string>("");
   const navigate = useNavigate();
-  const [error, setError] = useState<string>("");
   const dispatch = useDispatch();
   const [timer, setTimer] = useState<number>(60);
   const [otpSent, setOtpSent] = useState(false); // Track whether OTP has been sent
@@ -137,7 +135,7 @@ const userEmail = queryParams.get("studentEmail");
                 Submit
               </button>
             </form>
-            {error && <div className="mt-4 text-red-500">{error}</div>}
+           
             <div className="mt-4">
               {timer === 0 ? (
                 <p>

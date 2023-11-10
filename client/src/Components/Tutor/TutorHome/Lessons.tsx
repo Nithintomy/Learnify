@@ -17,7 +17,7 @@ function Accordion() {
     }
   };
 
-  const handlePlayClick = (videoUrl: string, index: number) => {
+  const handlePlayClick = (videoUrl: string, _index: number) => {
     setCurrentVideoUrl(videoUrl);
     setShowVideoModal(true);
   };

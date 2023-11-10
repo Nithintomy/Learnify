@@ -5,7 +5,7 @@ import axios from 'axios';
 import { UserBaseUrl } from '../../../Api';
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfileImage,selectUser  } from "../../../features/userSlice/userSlice";
-import { RingLoader } from 'react-spinners';
+
 
 
 function UserProfile() {

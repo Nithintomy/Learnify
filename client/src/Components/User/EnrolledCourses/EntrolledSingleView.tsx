@@ -31,7 +31,7 @@ function EntrolledSingleView() {
   const [loading, setLoading] = useState(true);
   const courseId =courseDetails?.courseId?._id
   const studentId =courseDetails?.studentId
-  const tutorId = courseDetails?.tutorId
+
 
 
   console.log(courseId,"courseId")
@@ -63,7 +63,7 @@ function EntrolledSingleView() {
     setShowChatModal(!showChatModal);
   };
   
-  const handlePlayClick = (videoUrl: string, index: number) => {
+  const handlePlayClick = (videoUrl: string, _index: number) => {
     setCurrentVideoUrl(videoUrl);
     setShowVideoModal(true);
   };

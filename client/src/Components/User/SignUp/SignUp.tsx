@@ -18,7 +18,7 @@ function SignUp() {
   const isStrongPassword = (password: string): boolean => {
     return password.length >= 8;
   };
-  const [emailErr, setEmailErr] = useState("");
+
   const CLIENT_ID = import.meta.env.VITE_CLIENT_ID || "";
   const navigate = useNavigate();
 
@@ -110,17 +110,17 @@ function SignUp() {
                       .catch((err) => {
                         if (err.response && err.response.status === 400) {
                           // User already exists
-                          setEmailErr("User already exists");
+                         
                           toast.error("User already exists");
                         } else {
-                          setEmailErr(err?.message || "Login Failed");
+                          
                           toast.error(err?.message || "Login Failed");
                         }
                       });
                   }}
                   onError={() => {
                     console.log("");
-                    setEmailErr("Login Failed");
+                   
                   }}
                   type="standard"
                   size="large"

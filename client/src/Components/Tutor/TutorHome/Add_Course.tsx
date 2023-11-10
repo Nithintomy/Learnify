@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectTutor } from "../../../features/tutorSlice/tutorSlice";
 import axios from "axios";
 import { TutorBaseUrl } from "../../../Api";
 import { toast, ToastContainer } from "react-toastify";
@@ -15,9 +13,7 @@ interface Category {
 
 
 function Add_course() {
-  const dispatch = useDispatch();
-
-  const Tutor = useSelector(selectTutor);
+  
   const navigate =useNavigate()
 
   const [courseName, setCourseName] = useState("");

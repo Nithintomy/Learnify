@@ -1,11 +1,25 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
+import * as dotenv from 'dotenv';
+mongoose.set('strictQuery',true)
 
-const connectDB = mongoose.connect("mongodb://127.0.0.1:27017/Learnify")
-  .then(() => {
-    console.log('MongoDb Connected');
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+dotenv.config();
 
-export default connectDB;
+
+async function connectToDb() {
+    const URI:string = process.env.MONGO_URL??""
+    
+   console.log(URI,"ppp");
+   
+    try {
+        await mongoose.connect(URI);
+        console.log('====================================');
+        console.log("conncted");
+        console.log('====================================');
+        
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+
+export default connectToDb

@@ -14,7 +14,6 @@ import { GoogleOAuthProvider ,GoogleLogin} from "@react-oauth/google";
 function Login() {
   const [studentEmail, setStudentEmail] = useState("");
   const [studentPassword, setStudentPassword] = useState("");
-  const [emailErr,setEmailErr]=useState("")
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const CLIENT_ID= import.meta.env.VITE_CLIENT_ID || '';
@@ -145,7 +144,7 @@ function Login() {
                       if (!res.data.success) {
                         if (res.data.message === "User does not exist") {
                           toast.error(res.data.message);
-                          setEmailErr(res.data.message);
+                          
                         }
                       }
                       if (res.data.message === "login successfully") {
@@ -163,16 +162,12 @@ function Login() {
                     })
                     .catch((err) => {
                       toast.error(err?.message);
-                      if (err?.message === "Request failed with status code 400") {
-                        setEmailErr("User does not Exist");
-                      } else {
-                        setEmailErr(err?.message);
-                      }
+                     
                     });
                 }}
                 onError={() => {
                   console.log("Login Failed");
-                  setEmailErr("Login Failed");
+                
                 }}
                 type="standard"
                 size="large"

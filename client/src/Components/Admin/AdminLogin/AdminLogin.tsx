@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { selectAdmin,login } from "../../../features/adminSlice/adminSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../../features/adminSlice/adminSlice";
+import { useDispatch } from "react-redux";
 import axiosInstance from "../../../Axios/axios";
 
 function AdminLogin() {
   const [studentEmail, setStudentEmail] = useState("");
   const [studentPassword, setStudentPassword] = useState("");
   const dispatch = useDispatch();
-  const admin = useSelector(selectAdmin);
+  
   const navigate = useNavigate();
  
 

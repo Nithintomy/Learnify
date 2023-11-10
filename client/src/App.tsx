@@ -41,7 +41,7 @@ import CartView from "./Pages/User/Cart/CartView";
 import CheckoutPage from "./Components/User/CheckoutPage/CheckoutPage";
 import EntrolledSinglePage from "./Pages/User/EnrolledCourses/EntrolledSinglePage";
 
-import TutorSingleView from "./Components/User/TutorsList/TutorSingleView";
+
 
 
 

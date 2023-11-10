@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { EditedCourse, Course } from '../../../features/tutorSlice/courseSlice';
+import {  Course } from '../../../features/tutorSlice/courseSlice';
 import { toast } from 'react-toastify'; // Import react-toastify
 
 interface EditCourseModalProps {
   isOpen: boolean;
   onClose: () => void;
   courseDetails: Course | null;
-  onSave: (editedCourse: EditedCourse) => void;
+  onSave: (editedCourse: any) => void;
 }
 
 function EditCourseModal({
@@ -65,7 +65,7 @@ function EditCourseModal({
       return;
     }
 
-    const editedCourse: EditedCourse = {
+    const editedCourse = {
       _id: courseDetails?._id || '',
       courseName: formData.courseName,
       coursedescription: formData.coursedescription,

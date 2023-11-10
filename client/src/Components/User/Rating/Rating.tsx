@@ -15,18 +15,16 @@ const RatingComponent: React.FC<{ courseId: string }> = ({ courseId }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [ratings, setRatings] = useState<Rating[]>([]);
-  const [isRatingEditable, setIsRatingEditable] = useState(false); 
+ 
   const user = useSelector(selectUser);
 
-
-  const handleStarClick = (starRating) => {
+  const handleStarClick = (starRating:any) => {
     setRating(starRating);
   };
 
   const submitRating = async () => {
-
     if (rating === 0 || comment === "") {
-      alert("fill both ")
+      alert("fill both ");
       return;
     }
     if (rating < 1 || rating > 5) {
@@ -44,24 +42,19 @@ const RatingComponent: React.FC<{ courseId: string }> = ({ courseId }) => {
       return;
     }
 
- 
-
-    console.log(ratings,"ratings ")
+    console.log(ratings, "ratings ");
     try {
-          await axios.post(`${UserBaseUrl}/ratings`, {
+      await axios.post(`${UserBaseUrl}/ratings`, {
         rating,
         comment,
         user: user.user._id,
         course: courseId,
       });
 
-      
       setRating(0);
       setComment("");
       fetchRatings();
-
-
-    } catch (error:any) {
+    } catch (error: any) {
       toast.error(error.response.data);
     }
   };
@@ -74,8 +67,6 @@ const RatingComponent: React.FC<{ courseId: string }> = ({ courseId }) => {
       console.error("Error fetching ratings:", error);
     }
   };
-
-
 
   useEffect(() => {
     fetchRatings();
@@ -101,19 +92,16 @@ const RatingComponent: React.FC<{ courseId: string }> = ({ courseId }) => {
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         className="w-full p-2 mb-4 rounded border"
-        rows="3"
+        rows={3}
         placeholder="Add your comment"
       />
       <button
         onClick={submitRating}
         className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        onMouseEnter={() => setIsRatingEditable(true)} // Enable rating edit on button hover
-        onMouseLeave={() => setIsRatingEditable(false)} // Disable rating edit on button mouse leave
+        
       >
         Submit
       </button>
-
-     
     </div>
   );
 };

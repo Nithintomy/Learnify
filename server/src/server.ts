@@ -1,5 +1,5 @@
 import express from 'express';
-import './connection/connection'; // Importing the database connection setup
+import connectToDb from './connection/connection'; // Importing the database connection setup
 import studentRouter from './Routes/StudentRouter/studentRouter';
 import tutorRouter from './Routes/TutorRouter/tutorRouter';
 import adminRouter from './Routes/AdminRouter/adminRouter';
@@ -9,10 +9,10 @@ import paymentRouter from './Routes/PaymentRouter/Payment';
 import http from 'http'
 import {Server} from 'socket.io'
 import ChatRouter from './Routes/ChatRouter/ChatRoute';
+import path from "path";
 
-
-
-const app = express();
+ 
+const app = express(); 
 const server = http.createServer(app);
 export const io = new Server(server, {
     cors: {
@@ -40,7 +40,13 @@ app.use('/admin',adminRouter)
 app.use('/api/checkout',paymentRouter)
 app.use('/api/chat',ChatRouter)
 
+connectToDb();
 
+app.use(express.static(path.join(__dirname,"../../../client/dist")));
+
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname,"../../../client/dist/index.html"));
+});
 
 io.on('connection' , (socket) => {
   
@@ -58,11 +64,11 @@ io.on('connection' , (socket) => {
   socket.on('new chat message', (message) => {
     console.log('here toooo');
     const chat = message.chat;
-  
+    
     console.log(chat, 'ith chat');
   
     if (!chat.users) {
-      console.log('no participants');
+      console.log('no participants'); 
     }
     chat.users.forEach((user: any) => {
       console.log(user, '#################3');

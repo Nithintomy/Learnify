@@ -1,18 +1,18 @@
 import React from 'react'
-import { useState ,useEffect} from "react";
+import { useState} from "react";
 import { toast,ToastContainer } from "react-toastify";
 import axiosInstance from "../../../Axios/axios";
-import { login,selectTutor } from "../../../features/tutorSlice/tutorSlice";
+import { login } from "../../../features/tutorSlice/tutorSlice";
 import 'react-toastify/dist/ReactToastify.css';
-import { useSelector,useDispatch} from "react-redux"
+import { useDispatch} from "react-redux"
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import logo from '../../../assets/E_Learning (1).png'
+
 
 
 
 function TutorLogin() {
-  const tutor = useSelector(selectTutor)
+ 
   const [tutorEmail,setTutorEmail]= useState('')
   const [tutorPassword,settrimmedPassword]=useState('')
   const dispatch =useDispatch()
