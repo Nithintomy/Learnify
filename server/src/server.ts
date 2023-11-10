@@ -17,7 +17,7 @@ const app = express();
 const server = http.createServer(app);
 export const io = new Server(server, {
     cors: {
-      origin: 'http://localhost:3000',
+      origin: 'https://learnify.website',
       methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
       credentials: true,
     },
