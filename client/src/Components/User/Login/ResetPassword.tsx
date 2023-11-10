@@ -3,6 +3,7 @@ import {useState} from 'react'
 import {ToastContainer} from 'react-toastify'
 import axios from 'axios'
 import {useNavigate, useParams} from 'react-router-dom'
+import { BaseUrl } from '../../../Api'
 
 
 function ResetPassword() {
@@ -15,7 +16,7 @@ function ResetPassword() {
   const handleSubmit=async(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
 
-    axios.post(`http://localhost:5000/student/reset-password/${id}/${token}`,{password})
+    axios.post(`${BaseUrl}/student/reset-password/${id}/${token}`,{password})
     .then(res=>{
       if(res.data.Status==="Success"){
         nav('/login')
