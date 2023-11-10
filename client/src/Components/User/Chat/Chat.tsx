@@ -32,13 +32,14 @@ function Chat({studentId}:any) {
  
 
   useEffect(() => {
-    socket = io('http://localhost:5000', { withCredentials: true });
+    socket = io('https://learnify.website', { withCredentials: true });
 
     socket.on('connect', () => {
       setSocketConnection(true);
       
     });
     console.log(socketConnection)
+    console.log(chatId)
     socket.emit('start', studentId?._id);
 
     // Cleanup when component unmounts
