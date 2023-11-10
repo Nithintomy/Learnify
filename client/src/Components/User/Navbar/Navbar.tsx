@@ -142,7 +142,7 @@ function Navbar() {
                 </Link>
               </li>
 
-              {user && (
+              {user.user && (
                 <li>
                   <Link
                     to="/enrolled-courses"
@@ -155,7 +155,7 @@ function Navbar() {
               )}
             </ul>
 
-            {user ? (
+            {user.user ? (
               <>
                 <li className="ml-4 " style={{ listStyle: "none" }}>
                   <Link to="/cart">
