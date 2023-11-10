@@ -16,6 +16,7 @@ const http_1 = __importDefault(require("http"));
 const socket_io_1 = require("socket.io");
 const ChatRoute_1 = __importDefault(require("./Routes/ChatRouter/ChatRoute"));
 const path_1 = __importDefault(require("path"));
+const morgan_1 = __importDefault(require("morgan"));
 const app = (0, express_1.default)();
 const server = http_1.default.createServer(app);
 exports.io = new socket_io_1.Server(server, {
@@ -30,6 +31,7 @@ const PORT = process.env.PORT || 5000;
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
+app.use((0, morgan_1.default)("dev"));
 app.use('/student', studentRouter_1.default);
 app.use('/tutor', tutorRouter_1.default);
 app.use('/admin', adminRouter_1.default);
