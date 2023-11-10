@@ -36,9 +36,9 @@ app.use('/admin', adminRouter_1.default);
 app.use('/api/checkout', Payment_1.default);
 app.use('/api/chat', ChatRoute_1.default);
 (0, connection_1.default)();
-app.use(express_1.default.static(path_1.default.join(__dirname, "../../../client/dist")));
+app.use(express_1.default.static(path_1.default.join(__dirname, "../../client/dist")));
 app.get("*", function (req, res) {
-    res.sendFile(path_1.default.join(__dirname, "../../../client/dist/index.html"));
+    res.sendFile(path_1.default.join(__dirname, "../../client/dist/index.html"));
 });
 exports.io.on('connection', (socket) => {
     socket.on('start', (studentId) => {
