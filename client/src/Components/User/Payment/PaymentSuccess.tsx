@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function PaymentSuccess() {
 
@@ -17,15 +18,12 @@ function PaymentSuccess() {
         <h1 className="text-lg font-semibold text-amber-900 mb-4">Reference Number : {referenceNo}</h1>
         <p className="text-lg text-gray-700 mb-6">Thank you for your payment. Your order has been successfully processed.</p>
         <div className="flex justify-center space-x-4">
-          <button
-            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-300"
-            onClick={() => {
-              // Handle the action to view orders
-              // You can use react-router or another method to navigate to the orders page
-            }}
-          >
-            View Orders
-          </button>
+        <Link
+        to="/enrolled-courses"
+        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-300"
+      >
+        Enrolled Courses
+      </Link>
           <button
             className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded focus:outline-none focus:ring focus:ring-gray-300"
             onClick={() => {
