@@ -250,6 +250,7 @@ const GoogleSignUp = async (req: Request, res: Response) => {
 //Google SignIn
 
 const GoogleSignin = async (req: Request, res: Response) => {
+  console.log("why i am here")
   const token = req.body.credential;
   const decode = jwt.decode(token) as JwtPayload | null;
 
@@ -258,7 +259,7 @@ const GoogleSignin = async (req: Request, res: Response) => {
     const { name, email, picture, jti } = decode;
     studentEmail = email;
     if (name && email && picture && jti) {
-      console.log(name, email, picture, jti);
+      console.log(name, email, picture, jti,"work ayo");
     } else {
       console.log("jwt payload is missing some properties");
     }
@@ -268,7 +269,7 @@ const GoogleSignin = async (req: Request, res: Response) => {
 
   try {
     const user = await studentModel.findOne({ studentEmail });
-    console.log(user);
+    console.log(user,"google user");
 
     if (!user) {
       return res.json({ success: false, message: "User does not exist" });
@@ -284,8 +285,16 @@ const GoogleSignin = async (req: Request, res: Response) => {
         user.password = "";
 
         return res.json({
-          user,
-          token
+          user: {
+            _id: user._id,
+            studentName: user.studentName,
+            studentEmail: user.studentEmail,
+            phone: user.phone,
+            isBlocked: user.isBlocked,
+            photo: user.photo,
+          },
+          token,
+          message: "login successfully",
         });
       }
     }

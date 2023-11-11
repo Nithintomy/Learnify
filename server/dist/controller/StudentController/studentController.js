@@ -228,6 +228,7 @@ const GoogleSignUp = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.GoogleSignUp = GoogleSignUp;
 //Google SignIn
 const GoogleSignin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("why i am here");
     const token = req.body.credential;
     const decode = jsonwebtoken_1.default.decode(token);
     let studentEmail;
@@ -235,7 +236,7 @@ const GoogleSignin = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         const { name, email, picture, jti } = decode;
         studentEmail = email;
         if (name && email && picture && jti) {
-            console.log(name, email, picture, jti);
+            console.log(name, email, picture, jti, "work ayo");
         }
         else {
             console.log("jwt payload is missing some properties");
@@ -246,7 +247,7 @@ const GoogleSignin = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
     try {
         const user = yield userModel_1.default.findOne({ studentEmail });
-        console.log(user);
+        console.log(user, "google user");
         if (!user) {
             return res.json({ success: false, message: "User does not exist" });
         }
@@ -259,8 +260,16 @@ const GoogleSignin = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 const token = (0, generateToken_1.default)(user._id);
                 user.password = "";
                 return res.json({
-                    user,
-                    token
+                    user: {
+                        _id: user._id,
+                        studentName: user.studentName,
+                        studentEmail: user.studentEmail,
+                        phone: user.phone,
+                        isBlocked: user.isBlocked,
+                        photo: user.photo,
+                    },
+                    token,
+                    message: "login successfully",
                 });
             }
         }
