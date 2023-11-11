@@ -67,7 +67,7 @@ function SinglePageView() {
         quantity: 1
       })
         .then((response) => {
-          console.log(response, "added to cart");
+          console.log(response, "added to cart");  
           toast.success(response.data.message);
         })
         .catch((error) => {
