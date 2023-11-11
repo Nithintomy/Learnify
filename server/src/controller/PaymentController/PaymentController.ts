@@ -80,7 +80,7 @@ const verifyPayment = async (req: Request, res: Response) => {
     
 
       res.redirect(
-        `http://localhost:3000/paymentSuccess?reference=${razorpay_payment_id}`
+        `https://learnify.website/paymentSuccess?reference=${razorpay_payment_id}`
       );
     } else {
       res.status(400).json({
