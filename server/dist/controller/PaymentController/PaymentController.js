@@ -77,7 +77,7 @@ const verifyPayment = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 $push: { students: studentId },
             });
             console.log("Order saved:", order);
-            res.redirect(`https://learnify.website/paymentSuccess?reference=${razorpay_payment_id}`);
+            res.redirect(`http://localhost:3000/paymentSuccess?reference=${razorpay_payment_id}`);
         }
         else {
             res.status(400).json({
