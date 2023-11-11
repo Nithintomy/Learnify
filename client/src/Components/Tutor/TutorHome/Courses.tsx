@@ -55,7 +55,7 @@ function Courses() {
       });
   }, []);
   if (loading) {
-    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    return <div style={{ justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
     <RingLoader loading={true} color="#000000" speedMultiplier={1} size={150} />
   </div>
   }
@@ -69,7 +69,10 @@ function Courses() {
         courses.map((course, _) => (
           <Card className="mt-6 w-96" key={course._id}>
             <CardHeader color="blue-gray" className="relative h-56">
-              <img src={`${course.photo}`} alt="card-image" />
+              <img src={`${course.photo}`} 
+              alt="card-image"
+              style={{ width: "200vh", height: "250px" }}
+              />
             </CardHeader>
             <CardBody>
               <Typography variant="h5" color="blue-gray" className="mb-2">

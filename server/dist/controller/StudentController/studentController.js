@@ -259,14 +259,8 @@ const GoogleSignin = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 const token = (0, generateToken_1.default)(user._id);
                 user.password = "";
                 return res.json({
-                    _id: user._id,
-                    name: user.studentName,
-                    email: user.studentEmail,
-                    phone: user.phone,
-                    isBlocked: user.isBlocked,
-                    photo: user.photo,
-                    token,
-                    message: "login successfully",
+                    user,
+                    token
                 });
             }
         }

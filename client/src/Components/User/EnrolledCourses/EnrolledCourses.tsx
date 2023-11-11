@@ -50,8 +50,8 @@ function EnrolledCourses() {
   }
 
   return (
-    <div className="mt-5 ml-12 flex flex-col gap-8">
-  <h1 className="text-3xl font-bold text-gray-800">Enrolled Courses</h1>
+    <div className="mt-5 ml-12 flex flex-col gap-8 dark:bg-black  ">
+  <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Enrolled Courses</h1>
   {entrolledCourses && entrolledCourses.length > 0 ? (
    <div className="flex flex-wrap gap-4">
    {entrolledCourses.map((course) => (

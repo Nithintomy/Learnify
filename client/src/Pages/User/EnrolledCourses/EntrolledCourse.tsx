@@ -4,7 +4,7 @@ import EnrolledCourses from '../../../Components/User/EnrolledCourses/EnrolledCo
 
 function EntrolledCourse() {
   return (
-    <div>
+    <div className='dark:bg-black h-screen'>
     <Navbar/>
     <div className="mt-5 px-2 lg:px-0">
       <div className="overflow-x-auto">

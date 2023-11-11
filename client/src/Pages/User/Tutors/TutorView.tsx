@@ -4,7 +4,7 @@ import Navbar from "../../../Components/User/Navbar/Navbar";
 
 function TutorView() {
   return (
-    <div className="dark:bg-black">
+    <div className="dark:bg-black h-screen">
       <Navbar />
       <div className="mt-28 px-2 lg:px-0">
         

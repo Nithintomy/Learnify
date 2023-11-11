@@ -141,6 +141,7 @@ function Login() {
                     .post(`${UserBaseUrl}/googleSignIn`, credentialResponse)
                     .then((res) => {
                       console.log(res, "response ondo");
+                      dispatch(login(res.data));
                       if (!res.data.success) {
                         if (res.data.message === "User does not exist") {
                           toast.error(res.data.message);
@@ -153,7 +154,7 @@ function Login() {
                         localStorage.setItem("token", JSON.stringify(res.data.token));
 
                         localStorage.setItem("userData", JSON.stringify(res.data));
-                        dispatch(login(res.data));
+                        
                         console.log(res.data);
                         setTimeout(() => {
                           navigate("/");

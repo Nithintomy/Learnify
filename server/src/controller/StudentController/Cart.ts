@@ -8,7 +8,7 @@ export const addToCart =async(req:Request,res:Response)=>{
     
     try {
 
-        const {courseId,userId,quantity} = req.body
+        const {courseId,userId,quantity} = req.body   
 
         const existingCartItem =await CartItemModel.findOne({user:userId,course:courseId})
 

@@ -38,8 +38,6 @@ function Chat({studentId}:any) {
       setSocketConnection(true);
       
     });
-    console.log(socketConnection)
-    console.log(chatId)
     socket.emit('start', studentId?._id);
 
     // Cleanup when component unmounts
@@ -47,6 +45,8 @@ function Chat({studentId}:any) {
       socket.disconnect();
     };
   }, [studentId?._id]);
+
+  console.log(socketConnection)
   
   useEffect(() => {
     axios

@@ -17,7 +17,7 @@ interface CoursesByCategoryListProps {
 
 export function CoursesByCategoryList({ courses }: CoursesByCategoryListProps) {
   return (
-    <div className="mt-5 ml-12 flex flex-wrap gap-8">
+    <div className="mt-5 ml-12 flex flex-wrap gap-8 dark:bg-black">
       {courses.map((course, index) => (
         <div key={index}>
           <Card className="w-full max-w-[18rem] shadow-lg dark:bg-black dark:text-white">

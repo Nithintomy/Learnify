@@ -34,10 +34,10 @@ function Homepage() {
 
       <h1 className="text-4xl font-bold text-gray-800 dark:text-white ml-24 m-14">
         Let's start learning,
-        <span className="text-black text-3xl font-bold ml-4">{userName}</span>
+        <span className="text-black text-3xl font-bold ml-4 dark:text-white">{userName}</span>
       </h1>
 
-      <div className="px-3 lg:px-3 ">
+      <div className="px-3 lg:px-3 ml-8">
         <CourseCard />
       </div>
       <hr className="my-8 border-t-2 border-gray-300 dark:border-gray-700" />

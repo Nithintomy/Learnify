@@ -36,6 +36,7 @@ function SinglePageView() {
   const [currentVideoUrl, setCurrentVideoUrl] = useState<string>('');
   const [lessons, setLessons] = useState<Lesson[]>([]);
   
+  console.log(userData,"userdata illa")
 
   const toggleAccordion = (index: number) => {
     if (activeIndex === index) {
@@ -59,22 +60,25 @@ function SinglePageView() {
   };
 
   const handleAddToCart = () => {
-    axios.post(`${UserBaseUrl}/add-to-cart`, {
-      courseId: courseDetails?._id,
-      userId: userData.user._id,
-      quantity: 1
-    })
-      .then((response) => {
-        console.log(response,"added to cart")
-        toast.success(response.data.message);
-        
-       
+    if (userData.user) {
+      axios.post(`${UserBaseUrl}/add-to-cart`, {
+        courseId: courseDetails?._id,
+        userId: userData.user._id,
+        quantity: 1
       })
-      .catch((error) => {
-        console.error("Error occur while adding to cart", error);
-        toast.error(error.response.data.message);
-      });
+        .then((response) => {
+          console.log(response, "added to cart");
+          toast.success(response.data.message);
+        })
+        .catch((error) => {
+          console.error("Error occur while adding to cart", error);
+          toast.error(error.response.data.message);
+        });
+    } else {
+      toast.error("Please log in to add the course to your cart.");
+    }
   };
+  
 
   useEffect(() => {
     // Fetch course details based on the courseId
@@ -184,13 +188,14 @@ function SinglePageView() {
   return (
     <>
       <ToastContainer />
-      <div className="flex flex-col md:flex-row bg-gradient-to-r from-black via-gray-600 to-deep-orange-500 hover:bg-opacity-80 dark:bg-gray-800 dark:hover-bg-opacity-80 shadow-lg rounded-lg overflow-hidden">
+      <div className="flex flex-col md:flex-row bg-gradient-to-r from-black via-gray-600 to-lime-400 hover:bg-opacity-80 dark:bg-gray-800 dark:hover-bg-opacity-80 shadow-lg rounded-lg overflow-hidden">
         <div className="md:w-1/2">
-          <img
-            src={courseDetails?.photo}
-            alt="Course Image"
-            className="w-96 h-72"
-          />
+        <img
+        src={courseDetails?.photo}
+        alt="Course Image"
+        className="object-cover"
+        style={{ width: "200vh", height: "400px" }}
+      />
         </div>
         <div className="flex flex-col justify-between p-6 md:w-1/2">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -222,10 +227,10 @@ function SinglePageView() {
             <>
               <button
                 onClick={() => {
-                  if (userData) {
+                  if (userData.user) {
                     checkoutHandler();
                   } else {
-                    alert("Please Login to Buy the Course");
+                    toast("Please Login to Buy the Course");
                   }
                 }}
                 className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg"

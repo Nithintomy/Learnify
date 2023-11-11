@@ -4,7 +4,7 @@ import Cart from '../../../Components/User/Cart/Cart'
 
 function CartView() {
   return (
-    <div>
+    <div className='dark:text-white dark:bg-black'>
     <Navbar />
     <div className="mt-20 px-2 lg:px-0">
       <div className="overflow-x-auto">

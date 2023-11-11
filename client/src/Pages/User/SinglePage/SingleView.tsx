@@ -14,11 +14,11 @@ function SingleView() {
     <div>
       <Navbar />
 
-      <div className="px-3 mt-6">
+      <div className="px-3 mt-28">
         <SinglePageView />
       </div>
 
-      {user && (
+      { user.user  && (
         <div className="px-4 mt-6">
           <h2 className="text-2xl font-semibold mb-4">Course Ratings and Comments</h2>
           <RatingComponent courseId={courseId || ''} />
