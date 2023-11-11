@@ -87,7 +87,7 @@ const verifyPayment = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
     catch (error) {
         console.error(error);
-        res.status(500).send("Internal Server Error");
+        res.status(500).send("Internal Server Errorr");
     }
 });
 exports.verifyPayment = verifyPayment;
