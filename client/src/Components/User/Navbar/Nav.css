@@ -1,0 +1,20 @@
+.line {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: rgba(208, 0, 221, 0.84);
+    transition: all 0.3s ease;
+  }
+  
+  .group:hover .line {
+    width: 100%;
+    background: linear-gradient(to right, rgba(208, 0, 221, 0.84), rgba(0, 0, 105, 0.84));
+  }
+  
+  
+  .group {
+    position: relative;
+  }

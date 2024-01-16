@@ -26,7 +26,7 @@ export const io = new Server(server, {
 
 
 
-dotenv.config(); // Load environment variables from .env file
+dotenv.config(); 
 const PORT = process.env.PORT || 5000;
 
 

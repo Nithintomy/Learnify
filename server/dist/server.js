@@ -26,7 +26,7 @@ exports.io = new socket_io_1.Server(server, {
         credentials: true,
     },
 });
-dotenv_1.default.config(); // Load environment variables from .env file
+dotenv_1.default.config();
 const PORT = process.env.PORT || 5000;
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());

@@ -1,14 +1,13 @@
 import React from "react";
 import { useEffect } from "react";
-import Carousel from "../../../Components/User/Carousel/Carousel";
 import Navbar from "../../../Components/User/Navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../features/tutorSlice/tutorSlice";
 import { selectUser } from "../../../features/userSlice/userSlice";
-
 import Footer from "../../../Components/User/Footer/Footer";
 import { CourseCard } from "../../../Components/User/Card/cards";
 import TutorViewBanner from "../../../Components/User/Banners/tutorviewBanner";
+import HomeMain from "../../../Components/User/HomeMain/HomeMain";
 
 function Homepage() {
   const dispatch = useDispatch();
@@ -26,10 +25,12 @@ function Homepage() {
   }, [dispatch]);
 
   return (
-    <div className=" dark:bg-black">
+    <div className="dark:bg-black ">
       <Navbar />
-      <div className="mt-24 lg:px-0">
-        <Carousel />
+      <div className="mt- lg:px-0">
+       
+        <HomeMain/>
+        
       </div>
 
       <h1 className="text-4xl font-bold text-gray-800 dark:text-white ml-24 m-14">
