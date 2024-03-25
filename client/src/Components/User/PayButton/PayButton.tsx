@@ -21,7 +21,7 @@ function PayButton({cartItems}:any) {
 
   return (
     <div>
-         <button onClick={()=>handleCheckOut()} className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>
+         <button onClick={()=>handleCheckOut()} className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Checkout</button>
     
     </div>
   )

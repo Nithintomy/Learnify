@@ -1,15 +1,15 @@
 import React from 'react'
-import Navbar from '../../../Components/User/Navbar/Navbar'
 import EnrolledCourses from '../../../Components/User/EnrolledCourses/EnrolledCourses'
+import Navbars from '../../../Components/User/Navbar/Navbars'
 
 function EntrolledCourse() {
   return (
-    <div className='dark:bg-black h-screen'>
-    <Navbar/>
-    <div className="mt-5 px-2 lg:px-0">
+    <div className='dark:bg-black bg-gray-200 h-screen'>
+    <Navbars/>
+    <div className="px-2 lg:px-0">
       <div className="overflow-x-auto">
         <div className="max-w-screen-xl mx-auto">
-          <div className="max-w-5/6 mx-auto mt-28">
+          <div className="max-w-5/6 mx-auto mt-10">
             <EnrolledCourses />
           </div>
         </div>

@@ -1,16 +1,9 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PrivateRoute from "./utils/PrivateRoute";
-
-import SignUp from "./Components/User/SignUp/SignUp";
-import TutorSignUp from "./Components/Tutor/SignUp/TutorSignup";
-import TutorLogin from "./Components/Tutor/Login/TutorLogin";
 import Homepage from "./Pages/User/Home/Homepage";
 import Dashboard from "./Pages/Admin/Dashboard/Dashboard";
 import AdminLogin from "./Components/Admin/AdminLogin/AdminLogin";
-import Login from "./Components/User/Login/Login";
-import ResetPassword from "./Components/User/Login/ResetPassword";
-import ForgotPassword from "./Components/User/Login/ForgotPassword";
 import UserDetails from "./Pages/Admin/UserDetails/UserDetails";
 import TutorView from "./Pages/User/Tutors/TutorView";
 import AdminTutorDetails from "./Pages/Admin/TutorDetails/AdminTutorDetails";
@@ -22,7 +15,6 @@ import { useDispatch } from "react-redux";
 import { login } from "./features/userSlice/userSlice";
 import Add_courses from "./Pages/Tutor/Add_Courses/Add_courses";
 import Add_Lessons from "./Pages/Tutor/Add_Courses/Add_Lessons";
-import UserOtp from "./Components/User/SignUp/Otp";
 import AddCategory from "./Pages/Admin/Category/AddCategory";
 import AllCategory from "./Pages/Admin/Category/AllCategory";
 import SinglePage from "./Pages/Tutor/SinglePage/SinglePages";
@@ -40,6 +32,13 @@ import EntrolledCourse from "./Pages/User/EnrolledCourses/EntrolledCourse";
 import CartView from "./Pages/User/Cart/CartView";
 import CheckoutPage from "./Components/User/CheckoutPage/CheckoutPage";
 import EntrolledSinglePage from "./Pages/User/EnrolledCourses/EntrolledSinglePage";
+import Logins from "./Components/User/Login/Logins";
+import SignUps from "./Components/User/SignUp/SignUps";
+import Otps from "./Components/User/SignUp/Otps";
+import ForgotPasswords from "./Components/User/Login/ForgotPasswords";
+import ResetPasswords from "./Components/User/Login/ResetPasswords";
+import TutorLogins from "./Components/Tutor/Login/TutorLogins";
+import TutorSignups from "./Components/Tutor/SignUp/TutorSignups";
 
 
 
@@ -102,11 +101,11 @@ function App() {
         {/* User Side  */}
 
         <Route path="/" element={<Homepage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<SignUp />} />
-        <Route path="/forget-password" element={<ForgotPassword />} />
-        <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
-        <Route path="/user_otp" element={<UserOtp />} />
+        <Route path="/login" element={<Logins />} />
+        <Route path="/register" element={<SignUps />} />
+        <Route path="/forget-password" element={<ForgotPasswords />} />
+        <Route path="/reset-password/:id/:token" element={<ResetPasswords />} />
+        <Route path="/user_otp" element={<Otps />} />
         <Route path="/singlePage/:courseId" element={<SingleView />} />
         <Route path="/TutorView" element={<TutorView />} />
         <Route path="/tutor_details/:tutorId" element={<TutorDetails />} />
@@ -117,8 +116,8 @@ function App() {
 
         {/* Tutor side */}
 
-        <Route path="/tutorRegister" element={<TutorSignUp />} />
-        <Route path="/tutorLogin" element={<TutorLogin />} />
+        <Route path="/tutorRegister" element={<TutorSignups />} />
+        <Route path="/tutorLogin" element={<TutorLogins />} />
 
         {/* admin side  */}
 

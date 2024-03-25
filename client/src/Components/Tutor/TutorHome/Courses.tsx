@@ -8,12 +8,13 @@ import {
   Button,
 } from "@material-tailwind/react";
 
-import { toast, ToastContainer } from "react-toastify";
+import toast, { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { TutorBaseUrl } from "../../../Api";
 import { RingLoader } from 'react-spinners';
+import Breadcrumbs from "../../common/Breadcrumbs";
 
 
 
@@ -61,13 +62,15 @@ function Courses() {
   }
 
   return (
-    <div className="flex flex-wrap">
-      <ToastContainer />
+    <div>
+    <Breadcrumbs  /> 
+    <div className="flex flex-wrap h-full ">
+     
       {courses.length === 0 ? (
         <p>No courses available.</p>
       ) : (
         courses.map((course, _) => (
-          <Card className="mt-6 w-96" key={course._id}>
+          <Card className="m-6 w-96" key={course._id}>
             <CardHeader color="blue-gray" className="relative h-56">
               <img src={`${course.photo}`} 
               alt="card-image"
@@ -91,6 +94,8 @@ function Courses() {
           </Card>
         ))
       )}
+      <Toaster position="top-right" containerClassName="p-8 m-8" />
+    </div>
     </div>
   );
 }

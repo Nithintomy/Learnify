@@ -1,14 +1,20 @@
 import React from 'react'
 import Navbar from '../../../Components/Tutor/TutorHome/Navbar'
-import Add_Lesson from '../../../Components/Tutor/TutorHome/Add_Lesson'
+
+import Navbars from '../../../Components/Tutor/TutorHome/Navbars';
+import AddLesson from '../../../Components/Tutor/TutorHome/AddLesson';
+import Breadcrumbs from '../../../Components/common/Breadcrumbs';
 
 function Add_Lessons() {
   return (
-    <div>
-      <Navbar />
-      <div className="flex justify-center items-center bg-orange-100">
+    <div className="dark:bg-black bg-gray-200 h-full">
+      <Navbars/>
+      <div className='ml-16'>
+      <Breadcrumbs/>
+      </div>
+      <div className="flex justify-center items-center">
   <div className="w-full max-w-4xl p-4 mb-9">
-    <Add_Lesson />
+    <AddLesson />
   </div>
 </div>
     </div>

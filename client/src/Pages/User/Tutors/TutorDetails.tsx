@@ -1,27 +1,19 @@
-
-import React from 'react'
-import Navbar from '../../../Components/User/Navbar/Navbar'
-import TutorSingleView from '../../../Components/User/TutorsList/TutorSingleView'
+import React from "react";
 import { useParams } from "react-router-dom";
+import Navbars from "../../../Components/User/Navbar/Navbars";
+import TutorSingleViews from "../../../Components/User/TutorsList/TutorSingleViews";
 
 function TutorDetails() {
-
   const { tutorId } = useParams();
   return (
-    <div>
+    <div className="dark:bg-black bg-base-200 h-screen">
+      <Navbars />
 
-     <Navbar/>
-
-     <div className="px-3 mt-6">
-        <TutorSingleView tutorId={tutorId}/> 
-        
+      <div className="px-3 mt-6">
+        <TutorSingleViews tutorId={tutorId} />
       </div>
-
-
-
-      
     </div>
-  )
+  );
 }
 
-export default TutorDetails
+export default TutorDetails;

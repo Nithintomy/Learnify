@@ -1,16 +1,21 @@
 import React from 'react'
-import Navbar from '../../../Components/Tutor/TutorHome/Navbar'
-import SingleView from '../../../Components/Tutor/TutorHome/SingleView'
 import CourseContent from '../../../Components/Tutor/TutorHome/CourseContent'
+import Navbars from '../../../Components/Tutor/TutorHome/Navbars'
+import SingleViews from '../../../Components/Tutor/TutorHome/SingleViews'
+import Breadcrumbs from '../../../Components/common/Breadcrumbs'
 
 
 function SinglePages() {
   return (
-    <div>
-     <Navbar/>
+    <div className="dark:bg-black bg-gray-200 h-full">
+     <Navbars/>
+
+     <div className='ml-16'>
+      <Breadcrumbs/>
+      </div>
 
      <div className="px-3 lg:px-3 flex flex-wrap mt-6">
-        <SingleView/> 
+        <SingleViews/> 
         
       </div>
     

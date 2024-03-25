@@ -10,6 +10,7 @@ import courseModel from "../../model/Courses";
 
 const addCourses =asyncHandler(async(req:Request,res:Response)=>{
     console.log("I m adding course")
+    console.log(req.body,"bodyyyyyyyyyyyyyyyyyyy")
 
     try {
         const {courseName,courseduration,coursedescription,photo,courseFee,tutor,category} =req.body;

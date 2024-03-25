@@ -1,26 +1,26 @@
 import React from 'react';
-import SinglePageView from '../../../Components/User/SinglePage/SinglePageView';
-import Navbar from '../../../Components/User/Navbar/Navbar';
 import RatingComponent from '../../../Components/User/Rating/Rating';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../../features/userSlice/userSlice';
+import Navbars from '../../../Components/User/Navbar/Navbars';
+import SinglePages from '../../../Components/User/SinglePage/SinglePages';
 
 function SingleView() {
   const { courseId } = useParams();
   const user = useSelector(selectUser);
 
   return (
-    <div>
-      <Navbar />
+    <div className="dark:bg-black bg-gray-200 h-screen">
+      <Navbars />
 
-      <div className="px-3 mt-28">
-        <SinglePageView />
+      <div className="px-3 bg-gray-200 ">
+        <SinglePages/>
       </div>
 
       { user.user  && (
-        <div className="px-4 mt-6">
-          <h2 className="text-2xl font-semibold mb-4">Course Ratings and Comments</h2>
+        <div className="px-4 shadow-lg bg-gray-200 ">
+          <h2 className="text-2xl  font-semibold mb-4">Course Ratings and Comments</h2>
           <RatingComponent courseId={courseId || ''} />
         </div>
       )}

@@ -3,11 +3,13 @@ import React from 'react'
 import Navbar from '../../../Components/User/Navbar/Navbar'
 import { CoursesByCategory } from '../../../Components/User/Courses/CoursesByCategory'
 import Footer from '../../../Components/User/Footer/Footer'
+import Navbars from '../../../Components/User/Navbar/Navbars'
+import Footers from '../../../Components/User/Footer/Footers'
 
 function CategoriedCourses() {
   return (
-    <div className='dark:bg-black'>
-      <Navbar/>
+    <div className='dark:bg-black bg-gray-200'>
+      <Navbars/>
       <div className="mt-20 px-2 lg:px-0">
         <div className="overflow-x-auto">
           <div className="max-w-screen-xl mx-auto">
@@ -15,8 +17,8 @@ function CategoriedCourses() {
               <CoursesByCategory />
             </div>
           </div>
-          <div className='mt-5 px-2'>
-            <Footer/>
+          <div className='mt-5'>
+            <Footers/>
           </div>
         </div>
       </div>

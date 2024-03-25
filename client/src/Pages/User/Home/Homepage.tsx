@@ -1,13 +1,15 @@
 import React from "react";
 import { useEffect } from "react";
-import Navbar from "../../../Components/User/Navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../features/tutorSlice/tutorSlice";
 import { selectUser } from "../../../features/userSlice/userSlice";
-import Footer from "../../../Components/User/Footer/Footer";
-import { CourseCard } from "../../../Components/User/Card/cards";
-import TutorViewBanner from "../../../Components/User/Banners/tutorviewBanner";
-import HomeMain from "../../../Components/User/HomeMain/HomeMain";
+import Footers from "../../../Components/User/Footer/Footers";
+import TutorBanner from "../../../Components/User/Banners/TutorBanner";
+import Navbars from "../../../Components/User/Navbar/Navbars";
+import Hero from "../../../Components/User/HomeMain/Hero";
+import CourseCards from "../../../Components/User/Card/CourseCards";
+import TrustedCompanies from "../../../Components/User/Banners/TrustedCompanies";
+import OurCourses from "../../../Components/User/Banners/OurCourses";
 
 function Homepage() {
   const dispatch = useDispatch();
@@ -25,28 +27,39 @@ function Homepage() {
   }, [dispatch]);
 
   return (
-    <div className="dark:bg-black ">
-      <Navbar />
-      <div className="mt- lg:px-0">
+    <div className="dark:bg-black bg-base-200 ">
+      <Navbars />
+      <div className="lg:px-0">
        
-        <HomeMain/>
-        
+        <Hero/>
+       
       </div>
-
-      <h1 className="text-4xl font-bold text-gray-800 dark:text-white ml-24 m-14">
+      <TrustedCompanies/>
+      <div className="flex items-center justify-center bg-gray-200 py-5">
+      <div className="max-w-screen-xl w-full overflow-x-auto px-4">
+      <h2 className=" font-bold text-gray-800 mb-4 border-b-4 pb-2 text-3xl font-bitter" >
+       
+       
         Let's start learning,
-        <span className="text-black text-3xl font-bold ml-4 dark:text-white">{userName}</span>
-      </h1>
-
-      <div className="px-3 lg:px-3 ml-8">
-        <CourseCard />
+        <span className="text-black text-3xl font-bold font-bitter ml-4 dark:text-white">{userName}</span>
+      </h2>
       </div>
-      <hr className="my-8 border-t-2 border-gray-300 dark:border-gray-700" />
+      </div>
 
-      <TutorViewBanner />
-      <hr className="my-8 border-t-2 border-gray-300 dark:border-gray-700" />
+      <div className="px-3 lg:px-3 ml-8 ">
+        <CourseCards />
+      </div>
+      
+      <hr className="m-6 border-t-2 border-gray-300 shadow-md dark:border-gray-700" />
 
-      <Footer />
+      <OurCourses/>
+
+      <hr className="m-6 border-t-2 border-gray-300 shadow-md dark:border-gray-700" />
+
+      <TutorBanner />
+      
+
+      <Footers/>
     </div>
   );
 }

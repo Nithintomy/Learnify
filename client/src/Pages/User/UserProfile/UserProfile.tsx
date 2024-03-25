@@ -1,17 +1,17 @@
 import React from 'react'
-import Navbar from '../../../Components/User/Navbar/Navbar'
-import Profile from '../../../Components/User/userProfile/Profile'
+import Navbars from '../../../Components/User/Navbar/Navbars'
+import AboutSection from '../../../Components/User/userProfile/UserProfiles'
 
 function UserProfile() {
   return (
-    <div className=' dark:bg-black'>
+    <div className=' dark:bg-black bg-gray-200'>
 
-    <Navbar/>
+    <Navbars/>
 
-      <div className='px-3 mt-24 lg:px-3 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-black '>
-        <Profile/>
-           
-      </div>
+  <div className='px-3  lg:px-3 border border-gray-200 rounded-lg shadow-md dark:bg-black '>
+    <AboutSection/>
+  </div>
+  
    
   </div>
   )

@@ -1,14 +1,16 @@
 import React from "react";
 import Navbar from "../../../Components/Tutor/TutorHome/Navbar";
 import Students from "../../../Components/Tutor/TutorHome/Students";
+import Navbars from "../../../Components/Tutor/TutorHome/Navbars";
+import StudentTable from "../../../Components/Tutor/TutorHome/StudentTable";
 
 function My_students() {
   return (
-    <div>
-      <Navbar />
-      <div className="flex justify-center items-center bg-orange-100 ">
-        <div className="w-full max-w-4xl p-4 mb-9">
-          <Students />
+    <div className="dark:bg-black bg-gray-200 h-full">
+      <Navbars/>
+      <div className="flex justify-center items-center ">
+        <div className="w-full max-w-6xl p-4 mb-9">
+          <StudentTable />
         </div>
       </div>
     </div>

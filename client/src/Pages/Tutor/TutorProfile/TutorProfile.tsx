@@ -1,17 +1,20 @@
 import React from 'react'
-import Navbar from '../../../Components/Tutor/TutorHome/Navbar'
-import Tutorprofile from '../../../Components/Tutor/TutorProfile/Tutorprofile'
+import TutorProfiles from '../../../Components/Tutor/TutorProfile/TutorProfiles'
+import Navbars from '../../../Components/Tutor/TutorHome/Navbars'
+import Breadcrumbs from '../../../Components/common/Breadcrumbs'
 
 
 
 function TutorProfile() {
     return (
-        <div className=' dark:bg-black'>
+      <div className="dark:bg-black bg-gray-200 h-screen">
     
-        <Navbar/>
-    
+        <Navbars/>
+        <div className='ml-16'>
+      <Breadcrumbs/>
+      </div>
           <div className='px-3 lg:px-3 '>
-            <Tutorprofile/>
+            <TutorProfiles/>
                
           </div>
        

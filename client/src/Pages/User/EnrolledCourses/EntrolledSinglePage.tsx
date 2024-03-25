@@ -1,14 +1,15 @@
 import React from 'react'
-import Navbar from '../../../Components/User/Navbar/Navbar'
-import EntrolledSingleView from '../../../Components/User/EnrolledCourses/EntrolledSingleView'
+import Navbars from '../../../Components/User/Navbar/Navbars'
+import EntrolledSingleViews from '../../../Components/User/EnrolledCourses/EntrolledSingleViews'
 
 function EntrolledSinglePage() {
   return (
-    <div>
-    <Navbar/>
+    <div className=" bg-gray-200 py-5">
 
-    <div className="px-3 mt-40">
-       <EntrolledSingleView/> 
+    <Navbars/>
+
+    <div className="px-3 ">
+       <EntrolledSingleViews/> 
        
      </div>
      </div>

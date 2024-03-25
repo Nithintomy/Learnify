@@ -73,7 +73,7 @@ const RatingComponent: React.FC<{ courseId: string }> = ({ courseId }) => {
   }, [courseId]);
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md">
+    <div className="p-4 rounded-lg shadow-md">
       <h2 className="text-xl font-semibold mb-4">Rate this course</h2>
       <div className="flex space-x-2 my-4 ">
         {[1, 2, 3, 4, 5].map((star) => (

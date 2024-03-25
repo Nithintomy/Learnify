@@ -85,7 +85,7 @@ function EditCourseModal({
         isOpen ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
       } fixed top-0 left-0 w-full h-full flex items-center justify-center transform z-30 transition-transform duration-300 ease-in-out bg-black bg-opacity-50`}
     >
-      <div className="bg-white p-6 rounded-lg w-2/5">
+      <div className="bg-gray-200 p-6 rounded-lg w-2/5">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">Edit Course</h2>
           <button
@@ -161,19 +161,7 @@ function EditCourseModal({
               className="w-full border rounded-lg px-3 py-2 mt-1"
             />
           </div>
-          <div className="mb-4">
-            <label htmlFor="photo" className="block text-sm font-medium">
-              Course Photo URL
-            </label>
-            <input
-              type="text"
-              id="photo"
-              name="photo"
-              value={formData.photo}
-              onChange={handleChange}
-              className="w-full border rounded-lg px-3 py-2 mt-1"
-            />
-          </div>
+          
           <div className="flex justify-end">
             <button
               type="submit"

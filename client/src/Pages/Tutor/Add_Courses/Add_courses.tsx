@@ -1,14 +1,21 @@
 import React from 'react';
-import Navbar from '../../../Components/Tutor/TutorHome/Navbar';
-import Add_Course from '../../../Components/Tutor/TutorHome/Add_Course';
+import Navbars from '../../../Components/Tutor/TutorHome/Navbars';
+import Add_Courses from '../../../Components/Tutor/TutorHome/Add_Courses';
+import Breadcrumbs from '../../../Components/common/Breadcrumbs';
+
 
 function Add_courses() {
   return (
-    <div>
-      <Navbar />
-      <div className="flex justify-center items-center bg-orange-100">
+    <div className="dark:bg-black bg-gray-200 h-full">
+      <Navbars/>
+      <div className='ml-16'>
+      <Breadcrumbs/>
+      </div>
+      <div className="flex justify-center items-center">
+     
         <div className="w-full max-w-4xl p-4">
-          <Add_Course />
+          
+          <Add_Courses />
         </div>
       </div>
     </div>

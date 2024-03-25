@@ -1,0 +1,19 @@
+.company-container {
+    width: 120px; /* Adjust width as needed */
+    animation: moveLeft 20s linear infinite;
+  }
+  
+  .company-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  @keyframes moveLeft {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-120px * 5));
+    }
+  }
+  
