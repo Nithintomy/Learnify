@@ -18,6 +18,7 @@ const Courses_1 = __importDefault(require("../../model/Courses"));
 //add courses
 const addCourses = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("I m adding course");
+    console.log(req.body, "bodyyyyyyyyyyyyyyyyyyy");
     try {
         const { courseName, courseduration, coursedescription, photo, courseFee, tutor, category } = req.body;
         console.log(req.body, "Body data");

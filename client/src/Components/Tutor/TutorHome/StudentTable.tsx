@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { TutorBaseUrl } from '../../../Api'
-import { ToastContainer, toast } from 'react-toastify'
+import toast, { Toaster } from "react-hot-toast";
 import 'react-toastify/dist/ReactToastify.css';
 import { RingLoader } from 'react-spinners';
 import Breadcrumbs from '../../common/Breadcrumbs';
@@ -66,7 +66,7 @@ function StudentTable() {
         <th></th>
       </tr>
     </thead>
-    {UserDetails.map((user:User,index)=>(
+    {UserDetails.map((user:User)=>(
     <tbody>
         
       <tr>
@@ -104,6 +104,7 @@ function StudentTable() {
          ))}
   </table>
 </div>
+<Toaster position="top-right" containerClassName="p-8 m-8" />
    </div>
   )
 }

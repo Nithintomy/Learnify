@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
+import { RecursivePartial } from "@tsparticles/engine";
 
 interface ParticlesComponentProps {
   id: string;
@@ -17,7 +18,8 @@ const ParticlesComponent: React.FC<ParticlesComponentProps> = ({ id }) => {
     });
   }, []);
 
-  const options = useMemo(
+  // Use RecursivePartial<IOptions> directly for options
+  const options: RecursivePartial<any> = useMemo(
     () => ({
       background: {
         color: {
@@ -41,7 +43,6 @@ const ParticlesComponent: React.FC<ParticlesComponentProps> = ({ id }) => {
         enable: true,
         zIndex: -1,
       },
-
       duration: 0,
       fpsLimit: 120,
       interactivity: {
@@ -76,7 +77,6 @@ const ParticlesComponent: React.FC<ParticlesComponentProps> = ({ id }) => {
           },
         },
       },
-
       particles: {
         color: {
           value: "#061c3a",

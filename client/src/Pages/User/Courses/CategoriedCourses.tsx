@@ -1,8 +1,6 @@
 
 import React from 'react'
-import Navbar from '../../../Components/User/Navbar/Navbar'
 import { CoursesByCategory } from '../../../Components/User/Courses/CoursesByCategory'
-import Footer from '../../../Components/User/Footer/Footer'
 import Navbars from '../../../Components/User/Navbar/Navbars'
 import Footers from '../../../Components/User/Footer/Footers'
 

@@ -9,29 +9,18 @@ import { Link } from "react-router-dom";
 function Navbars() {
   const tutor = useSelector(selectTutor);
   const dispatch = useDispatch();
-  const [showCourseDropdown, setShowCourseDropdown] = useState(false);
-  const [showUserDropdown, setShowUserDropdown] = useState(false);
+
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const navigate = useNavigate();
 
-  const handleCourseClick = () => {
-    setShowCourseDropdown(!showCourseDropdown);
-    setShowMobileMenu(false);
-  };
 
-  const handleUserClick = () => {
-    setShowUserDropdown(!showUserDropdown);
-    setShowMobileMenu(false);
-  };
   const handleMobileMenuToggle = () => {
     setShowMobileMenu(!showMobileMenu);
   };
 
   const handleLogout = () => {
     dispatch(logout());
-    setShowCourseDropdown(false);
-    setShowUserDropdown(false);
     navigate("/tutorLogin");
   };
 

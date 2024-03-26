@@ -19,6 +19,7 @@ function CourseCards() {
       .then((response) => {
         console.log(response.data.allcourse);
         setCourses(response.data.allcourse);
+        setShowAllCourses(true);
         setLoading(false);
       })
       .catch((error) => {
@@ -31,9 +32,6 @@ function CourseCards() {
 
   const filteredCourses = showAllCourses ? courses : courses.slice(0, 3);
 
-  const handleViewAllCourses = () => {
-    setShowAllCourses(true);
-  };
 
   if (loading) {
     return (

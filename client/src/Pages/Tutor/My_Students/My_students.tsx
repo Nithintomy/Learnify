@@ -1,6 +1,4 @@
 import React from "react";
-import Navbar from "../../../Components/Tutor/TutorHome/Navbar";
-import Students from "../../../Components/Tutor/TutorHome/Students";
 import Navbars from "../../../Components/Tutor/TutorHome/Navbars";
 import StudentTable from "../../../Components/Tutor/TutorHome/StudentTable";
 

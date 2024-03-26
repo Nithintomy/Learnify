@@ -36,7 +36,7 @@ const coursemodel = new mongoose_1.default.Schema({
     tutor: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: "tutorModel",
-        required: true
+        required: false
     },
     students: [{
             type: mongoose_1.default.Schema.Types.ObjectId,

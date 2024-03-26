@@ -1,5 +1,4 @@
 import React from 'react'
-import Navbar from '../../../Components/Tutor/TutorHome/Navbar'
 
 import Navbars from '../../../Components/Tutor/TutorHome/Navbars';
 import AddLesson from '../../../Components/Tutor/TutorHome/AddLesson';

@@ -14,14 +14,10 @@ function Navbars() {
   const theme = useSelector(selectTheme);
   console.log(user, "user vanuu");
   const dispatch = useDispatch();
-  const [showDropdown, setShowDropdown] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const nav = useNavigate();
 
-  const handleUserClick = () => {
-    setShowDropdown(!showDropdown);
-  };
 
   const handleMobileMenuToggle = () => {
     setShowMobileMenu(!showMobileMenu);
@@ -31,8 +27,7 @@ function Navbars() {
     // Dispatch the logout action
     dispatch(logout());
     nav("/login");
-    // Hide the dropdown
-    setShowDropdown(false);
+    
   };
 
   useEffect(() => {
@@ -64,7 +59,7 @@ function Navbars() {
           to="/"
           className="btn btn-ghost text-2xl font-bold ml-14  dark:text-white"
         >
-          LEARNIFY
+          LEARNIFYhandleUserClick
         </Link>
       </div>
       {/* Hamburger menu button for mobile */}

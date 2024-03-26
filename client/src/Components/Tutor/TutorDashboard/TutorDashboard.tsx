@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaEllipsisV, FaRegCalendarMinus } from "react-icons/fa";
-
+import toast, { Toaster } from "react-hot-toast";
 import {
   LineChart,
   Line,
@@ -13,7 +13,6 @@ import {
 } from "recharts";
 import { AdminBaseUrl, TutorBaseUrl } from "../../../Api";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { selectTutor } from "../../../features/tutorSlice/tutorSlice";
 import Breadcrumbs from "../../common/Breadcrumbs";
@@ -124,6 +123,7 @@ function TutorDashboard() {
           </ResponsiveContainer>
         </div>
       </div>
+      <Toaster position="top-right" containerClassName="p-8 m-8" />
     </div>
   );
 }

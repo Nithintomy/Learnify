@@ -50,7 +50,7 @@ const coursemodel =new mongoose.Schema({
     tutor:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"tutorModel",
-        required:true
+        required: false
     },
     students: [{
         type: mongoose.Schema.Types.ObjectId,
