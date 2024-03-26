@@ -14,7 +14,7 @@ import EditCourseModal from "./EditCourseModal";
 import { Link } from "react-router-dom";
 import { RingLoader } from "react-spinners";
 import toast, { Toaster } from "react-hot-toast";
-import Breadcrumbs from "../../common/Breadcrumbs";
+
 
 function SingleViews() {
   const { courseId } = useParams();

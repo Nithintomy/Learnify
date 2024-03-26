@@ -354,7 +354,7 @@ const sendPasswordLink = async (req: Request, res: Response) => {
           from: "nithintomy8281@gmail.com",
           to: email,
           subject: "Sending Email for password Reset",
-          text: `This Link Valid For 2 minutes http://localhost:3000/reset-password/${user._id}/${token}`,
+          text: `This Link Valid For 2 minutes https://learnify.website/reset-password/${user._id}/${token}`,
         };
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
