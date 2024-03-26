@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaEllipsisV, FaRegCalendarMinus } from "react-icons/fa";
-import toast, { Toaster } from "react-hot-toast";
+
 import {
   LineChart,
   Line,
@@ -13,9 +13,9 @@ import {
 } from "recharts";
 import { AdminBaseUrl, TutorBaseUrl } from "../../../Api";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { selectTutor } from "../../../features/tutorSlice/tutorSlice";
-import Breadcrumbs from "../../common/Breadcrumbs";
 
 function TutorDashboard() {
   const tutor = useSelector(selectTutor);
@@ -57,7 +57,7 @@ function TutorDashboard() {
 
   return (
     <div className="px-4 sm:px-6 md:px-8 pt-4 sm:pt-6 md:pt-8 pb-6">
-      <Breadcrumbs/>
+      <ToastContainer />
       <div className="flex items-center bg-gray-200 py-5">
         <div className="max-w-screen-xl w-full overflow-x-auto px-4">
           <h2 className=" font-bold text-gray-800 mb-4 text-2xl underline font-bitter">
@@ -123,7 +123,6 @@ function TutorDashboard() {
           </ResponsiveContainer>
         </div>
       </div>
-      <Toaster position="top-right" containerClassName="p-8 m-8" />
     </div>
   );
 }
