@@ -59,7 +59,7 @@ function Navbars() {
           to="/"
           className="btn btn-ghost text-2xl font-bold ml-14  dark:text-white"
         >
-          LEARNIFYhandleUserClick
+          LEARNIFY
         </Link>
       </div>
       {/* Hamburger menu button for mobile */}
