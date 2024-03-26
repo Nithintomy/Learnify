@@ -62,7 +62,7 @@ function Navbars() {
           LEARNIFY
         </Link>
       </div>
-      {/* Hamburger menu button for mobile */}
+     
       <div className="md:hidden">
         <button
           type="button"
