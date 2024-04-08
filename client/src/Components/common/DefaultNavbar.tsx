@@ -26,7 +26,7 @@ function DefaultNavbar() {
       <div className="container mx-auto px-6 py-3 flex items-center justify-between">
         <div className="flex items-center">
           <Link
-            to="/"
+            to="/" 
             className="text-2xl font-bold text-black dark:text-white"
           >
             LEARNIFY
