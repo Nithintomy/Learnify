@@ -15,6 +15,8 @@ const AboutSection = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
+  console.log(user,"heeeeeeeee")
+
 
   const id=user?.user?._id
   

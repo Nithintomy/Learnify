@@ -26,7 +26,7 @@ const PrivateRoutes = ({ userType }: { userType: string }) => {
       } else if (userType === 'tutor') {
         navigate('/tutorLogin');
       } else if (userType === 'admin') {
-        navigate('/adminLogin');
+        navigate('/admin');
       }
     }
   }, [user, navigate, userType]);

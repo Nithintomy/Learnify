@@ -6,8 +6,6 @@ import { Course } from "../../../features/tutorSlice/courseSlice";
 import { Link } from "react-router-dom";
 import { RingLoader } from 'react-spinners';
 
-
-
 function CourseCards() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
@@ -19,19 +17,15 @@ function CourseCards() {
       .then((response) => {
         console.log(response.data.allcourse);
         setCourses(response.data.allcourse);
-        setShowAllCourses(true);
         setLoading(false);
       })
       .catch((error) => {
         toast.error("Something went wrong");
         console.log(error);
       });
-
-      
   }, []);
 
   const filteredCourses = showAllCourses ? courses : courses.slice(0, 3);
-
 
   if (loading) {
     return (
@@ -52,14 +46,12 @@ function CourseCards() {
                 <img src={course.photo} className="rounded-lg" alt="Courses" style={{ width: '100%', height: '180px' }} />
               </figure>
               <div className="card-body">
-            
                 <h2 className="card-title">{course.courseName}</h2>
                 <p className="font-semibold text-gray-600">{course.coursedescription}</p>
                 <p className="text-xl font-bold font-serif"> Rs: {course.courseFee} /-</p>
                 <div className="card-actions justify-end">
-               
-                <Link to={`/singlePage/${course._id}`}>
-                  <button className="btn btn-primary">View Course</button>
+                  <Link to={`/singlePage/${course._id}`}>
+                    <button className="btn btn-primary">View Course</button>
                   </Link>
                 </div>
               </div>
@@ -69,10 +61,7 @@ function CourseCards() {
       </div>
       {!showAllCourses && courses.length > 3 && (
         <div className="flex justify-center mt-4">
-          <Link to='/courses'>
-          <button className="btn btn-secondary" >View All Courses</button>
-          </Link>
-          
+          <button className="btn btn-secondary" onClick={() => setShowAllCourses(true)}>View All Courses</button>
         </div>
       )}
     </>

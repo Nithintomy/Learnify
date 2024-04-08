@@ -50,7 +50,7 @@ export function CoursesByCategory() {
 
   return (
     <div>
-      <div className="relative w-full max-w-xl mx-auto bg-white rounded-full">
+      <div className="relative w-full max-w-xl mx-auto bg-white dark:bg-black rounded-full">
   <input
      type="text"
      placeholder="Search courses"

@@ -11,10 +11,10 @@ function SingleView() {
   const user = useSelector(selectUser);
 
   return (
-    <div className="dark:bg-black bg-gray-200 h-screen">
+    <div className="dark:bg-black  bg-gray-200 h-full">
       <Navbars />
 
-      <div className="px-3 bg-gray-200 ">
+      <div className="px-3 dark:bg-black  ">
         <SinglePages/>
       </div>
 

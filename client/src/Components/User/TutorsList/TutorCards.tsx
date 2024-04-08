@@ -46,13 +46,14 @@ function TutorCards() {
   return (
     <div className="flex flex-wrap ">
       {tutors.map((tutor, index) => (
-        <div key={index} className="card bg-gray-200 rounded-lg w-56 glass m-4">
+        <div key={index} className="card bg-black text-white rounded-lg w-56 glass m-4">
           <figure>
             <img
               className="p-2 rounded-3xl"
               src={tutor.photo || image}
               alt="Tutor Image"
               style={{ width: '230px', height: '200px' }}
+              loading="lazy" // Add lazy loading attribute
             />
           </figure>
           <div className="card-body">

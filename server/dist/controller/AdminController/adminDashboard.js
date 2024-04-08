@@ -19,6 +19,7 @@ const tutorModel_1 = __importDefault(require("../../model/tutorModel"));
 const userModel_1 = __importDefault(require("../../model/userModel"));
 const TotalSales = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Total sales vannu");
+    console.log("vannuuuuuuuuuuuuuuuuu");
     try {
         const totalOrderCount = yield orderModel_1.default.countDocuments({ status: "success" });
         const totalUsersCount = yield userModel_1.default.countDocuments({});
@@ -37,7 +38,7 @@ const TotalSales = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 },
             },
         ]);
-        const totals = TotalRevenue[0].total;
+        const totals = TotalRevenue.length > 0 ? TotalRevenue[0].total : 0;
         res.status(200).json({
             totalOrderCount,
             totalUsersCount,

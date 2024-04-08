@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { login, selectTutor } from "../../../features/tutorSlice/tutorSlice";
+import { tutorLogin, selectTutor } from "../../../features/tutorSlice/tutorSlice";
 import { useState } from "react";
 import { logout } from "../../../features/tutorSlice/tutorSlice";
 import { useNavigate } from "react-router-dom";
@@ -9,11 +9,10 @@ import { Link } from "react-router-dom";
 function Navbars() {
   const tutor = useSelector(selectTutor);
   const dispatch = useDispatch();
-
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string | null>(localStorage.getItem("profileImageUrl") || null);
 
   const navigate = useNavigate();
-
 
   const handleMobileMenuToggle = () => {
     setShowMobileMenu(!showMobileMenu);
@@ -28,9 +27,20 @@ function Navbars() {
     const storedUserData = localStorage.getItem("tutorData");
     if (storedUserData) {
       const parsedUserData = JSON.parse(storedUserData);
-      dispatch(login(parsedUserData));
+      dispatch(tutorLogin(parsedUserData));
     }
   }, [dispatch]);
+
+
+  useEffect(() => {
+    if (imageUrl) {
+      localStorage.setItem('profileImageUrl', imageUrl); 
+    } else {
+      localStorage.removeItem('profileImageUrl'); 
+    }
+  }, [imageUrl, setImageUrl]); 
+  
+
   return (
     <div className="navbar flex justify-between relative">
       <div className="navbar-start">
@@ -99,11 +109,11 @@ function Navbars() {
               >
                 Course
               </summary>
-              <ul className="p-2 bg-base-100 rounded-t-none absolute top-full left-0 z-50">
+              <ul className="bg-base-100 rounded-t-none absolute top-full left-0 z-50 ">
                 <li>
                 <Link
                         to="/Add_Course"
-                        className="nav-link text-md font-semibold hover:bg-gray-100 dark:hover:bg-gray-700"
+                        className="nav-link w-32 text-md font-semibold hover:bg-gray-100 dark:hover:bg-gray-700"
                       >
                         Create Course
                       </Link>
@@ -160,13 +170,16 @@ function Navbars() {
                 className="btn btn-ghost btn-circle avatar"
               >
                 <div className="w-10 rounded-full">
-                  <img
-                    alt="Tailwind CSS Navbar component"
-                    src={
-                      tutor?.photo ||
-                      "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                    }
-                  />
+                  {tutor ? (
+                    <img className="w-56 object-cover object-top sm:h-72 md:h-96 lg:w-full" 
+                      src={imageUrl || tutor.photo}  alt="" />
+                  ) : (
+                    <img
+                      className="h-56 w-full object-cover object-top sm:h-72 md:h-96 lg:w-full lg:h-full"
+                      src="https://cdn.pixabay.com/photo/2016/03/23/04/01/woman-1274056_960_720.jpg"
+                      alt=""
+                    />
+                  )}
                 </div>
               </div>
               

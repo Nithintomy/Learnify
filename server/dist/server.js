@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.io = void 0;
 const express_1 = __importDefault(require("express"));
-const connection_1 = __importDefault(require("./connection/connection")); // Importing the database connection setup
+const connection_1 = __importDefault(require("./connection/connection"));
 const studentRouter_1 = __importDefault(require("./Routes/StudentRouter/studentRouter"));
 const tutorRouter_1 = __importDefault(require("./Routes/TutorRouter/tutorRouter"));
 const adminRouter_1 = __importDefault(require("./Routes/AdminRouter/adminRouter"));
@@ -60,8 +60,6 @@ exports.io.on('connection', (socket) => {
         }
         chat.users.forEach((user) => {
             console.log(user, '#################3');
-            console.log('enter ayo');
-            console.log('njn messager', message.sender);
             if (user === message.sender._id) {
                 console.log('matched');
                 return;

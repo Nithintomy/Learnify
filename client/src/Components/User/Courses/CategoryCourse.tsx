@@ -15,9 +15,9 @@ export function CategoryCourse({ courses, category }: CategoryCourseProps) {
    
 
     <div className="bg-gray-200' rounded-md dark:text-white dark:bg-black">
-    <div className="flex items-center justify-center bg-gray-200 ">
+    <div className="flex items-center justify-center dark:bg-black bg-gray-200 ">
       <div className="max-w-screen-xl w-full overflow-x-auto px-4">
-      <h2 className=" font-bold text-gray-800 mt-10 border-2 border-b-black text-3xl font-bitter" >
+      <h2 className="dark:text-white font-bold text-gray-800 mt-10 dark:border-none border-2 border-b-black text-3xl font-bitter" >
        
        
       {category}

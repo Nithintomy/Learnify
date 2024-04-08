@@ -7,7 +7,7 @@ import axiosInstance from "../../../Axios/axios";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { UserBaseUrl } from "../../../Api";
-import ReplyAllIcon from '@mui/icons-material/ReplyAll';
+
 
 
 
@@ -84,12 +84,7 @@ function SignUps() {
 
   return (
     <GoogleOAuthProvider clientId={CLIENT_ID}>  
-      <div className="flex justify-center pt-12 md:-mb-24 md:justify-start md:pl-12">
-      <Link to="/login" className="border-b-2  pb-2 text-2xl font-bitter text-gray-900">
-       <ReplyAllIcon/>
-       <span className="ml-2">Login</span>
-       </Link>
-    </div>
+      
       
       <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12 overflow-x-hidden">
     <div className="relative py-3 sm:max-w-xl sm:mx-auto">

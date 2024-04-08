@@ -4,7 +4,7 @@ import UserTable from "../../../Components/Admin/UserTable/UserTable";
 
 function UserDetails() {
   return (
-    <div className="bg-blue-gray-700 h-screen">
+    <div className="bg-gray-400 h-screen">
       <AdminNavbar />
       <div className="mt-5 px-2 lg:px-0">
         <div className="overflow-x-auto">

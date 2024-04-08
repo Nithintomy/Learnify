@@ -22,7 +22,7 @@ const tutorSlice = createSlice({
   name: "tutor",
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<Tutor | null>) => {
+    tutorLogin: (state, action: PayloadAction<Tutor | null>) => {
       state.tutor = action.payload;
       localStorage.setItem("tutorData", JSON.stringify(action.payload));
     },
@@ -49,6 +49,6 @@ const tutorSlice = createSlice({
   },
 });
 
-export const { login, logout, updateProfileImage, updateTutorDetails } = tutorSlice.actions;
+export const { tutorLogin, logout, updateProfileImage, updateTutorDetails } = tutorSlice.actions;
 export const selectTutor = (state: { tutor: TutorState }) => state.tutor.tutor;
 export default tutorSlice.reducer;

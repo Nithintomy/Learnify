@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast, { Toaster } from 'react-hot-toast';
+
+
 import axios from "axios";
 import { AdminBaseUrl } from "../../../Api";
 
@@ -31,12 +32,12 @@ const CategoryList: React.FC = () => {
   return (
     <div className="px-3">
      
-      <ToastContainer />
-      <h1 className="text-2xl font-bold mb-4">Category Table</h1>
+
+      <h1 className="text-lg text-black underline font-bold mb-4">Category Table</h1>
       <table className="w-full table-auto rounded-lg shadow-lg mt-2">
         <thead>
-          <tr className="bg-blue-500 text-white">
-            <th className="px-4 py-2">#</th>
+          <tr className="bg-gray-700 text-white">
+            <th className="px-4 py-2">No</th>
             <th className="px-4 py-2">Category</th>
             <th className="px-4 py-2">Description</th>
           </tr>
@@ -54,6 +55,7 @@ const CategoryList: React.FC = () => {
           ))}
         </tbody>
       </table>
+      <Toaster position="top-right" containerClassName="p-8 m-8" />
     </div>
   );
 };

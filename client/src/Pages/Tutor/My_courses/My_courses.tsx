@@ -1,6 +1,7 @@
 import React from 'react'
 import Courses from '../../../Components/Tutor/TutorHome/Courses'
 import Navbars from '../../../Components/Tutor/TutorHome/Navbars'
+import Footers from '../../../Components/User/Footer/Footers'
 
 function My_courses() {
   return (
@@ -9,6 +10,10 @@ function My_courses() {
       <div className="px-3 lg:px-3 flex flex-wrap  m-8">
         <Courses /> 
       </div>
+     <div className='pt-10'>
+     <Footers/>
+
+     </div>
     </div>
   )
 }

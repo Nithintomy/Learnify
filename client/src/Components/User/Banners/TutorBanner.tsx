@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function TutorBanner() {
   return (
-    <div className="hero min-h-screen bg-base-200">
+    <div className="hero min-h-screen bg-base-200 dark:text-white dark:bg-black">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <img src={Tutorimg} className="max-w-sm rounded-2xl shadow-2xl" alt="Tutor Banner" />
         <div>

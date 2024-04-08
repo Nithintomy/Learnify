@@ -7,7 +7,7 @@ import { updateCartCount } from '../../../features/userSlice/cartSlice';
 import PayButton from '../PayButton/PayButton';
 import { RingLoader } from 'react-spinners';
 import { Course } from '../../../features/tutorSlice/courseSlice';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 interface CartItem {
   _id: string;
   quantity: number;
@@ -28,8 +28,7 @@ const ShoppingCart = () => {
         axios.get(`${UserBaseUrl}/get-cart-items/${userId}`)
         .then((response)=>{
             console.log(response.data,"response From get")
-            // localStorage.setItem('cartData', JSON.stringify(response.data));
-            //  const cartData = JSON.parse(localStorage.getItem('cartData') || '[]');
+
             setCartItems(response.data)
             setLoading(false)
             dispatch(updateCartCount(response.data.length))
@@ -127,6 +126,13 @@ const ShoppingCart = () => {
                           <span className="text-center w-2/5 font-semibold text-sm">
                           {item?.course?.courseFee}
                           </span>
+
+                          <span
+                                      className="font-semibold text-red-500 cursor-pointer text-xs"
+                                      onClick={() => handleDelete(item?._id)}
+                                  >
+                                      <DeleteIcon/>
+                                  </span>
                           
                       </div>
                       </>

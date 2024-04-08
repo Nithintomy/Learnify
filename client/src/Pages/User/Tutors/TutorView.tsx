@@ -4,7 +4,7 @@ import TutorCards from "../../../Components/User/TutorsList/TutorCards";
 
 function TutorView() {
   return (
-    <div className="dark:bg-black bg-base-200 h-screen dark:text-white">
+    <div className="dark:bg-black bg-base-200  h-screen dark:text-white">
       <Navbars />
       <div className=" px-2 lg:px-0">
         <div className="flex items-center justify-center py-5">

@@ -41,10 +41,11 @@ const userSlice = createSlice({
     },
     
     logout: (state) => {
-      state.user = null;
+      state.user = {};
       state.token = null;
       localStorage.clear();
     }
+    
   }
 })
 

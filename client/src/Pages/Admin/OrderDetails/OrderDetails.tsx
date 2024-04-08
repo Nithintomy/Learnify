@@ -4,7 +4,7 @@ import Orders from '../../../Components/Admin/Orders/Orders'
 
 function OrderDetails() {
   return (
-    <div className="bg-blue-gray-700 h-screen">
+    <div className="bg-gray-400 h-screen text-black">
     <AdminNavbar/>
    
     <div className="mt-5 px-2 lg:px-0">

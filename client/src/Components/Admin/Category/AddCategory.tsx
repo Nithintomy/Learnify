@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import toast, { Toaster } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 import { AdminBaseUrl } from '../../../Api';
 
@@ -38,8 +38,7 @@ const AddCategorys: React.FC = () => {
   return (
     
     <div className="px-3 ">
-      <ToastContainer />
-      <div className="bg-white p-8 rounded-lg shadow-lg mt-8">
+      <div className="bg-white p-8 rounded-xl shadow-lg mt-8">
         <h1 className="text-2xl font-bold mb-4">Add Category</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -80,6 +79,7 @@ const AddCategorys: React.FC = () => {
           </div>
         </form>
       </div>
+      <Toaster position="top-right" containerClassName="p-8 m-8" />
     </div>
   );
 };

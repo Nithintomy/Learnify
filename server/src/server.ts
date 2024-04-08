@@ -1,5 +1,5 @@
 import express from 'express';
-import connectToDb from './connection/connection'; // Importing the database connection setup
+import connectToDb from './connection/connection'; 
 import studentRouter from './Routes/StudentRouter/studentRouter';
 import tutorRouter from './Routes/TutorRouter/tutorRouter';
 import adminRouter from './Routes/AdminRouter/adminRouter';
@@ -74,8 +74,7 @@ io.on('connection' , (socket) => {
     }
     chat.users.forEach((user: any) => {
       console.log(user, '#################3');
-      console.log('enter ayo');
-      console.log('njn messager', message.sender);
+    
       if (user === message.sender._id) {
         console.log('matched');
         return;

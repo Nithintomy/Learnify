@@ -4,7 +4,7 @@ import EntrolledSingleViews from '../../../Components/User/EnrolledCourses/Entro
 
 function EntrolledSinglePage() {
   return (
-    <div className=" bg-gray-200 py-5">
+    <div className="bg-gray-200 py-5">
 
     <Navbars/>
 

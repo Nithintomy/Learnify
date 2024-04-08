@@ -1,0 +1,1 @@
+import{_ as c}from"./index-ef6344fb.js";async function i(t,r=!0){await t.addInteractor("particlesAttract",async a=>{const{Attractor:o}=await c(()=>import("./Attractor-e84c0fb6.js"),["assets/Attractor-e84c0fb6.js","assets/ParticlesInteractorBase-7b2895e9.js","assets/index-ef6344fb.js","assets/index-f0fcfeaf.css"]);return new o(a)},r)}export{i as loadParticlesAttractInteraction};

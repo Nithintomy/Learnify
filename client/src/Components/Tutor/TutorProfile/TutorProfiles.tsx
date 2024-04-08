@@ -10,8 +10,9 @@ import { updateProfileImage } from '../../../features/tutorSlice/tutorSlice';
 
 function TutorProfiles() {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [imageUrl, setImageUrl] = useState<string | null>(localStorage.getItem("tutorProfileImageUrl") || null);
+    const [imageUrl, setImageUrl] = useState<string | null>(localStorage.getItem("ProfileImageUrl") || null);
     const [imageFile, setImageFile] = useState<File | null>(null);
+    
     
     const dispatch = useDispatch();
     const tutor = useSelector(selectTutor);
@@ -26,6 +27,7 @@ function TutorProfiles() {
       // Save the image URL to localStorage whenever it changes
       if (imageUrl) {
         localStorage.setItem('profileImageUrl', imageUrl);
+
       } else {
         // Remove the item from localStorage if imageUrl is null
         localStorage.removeItem('profileImageUrl');

@@ -64,13 +64,14 @@ function Courses() {
   return (
     <div>
     <Breadcrumbs  /> 
-    <div className="flex flex-wrap h-full ">
+    <div className="flex flex-wrap">
      
       {courses.length === 0 ? (
         <p>No courses available.</p>
       ) : (
-        courses.map((course, _) => (
-          <Card className="m-6 w-96" key={course._id}>
+        courses.map((course,index) => (
+          <div className="w-full sm:w-1/2 md:w-1/3 transition lg:w-1/3 xl:w-1/3 p-4" key={index}>
+          <Card className="m-6" key={course._id}>
             <CardHeader color="blue-gray" className="relative h-56">
               <img src={`${course.photo}`} 
               alt="card-image"
@@ -87,11 +88,13 @@ function Courses() {
               <span className="font-bold m-6">Duration: {course.courseduration} hrs</span>
             </Typography>
             <CardFooter className="pt-0">
-              <Link to={`/singleView/${course._id}`}>
-                <Button>Read More</Button>
-              </Link>
+            <Link to={`/singleView/${course._id}?courseName=${encodeURIComponent(course.courseName)}`}>
+  <Button>Read More</Button>
+</Link>
+
             </CardFooter>
           </Card>
+          </div>
         ))
       )}
       <Toaster position="top-right" containerClassName="p-8 m-8" />

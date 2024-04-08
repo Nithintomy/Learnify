@@ -6,7 +6,7 @@ import DashboardView from '../../../Components/Admin/DashBoardView/DashboardView
 
 function Dashboard() {
   return (
-    <div className='bg-blue-gray-700'>
+    <div className='bg-gray-400'>
         <AdminNavbar/>
 
         <div>

@@ -74,6 +74,7 @@ const tutorLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 name: tutor.tutorName,
                 email: tutor.tutorEmail,
                 phone: tutor.phone,
+                photo: tutor.photo,
                 token
             });
         }

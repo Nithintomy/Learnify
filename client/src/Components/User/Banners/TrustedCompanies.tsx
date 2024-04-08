@@ -19,9 +19,9 @@ function TrustedCompanies() {
   ];
 
   return (
-    <div className="flex items-center justify-center bg-gray-200 py-8">
+    <div className="flex items-center justify-center dark:text-white dark:bg-black bg-gray-200 py-8">
       <div className="max-w-screen-xl w-full overflow-x-auto px-4">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">
+        <h2 className=" dark:text-white dark:bg-black text-2xl font-bold text-gray-800 mb-4">
           Trusted by over 15,000 companies
         </h2>
         <div className="flex space-x-4 overflow-hidden">

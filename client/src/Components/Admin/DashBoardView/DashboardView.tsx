@@ -1,5 +1,3 @@
-
-
 import React, {  useEffect, useState } from 'react';
 import { FaEllipsisV, FaRegCalendarMinus } from 'react-icons/fa';
 
@@ -7,7 +5,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'r
 import MyPieChart from './PieChart';
 import { AdminBaseUrl } from '../../../Api';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { Toaster,toast } from 'react-hot-toast';
 
 
 
@@ -70,23 +68,20 @@ function DashboardView() {
           console.error(error);
         });
     }, []);
-  
    
 
   return (
-    <div className="px-4 sm:px-6 md:px-8 pt-4 sm:pt-6 md:pt-8 pb-6 bg-blue-gray-700">
-        <ToastContainer/>
+    <div className="px-4 sm:px-6 md:px-8 pt-4 sm:pt-6 md:pt-8 pb-6 bg-gray-400 ">
+       
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl sm:text-3xl font-semibold text-white cursor-pointer">
+        <h1 className="text-2xl sm:text-3xl font-bold underline cursor-pointer">
           Dashboard
         </h1>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded-md flex items-center justify-center">
-          Generate Report
-        </button>
+       
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-6">
-        <div className="h-[10rem] rounded-lg bg-white border-l-4 border-[#4E73DF] flex items-center justify-between px-4 cursor-pointer hover:shadow-lg transform hover:scale-105 transition duration-300 ease-out">
+        <div className="h-[10rem] rounded-lg bg-gray-100 border-l-4 border-[#4E73DF] flex items-center justify-between px-4 cursor-pointer hover:shadow-lg transform hover:scale-105 transition duration-300 ease-out">
           <div>
             <h2 className="text-[#B589DF] text-sm font-bold">EARNINGS (MONTHLY)</h2>
             <h1 className="text-2xl font-bold text-[#5a5c69] mt-2">${counts?.totals}</h1>
@@ -94,7 +89,7 @@ function DashboardView() {
           <FaRegCalendarMinus className="text-[#4E73DF] text-3xl" />
         </div>
 
-        <div className=' h-[10rem] rounded-[8px] bg-white border-l-[4px] border-[#1CC88A] flex items-center justify-between px-[30px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] transition duration-300 ease-out'>
+        <div className=' h-[10rem] rounded-[8px] bg-gray-100 border-l-[4px] border-[#1CC88A] flex items-center justify-between px-[30px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] transition duration-300 ease-out'>
             <div>
                 <h2 className='text-[#1cc88a] text-[11px] leading-[17px] font-bold'>
                     TOTAL USERS</h2>
@@ -102,14 +97,14 @@ function DashboardView() {
             </div>
             <FaRegCalendarMinus fontSize={28} />
         </div>
-        <div className=' h-[10rem] rounded-[8px] bg-white border-l-[4px] border-[#36B9CC] flex items-center justify-between px-[30px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] transition duration-300 ease-out'>
+        <div className=' h-[10rem] rounded-[8px] bg-gray-100 border-l-[4px] border-[#36B9CC] flex items-center justify-between px-[30px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] transition duration-300 ease-out'>
             <div>
                 <h2 className='text-[#1cc88a] text-[11px] leading-[17px] font-bold'>TOTAL TUTORS</h2>
                 <h1 className='text-[20px] leading-[24px] font-bold text-[#5a5c69] mt-[5px]'>{counts?.totalTutorCount}</h1>
             </div>
             <FaRegCalendarMinus fontSize={28} />
         </div>
-        <div className=' h-[10rem] rounded-[8px] bg-white border-l-[4px] border-[#F6C23E] flex items-center justify-between px-[30px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] transition duration-300 ease-out'>
+        <div className=' h-[10rem] rounded-[8px] bg-gray-100 border-l-[4px] border-[#F6C23E] flex items-center justify-between px-[30px] cursor-pointer hover:shadow-lg transform hover:scale-[103%] transition duration-300 ease-out'>
             <div>
                 <h2 className='text-[#1cc88a] text-[11px] leading-[17px] font-bold'>Total Orders</h2>
                 <h1 className='text-[20px] leading-[24px] font-bold text-[#5a5c69] mt-[5px]'>{counts?.totalOrderCount}</h1>
@@ -157,7 +152,7 @@ function DashboardView() {
         </div>
       </div>
 
-
+      <Toaster position="top-right" containerClassName="p-8 m-8" />
     </div>
   );
 }

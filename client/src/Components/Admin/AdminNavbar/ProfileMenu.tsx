@@ -21,12 +21,12 @@ function ProfileMenu() {
 
   return (
     <div>
-      <nav className="bg-blue-gray-700 border-gray-200 dark:bg-gray-900">
+      <nav className=" border-gray-200 dark:bg-gray-900">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <div className="flex items-center md:order-2">
             <button
               type="button"
-              className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+              className="flex mr-3 text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
               onClick={toggleDropdown}
             >
               <span className="sr-only">Open user menu</span>

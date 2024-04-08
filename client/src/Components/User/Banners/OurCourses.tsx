@@ -24,17 +24,17 @@ function OurCourses() {
   ];
 
   return (
-    <div className="bg-gray-100 py-8 ">
+    <div className="bg-gray-100 py-8 dark:text-white dark:bg-black">
        <div className="max-w-screen-xl mx-auto px-4 justify-center ">
-        <h2 className=" font-bold text-gray-800 mb-6 border-b-4 pb-2 text-3xl font-bitter">Popular Courses</h2>
+        <h2 className=" font-bold text-gray-800 mb-6 pb-2 dark:text-white text-3xl font-bitter">Popular Courses</h2>
         <div className="flex items-center space-x-4 overflow-x-auto">
           {/* Map over the courses array */}
           {courses.map((course, index) => (
-            <div key={index} className="flex flex-col items-center justify-center w-28 h-25 bg-gray-50 rounded-full p-4">
+            <div key={index} className="flex cursor-pointer flex-col items-center justify-center w-28 h-25 bg-gray-50 rounded-full p-4">
               <img
                 src={course.image}
                 alt={course.name}
-                className="w-12 h-12  object-cover mb-2"
+                className="w-12 h-12 object-cover mb-2 transform hover:scale-110 transition-transform"
               />
               <p className="text-gray-800 text-center font-semibold">{course.name}</p>
             </div>

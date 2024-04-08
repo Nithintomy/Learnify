@@ -2,7 +2,6 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import toast, { Toaster } from 'react-hot-toast';
-import ReplyAllIcon from '@mui/icons-material/ReplyAll';
 import "react-toastify/dist/ReactToastify.css";
 import axiosInstance from "../../../Axios/axios";
 
@@ -65,15 +64,7 @@ function TutorSignups() {
   };
   return (
     <>
-      <div className="flex justify-center pt-12 md:-mb-24 md:justify-start md:pl-12">
-        <Link
-          to="/tutorLogin"
-          className="border-b-2  pb-2 text-2xl font-bitter text-gray-900"
-        >
-          <ReplyAllIcon />
-          <span className="ml-2">Tutor Login</span>
-        </Link>
-      </div>
+      
 
       <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12 overflow-x-hidden">
         <div className="relative py-3 sm:max-w-xl sm:mx-auto">

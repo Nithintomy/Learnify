@@ -18,12 +18,12 @@ function NavList() {
   };
 
   return (
-    <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 p-4 bg-blue-gray-700">
+    <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 p-4 ">
       <Typography
         as="li"
         variant="small"
         color="blue-gray"
-        className="text-md text-black uppercase font-semibold mr-6"
+        className="text-md text-black uppercase font-bold mr-6"
       >
         <Link to="/dashboard" className="flex items-center hover:text-blue-500 transition-colors">
           Dashboard
@@ -33,7 +33,7 @@ function NavList() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="text-lg text-black uppercase font-semibold mr-6 "
+        className="text-md text-black uppercase font-bold mr-6 "
       >
         <Link to="/admin_studentList" className="flex items-center hover:text-blue-500 transition-colors">
           Users
@@ -44,7 +44,7 @@ function NavList() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="text-lg text-black uppercase font-semibold mr-6 "
+        className="text-md text-black uppercase font-bold mr-6 "
       >
         <Link to="/admin_tutorList" className="flex items-center hover:text-blue-500 transition-colors">
           Tutors
@@ -55,7 +55,7 @@ function NavList() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="text-lg text-black uppercase font-semibold mr-6"
+        className="text-md text-black uppercase font-bold mr-6"
       >
         <Link to="/CourseViews" className="flex items-center hover:text-blue-500 transition-colors">
           Courses
@@ -64,7 +64,7 @@ function NavList() {
       <li>
         <Link
           to=""
-          className={`text-md font-semibold text-left z-30 text-black uppercase hover:bg-gray-700 md:hover:bg-transparent md:p-0`}
+          className={`text-md font-bold text-left z-30 text-black uppercase hover:bg-gray-700 md:hover:bg-transparent md:p-0`}
           onClick={handleCourseClick}
         >
           Category <ArrowDropDownIcon/>
@@ -94,7 +94,7 @@ function NavList() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="text-lg text-black uppercase font-semibold mr-6 "
+        className="text-md text-black uppercase font-bold mr-6 "
       >
         <Link to="/Orders" className="flex items-center hover:text-blue-500 transition-colors">
           Orders
@@ -188,15 +188,17 @@ export function AdminNavbar() {
   }, []);
 
   return (
-    <Navbar className="mx-auto px-2 py-1 w-full bg-blue-gray-700">
+    <Navbar className="mx-auto px-2 py-1 w-full shadow-gray-800 bg-gray-400">
       <div className="flex items-center justify-between text-blue-gray-900 w-full mx-auto px-4">
         <Typography
           as="a"
-          href="#"
+          
           variant="h6"
-          className="mr-4 cursor-pointer py-1.5 text-xl font-semibold text-black"
+          className="mr-4 cursor-pointer py-1.5 text-xl font-bold text-black"
         >
-          LEARNIFY
+         <Link to={"/dashboard"}>
+         LEARNIFY
+         </Link>
         </Typography>
         <div className="hidden lg:block">
           <NavList />

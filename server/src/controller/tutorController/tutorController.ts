@@ -87,8 +87,9 @@ const tutorLogin =async(req:Request,res:Response)=>{
                 name:tutor.tutorName,
                 email:tutor.tutorEmail,
                 phone:tutor.phone,
+                photo:tutor.photo,
                 token
-            })
+            }) 
           
         }else{
             return res.status(400).json({message:"Invalid Email or Password"})

@@ -4,7 +4,7 @@ import Navbars from '../../../Components/User/Navbar/Navbars'
 
 function EntrolledCourse() {
   return (
-    <div className='dark:bg-black bg-gray-200 h-screen'>
+    <div className='dark:bg-black bg-gray-200 h-full'>
     <Navbars/>
     <div className="px-2 lg:px-0">
       <div className="overflow-x-auto">

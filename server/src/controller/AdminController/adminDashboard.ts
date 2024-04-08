@@ -6,6 +6,7 @@ import studentModel from "../../model/userModel";
 
 const TotalSales = async (req: Request, res: Response) => {
     console.log("Total sales vannu")
+    console.log("vannuuuuuuuuuuuuuuuuu")
     try {
         const totalOrderCount = await orderModel.countDocuments({ status: "success" });
         const totalUsersCount = await studentModel.countDocuments({});
@@ -26,7 +27,7 @@ const TotalSales = async (req: Request, res: Response) => {
             },
         ]);
 
-        const totals = TotalRevenue[0].total;
+        const totals = TotalRevenue.length > 0 ? TotalRevenue[0].total : 0;
 
         res.status(200).json({
             totalOrderCount,

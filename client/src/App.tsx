@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PrivateRoute from "./utils/PrivateRoute";
 import Homepage from "./Pages/User/Home/Homepage";
 import Dashboard from "./Pages/Admin/Dashboard/Dashboard";
-import AdminLogin from "./Components/Admin/AdminLogin/AdminLogin";
 import UserDetails from "./Pages/Admin/UserDetails/UserDetails";
 import TutorView from "./Pages/User/Tutors/TutorView";
 import AdminTutorDetails from "./Pages/Admin/TutorDetails/AdminTutorDetails";
@@ -32,13 +31,16 @@ import EntrolledCourse from "./Pages/User/EnrolledCourses/EntrolledCourse";
 import CartView from "./Pages/User/Cart/CartView";
 import CheckoutPage from "./Components/User/CheckoutPage/CheckoutPage";
 import EntrolledSinglePage from "./Pages/User/EnrolledCourses/EntrolledSinglePage";
-import Logins from "./Components/User/Login/Logins";
-import SignUps from "./Components/User/SignUp/SignUps";
 import Otps from "./Components/User/SignUp/Otps";
 import ForgotPasswords from "./Components/User/Login/ForgotPasswords";
 import ResetPasswords from "./Components/User/Login/ResetPasswords";
-import TutorLogins from "./Components/Tutor/Login/TutorLogins";
-import TutorSignups from "./Components/Tutor/SignUp/TutorSignups";
+import Login from "./Pages/User/Login/Login";
+import SignUp from "./Pages/User/SignUp/SignUp";
+import TutorSignup from "./Pages/Tutor/TutorSignup/TutorSignup";
+import TutorLogin from "./Pages/Tutor/TutorLogin/TutorLogin";
+import AdminLogin from "./Pages/Admin/AdminLogin/AdminLogin";
+import { tutorLogin } from "./features/tutorSlice/tutorSlice";
+
 
 
 
@@ -46,6 +48,7 @@ import TutorSignups from "./Components/Tutor/SignUp/TutorSignups";
 
 function App() {
   const dispatch = useDispatch();
+ 
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("userData");
@@ -53,7 +56,19 @@ function App() {
       const parsedUserData = JSON.parse(storedUserData);
       dispatch(login(parsedUserData));
     }
+    
   }, [dispatch]);
+
+  useEffect(() => {
+    const storedTutorData = localStorage.getItem("tutorData");
+    if (storedTutorData) {
+      const parsedTutorData = JSON.parse(storedTutorData);
+      dispatch(tutorLogin(parsedTutorData));
+    }
+  }, [dispatch]);
+
+ 
+
 
   return (
     <Router>
@@ -72,7 +87,7 @@ function App() {
 
         {/* Protected Tutor */}
 
-          <Route element={<PrivateRoute userType="tutor" />}>
+          {/* <Route element={<PrivateRoute userType="tutor" />}> */}
 
           <Route path="/tutor_dashboard" element={<TutorHome />} />
           <Route path="/my_courses" element={<My_courses />} />
@@ -83,7 +98,7 @@ function App() {
           <Route path="/tutorProfile" element={<TutorProfile />} />
           {/* <Route path="/tutorChats/:studentId" element={<TutorChat/>} /> */}
 
-         </Route>
+         {/* </Route> */}
 
         {/* Protected Admin */}
 
@@ -101,8 +116,8 @@ function App() {
         {/* User Side  */}
 
         <Route path="/" element={<Homepage />} />
-        <Route path="/login" element={<Logins />} />
-        <Route path="/register" element={<SignUps />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<SignUp />} />
         <Route path="/forget-password" element={<ForgotPasswords />} />
         <Route path="/reset-password/:id/:token" element={<ResetPasswords />} />
         <Route path="/user_otp" element={<Otps />} />
@@ -116,8 +131,8 @@ function App() {
 
         {/* Tutor side */}
 
-        <Route path="/tutorRegister" element={<TutorSignups />} />
-        <Route path="/tutorLogin" element={<TutorLogins />} />
+        <Route path="/tutorRegister" element={<TutorSignup />} />
+        <Route path="/tutorLogin" element={<TutorLogin />} />
 
         {/* admin side  */}
 

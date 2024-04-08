@@ -1,13 +1,13 @@
 import React from 'react'
 import { useState} from "react";
 import axiosInstance from "../../../Axios/axios";
-import { login } from "../../../features/tutorSlice/tutorSlice";
+import { tutorLogin } from "../../../features/tutorSlice/tutorSlice";
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch} from "react-redux"
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
-import ReplyAllIcon from '@mui/icons-material/ReplyAll';
+
 
 function TutorLogins() {
     const [tutorEmail,setTutorEmail]= useState('')
@@ -37,10 +37,12 @@ function TutorLogins() {
 
         const tutorData =response.data
 
+        console.log(tutorData,"hhhhhhhhhhhhhhhhh")
+
         localStorage.setItem('tutorData',JSON.stringify(tutorData))
         localStorage.setItem('token',JSON.stringify(tutorData.token))
 
-        dispatch(login(tutorData))
+        dispatch(tutorLogin(tutorData))
                 setTimeout(()=> {
                 navigate('/tutor_dashboard');
                 }, 2000)
@@ -55,12 +57,7 @@ function TutorLogins() {
   return (
     <>
     
-    <div className="flex justify-center pt-12 md:-mb-24 md:justify-start md:pl-12">
-    <Link to="/" className="border-b-2  pb-2 text-2xl font-bitter text-gray-900">
-     <ReplyAllIcon/>
-     <span className="ml-2">LEARNIFY</span>
-     </Link>
-  </div>
+   
     
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12 overflow-x-hidden">
   <div className="relative py-3 sm:max-w-xl sm:mx-auto">

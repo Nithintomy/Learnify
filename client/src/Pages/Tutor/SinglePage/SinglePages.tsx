@@ -14,7 +14,7 @@ function SinglePages() {
       <Breadcrumbs/>
       </div>
 
-     <div className="px-3 lg:px-3 flex flex-wrap mt-6">
+     <div className="px-3 lg:px-3 mt-6">
         <SingleViews/> 
         
       </div>

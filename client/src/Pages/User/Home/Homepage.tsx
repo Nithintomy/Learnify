@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../../features/tutorSlice/tutorSlice";
+import { login } from "../../../features/userSlice/userSlice";
 import { selectUser } from "../../../features/userSlice/userSlice";
 import Footers from "../../../Components/User/Footer/Footers";
 import TutorBanner from "../../../Components/User/Banners/TutorBanner";
@@ -29,15 +29,15 @@ function Homepage() {
   return (
     <div className="dark:bg-black bg-base-200 ">
       <Navbars />
-      <div className="lg:px-0">
+      <div className="lg:px-0 ">
        
         <Hero/>
        
       </div>
       <TrustedCompanies/>
-      <div className="flex items-center justify-center bg-gray-200 py-5">
+      <div className="flex items-center justify-center dark:text-white dark:bg-black  bg-gray-200 py-5">
       <div className="max-w-screen-xl w-full overflow-x-auto px-4">
-      <h2 className=" font-bold text-gray-800 mb-4 border-b-4 pb-2 text-3xl font-bitter" >
+      <h2 className="dark:text-white dark:bg-black font-bold text-gray-800 mb-4  pb-2 text-3xl font-bitter" >
        
        
         Let's start learning,
@@ -64,4 +64,4 @@ function Homepage() {
   );
 }
 
-export default Homepage;
+export default Homepage;  
