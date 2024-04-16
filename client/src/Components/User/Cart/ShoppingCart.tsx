@@ -67,7 +67,6 @@ const ShoppingCart = () => {
           <div className="md:w-3/4 bg-gray-200 px-10 py-10">
             <div className="flex justify-between border-b pb-8">
               <h1 className="font-semibold text-2xl">Shopping Cart</h1>
-           
             </div>
             {cartItems.length === 0 ? (
               <h1 className="text-2xl font-bold text-gray-800 dark:text-white text-center m-14">No courses Added in the cart</h1>

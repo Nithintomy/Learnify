@@ -9,7 +9,7 @@ function Breadcrumbs() {
   const courseName = queryParams.courseName;
 
   return (
-    <div className="text-sm font-bold text-blue-900 breadcrumbs p-5 mb-5">
+    <div className="text-sm font-bold text-blue-900 breadcrumbs p-5 mb-5 uppercase">
       <ul>
         <li>
           <Link to="/tutor_dashboard">

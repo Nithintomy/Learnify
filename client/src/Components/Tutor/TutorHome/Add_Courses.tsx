@@ -22,7 +22,14 @@ function Add_Courses() {
   const [croppedImage, setCroppedImage] = useState(""); // State to store cropped image URL
 
   const handleCropChange = (croppedImageUrl: string) => {
-    setCroppedImage(croppedImageUrl);
+    fetch(croppedImageUrl)
+      .then((res) => res.blob())
+      .then((blob) => {
+        setCroppedImage(new File([blob], "cropped-image.png", { type: "image/png" }));
+      })
+      .catch((error) => {
+        console.error("Error fetching cropped image:", error);
+      });
   };
 
 

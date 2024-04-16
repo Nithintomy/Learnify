@@ -8,7 +8,7 @@ const ASPECT_RATIO = 1;
 const MIN_DIMENSION = 350;
 
 interface ImageCropperProps {
-  onChange: (dataUrl: string) => void;
+  onChange: (croppedImage: File) => void; // Change the type of onChange to accept a File
 }
 
 function ImageCropper({ onChange }: ImageCropperProps) {
@@ -72,13 +72,17 @@ function ImageCropper({ onChange }: ImageCropperProps) {
       )
     );
 
-    // Get the data URL from the canvas and update the avatar
-    const dataUrl = previewCanvasRef.current.toDataURL();
-    onChange(dataUrl);
+    // Convert canvas content to blob (File)
+    previewCanvasRef.current.toBlob((blob) => {
+      if (!blob) return;
+      const croppedImage = new File([blob], "cropped-image.png", { type: "image/png" });
+      onChange(croppedImage); // Call onChange with the cropped image file
 
-    // Show toast notification
-    toast.success("Image cropped successfully!");
+      // Show toast notification
+      toast.success("Image cropped successfully!");
+    });
   };
+
   return (
     <>
       <label className="block mb-3 w-fit">
