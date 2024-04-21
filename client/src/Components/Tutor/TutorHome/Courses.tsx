@@ -8,7 +8,7 @@ import {
   Button,
 } from "@material-tailwind/react";
 
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -56,9 +56,11 @@ function Courses() {
       });
   }, []);
   if (loading) {
-    return <div style={{ justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-    <RingLoader loading={true} color="#000000" speedMultiplier={1} size={150} />
-  </div>
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+        <RingLoader loading={true} color="#000000" speedMultiplier={1} size={150} />
+      </div>
+    );
   }
 
   return (
@@ -97,7 +99,6 @@ function Courses() {
           </div>
         ))
       )}
-      <Toaster position="top-right" containerClassName="p-8 m-8" />
     </div>
     </div>
   );

@@ -59,7 +59,7 @@ function EnrolledCourses() {
   }
 
   return (
-    <div className="ml-8 flex flex-col gap-8 dark:bg-black ">
+    <div className="ml-8 flex flex-col gap-8 dark:bg-black min-h-screen ">
        <div className="flex items-center justify-center py-5">
           <div className="max-w-screen-xl w-full overflow-x-auto px-4">
             <h2 className=" font-bold text-gray-800 mb-4 border-b-4  text-3xl font uppercase dark:text-white">

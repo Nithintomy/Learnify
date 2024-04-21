@@ -3,12 +3,13 @@ import ReactCrop, { PercentCrop, makeAspectCrop, centerCrop, convertToPixelCrop 
 import "react-image-crop/dist/ReactCrop.css";
 import setCanvasPreview from "./setCanvasPreview";
 import toast from 'react-hot-toast';
+import { DotLoader } from "react-spinners";
 
 const ASPECT_RATIO = 1;
 const MIN_DIMENSION = 350;
 
 interface ImageCropperProps {
-  onChange: (croppedImage: File) => void; // Change the type of onChange to accept a File
+  onChange: (croppedImage: any) => void;
 }
 
 function ImageCropper({ onChange }: ImageCropperProps) {
@@ -17,10 +18,14 @@ function ImageCropper({ onChange }: ImageCropperProps) {
   const [imgSrc, setImgSrc] = useState<string>("");
   const [crop, setCrop] = useState<PercentCrop | undefined>();
   const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [cropping, setCropping] = useState<boolean>(false); // New state for cropping loader
 
   const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    setLoading(true); // Set loading state to true
 
     const reader = new FileReader();
     reader.addEventListener("load", () => {
@@ -29,6 +34,7 @@ function ImageCropper({ onChange }: ImageCropperProps) {
       imageElement.src = imageUrl;
 
       imageElement.addEventListener("load", (e) => {
+        setLoading(false); // Set loading state to false once the image is loaded
         if (error) setError("");
         const { naturalWidth, naturalHeight } = e.currentTarget as HTMLImageElement;
         if (naturalWidth < MIN_DIMENSION || naturalHeight < MIN_DIMENSION) {
@@ -62,6 +68,9 @@ function ImageCropper({ onChange }: ImageCropperProps) {
   const onCropImage = () => {
     if (!imgRef.current || !previewCanvasRef.current || !crop) return;
 
+    setLoading(true); // Set loading state to true
+    setCropping(true); // Set cropping state to true
+
     setCanvasPreview(
       imgRef.current,
       previewCanvasRef.current,
@@ -72,16 +81,19 @@ function ImageCropper({ onChange }: ImageCropperProps) {
       )
     );
 
-    // Convert canvas content to blob (File)
     previewCanvasRef.current.toBlob((blob) => {
-      if (!blob) return;
+      setLoading(false); // Set loading state to false
+      if (!blob) {
+        console.error("Blob is null");
+        return;
+      }
       const croppedImage = new File([blob], "cropped-image.png", { type: "image/png" });
-      onChange(croppedImage); // Call onChange with the cropped image file
 
-      // Show toast notification
+      onChange(URL.createObjectURL(croppedImage));
       toast.success("Image cropped successfully!");
-    });
+    }, "image/png");
   };
+
 
   return (
     <>
@@ -96,7 +108,11 @@ function ImageCropper({ onChange }: ImageCropperProps) {
         />
       </label>
       {error && <p className="text-red-500 text-xs">{error}</p>}
-      {imgSrc && (
+      {loading ? ( 
+        <div className="flex justify-center items-center h-64">
+          <DotLoader color="#6A64F1" loading={loading} size={30} />
+        </div>
+      ) : imgSrc && (
         <div className="flex flex-col items-center">
           <ReactCrop
             crop={crop || undefined}
@@ -122,7 +138,12 @@ function ImageCropper({ onChange }: ImageCropperProps) {
           </button>
         </div>
       )}
-       {crop && (
+      {crop && !cropping && ( 
+        <div className="flex justify-center items-center h-64">
+          <DotLoader color="#6A64F1" loading={loading} size={30} />
+        </div>
+      )}
+      {crop && (
         <>
           <canvas
             ref={previewCanvasRef}
@@ -135,7 +156,7 @@ function ImageCropper({ onChange }: ImageCropperProps) {
               height: 150,
             }}
           />
-          
+
           <img src={previewCanvasRef.current?.toDataURL()} alt="Cropped" style={{ maxWidth: "100%", marginTop: "10px" }} />
         </>
       )}

@@ -45,7 +45,7 @@ function Navbars() {
     <div className="navbar flex justify-between relative">
       <div className="navbar-start">
         <Link
-          to="/"
+          to="/dashboard"
           className="btn btn-ghost text-2xl font-bold ml-14  dark:text-white"
         >
           LEARNIFY

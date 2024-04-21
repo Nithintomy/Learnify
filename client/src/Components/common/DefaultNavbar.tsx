@@ -55,20 +55,21 @@ function DefaultNavbar() {
         </div>
         <div className="hidden md:flex items-center justify-center">
           <div className="flex items-center ml-4">
-        
-              <div className="flex">
-                <Link to="/login" className="mx-2">
-                  <button className="text-white bg-purple-500 border-2 border-purple-500 py-2 px-4 rounded-full focus:outline-none hover:bg-transparent hover:text-purple-500 transition duration-300">
+          <div className="flex">
+                <Link to="/login">
+                  <button className="btn btn-outline btn-info mx-5">
                     Login
                   </button>
                 </Link>
                 <Link to="/register">
-                  <button className="text-white bg-purple-500 border-2 border-purple-500 py-2 px-4 rounded-full focus:outline-none hover:bg-transparent hover:text-purple-500 transition duration-300">
-                    Sign up
+                  <button className="btn btn-outline btn-info mr-3">
+                 
+                    Signup
                   </button>
                 </Link>
                 <Link to="/tutorLogin" className="mx-2">
-                  <button className="text-white bg-purple-500 border-2 border-purple-500 py-2 px-4 rounded-full focus:outline-none hover:bg-transparent hover:text-purple-500 transition duration-300">
+                  <button className="btn btn-outline btn-info mr-5">
+    
                     Tutor Login
                   </button>
                 </Link>

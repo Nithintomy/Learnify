@@ -7,8 +7,10 @@ function My_courses() {
   return (
     <div className="dark:bg-black bg-gray-200 h-full">
       <Navbars/>
-      <div className="px-3 lg:px-3 flex flex-wrap  m-8">
+      <div className="flex justify-center items-center ">
+        <div className="w-full  p-4 mb-9">
         <Courses /> 
+      </div>
       </div>
      <div className='pt-10'>
      <Footers/>

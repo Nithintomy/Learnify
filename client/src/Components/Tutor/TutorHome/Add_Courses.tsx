@@ -19,30 +19,22 @@ function Add_Courses() {
   const [price, setPrice] = useState(0);
   const [category, setCategory] = useState("");
   const [categoryOptions, setCategoryOptions] = useState<Category[]>([]);
-  const [croppedImage, setCroppedImage] = useState(""); // State to store cropped image URL
+  const [croppedImage, setCroppedImage] = useState<File | null>(null);
 
-  const handleCropChange = (croppedImageUrl: string) => {
+  const handleCropChange = (croppedImageUrl: any) => {
+    console.log(croppedImageUrl,"crop")
     fetch(croppedImageUrl)
       .then((res) => res.blob())
       .then((blob) => {
-        setCroppedImage(new File([blob], "cropped-image.png", { type: "image/png" }));
+        const croppedImageFile = new File([blob], "cropped-image.png", { type: "image/png" });
+        setCroppedImage(croppedImageFile);
       })
       .catch((error) => {
         console.error("Error fetching cropped image:", error);
       });
   };
+  
 
-
-  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const files = e.target.files;
-  //   if (files && files.length > 0) {
-  //     const file = files[0];
-  //     setPhoto(file);
-  //   } else {
-  //     // No file selected
-  //     setPhoto(null);
-  //   }
-  // };
 
 
   try {
@@ -93,19 +85,19 @@ function Add_Courses() {
   
 
   
-    if (!croppedImage) {
-      toast.error("Please crop the image");
-      return;
-    }
-
     try {
+
+      if (!croppedImage) {
+        toast.error("Please crop the image");
+        return;
+      }
+
       // Upload cropped image to Cloudinary
-      console.log(croppedImage,"cropppppppppppp")
       const formData = new FormData();
       formData.append("file", croppedImage);
       formData.append("upload_preset", "Learnify_uploads");
       formData.append("cloud_name", "nithin7176");
-      console.log("beforee")
+
       const response = await axios.post(
         "https://api.cloudinary.com/v1_1/nithin7176/image/upload",
         formData
@@ -141,9 +133,10 @@ function Add_Courses() {
         console.error("Invalid response from Cloudinary", response.data);
         toast.error("Error uploading image to Cloudinary");
       }
-    } catch (error) {
+    } catch (error:any) {
       console.error("Error uploading image:", error);
       toast.error("Error uploading image: Please try again later");
+      console.log("Cloudinary Error Response:", error.response);
     }
   };
 
@@ -233,18 +226,7 @@ function Add_Courses() {
             <label className="mb-3 block text-base font-medium text-[#07074D]">
               Course Image
             </label>
-            {/* <input
-              className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-              type="file"
-              onChange={handleFileChange}
-            />
-            {photo && (
-              <img
-                src={URL.createObjectURL(photo)}
-                alt="Course"
-                className="mt-2 h-16 w-16 object-cover rounded"
-              />
-            )} */}
+       
 
 <ImageCropper onChange={handleCropChange} />
           </div>

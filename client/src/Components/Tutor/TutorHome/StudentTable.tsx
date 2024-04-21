@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { TutorBaseUrl } from '../../../Api'
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import 'react-toastify/dist/ReactToastify.css';
 import { RingLoader } from 'react-spinners';
 import Breadcrumbs from '../../common/Breadcrumbs';
@@ -104,7 +104,7 @@ function StudentTable() {
          ))}
   </table>
 </div>
-<Toaster position="top-right" containerClassName="p-8 m-8" />
+
    </div>
   )
 }

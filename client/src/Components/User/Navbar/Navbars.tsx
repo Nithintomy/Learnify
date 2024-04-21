@@ -67,33 +67,11 @@ function Navbars() {
               onClick={handleMobileMenuToggle}
               aria-expanded={showMobileMenu}
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {showMobileMenu ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16m-7 6h7"
-                  />
-                )}
-              </svg>
+              &#9776;
             </button>
           </div>
         </div>
         <div className="hidden md:flex items-center justify-center">
- 
           <ul className="flex justify-center menu menu-horizontal font-semibold ml-5 items-center">
             <li>
               <Link to="/" className="mx-3 nav-link  ">
@@ -121,7 +99,6 @@ function Navbars() {
         </div>
         <div className="hidden md:flex items-center justify-center">
           <div className="flex items-center ml-4">
-            
             {user.user ? (
               <div className="flex items-center ml-4">
                 <button className="btn btn-ghost btn-circle">
@@ -167,8 +144,6 @@ function Navbars() {
                   </button>
                 </Link>
                 <div className="dropdown dropdown-end absolute lg:relative z-50 top-full lg:top-auto lg:right-auto">
-                 
-
                   <div
                     tabIndex={0}
                     role="button"
@@ -195,7 +170,7 @@ function Navbars() {
                     >
                       Profile
                     </Link>
-                    <li  className="block w-full  py-2 text-left text-black">
+                    <li className="block w-full  py-2 text-left text-black">
                       <a>Settings</a>
                     </li>
                     <li>
@@ -208,18 +183,20 @@ function Navbars() {
               </div>
             ) : (
               <div className="flex">
-                <Link to="/login" className="mx-2">
-                  <button className="text-white bg-purple-500 border-2 border-purple-500 py-2 px-4 rounded-full focus:outline-none hover:bg-transparent hover:text-purple-500 transition duration-300">
+                <Link to="/login">
+                  <button className="btn btn-outline btn-info mx-5">
                     Login
                   </button>
                 </Link>
                 <Link to="/register">
-                  <button className="text-white bg-purple-500 border-2 border-purple-500 py-2 px-4 rounded-full focus:outline-none hover:bg-transparent hover:text-purple-500 transition duration-300">
-                    Sign up
+                  <button className="btn btn-outline btn-info mr-3">
+                 
+                    Signup
                   </button>
                 </Link>
                 <Link to="/tutorLogin" className="mx-2">
-                  <button className="text-white bg-purple-500 border-2 border-purple-500 py-2 px-4 rounded-full focus:outline-none hover:bg-transparent hover:text-purple-500 transition duration-300">
+                  <button className="btn btn-outline btn-info mr-5">
+    
                     Tutor Login
                   </button>
                 </Link>
