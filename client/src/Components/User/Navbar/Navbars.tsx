@@ -138,7 +138,7 @@ function Navbars() {
                         />
                       </svg>
                       <span className="badge badge-sm indicator-item">
-                        {count}
+                        {count ? count : 0}
                       </span>
                     </div>
                   </button>
@@ -190,13 +190,11 @@ function Navbars() {
                 </Link>
                 <Link to="/register">
                   <button className="btn btn-outline btn-info mr-3">
-                 
                     Signup
                   </button>
                 </Link>
                 <Link to="/tutorLogin" className="mx-2">
                   <button className="btn btn-outline btn-info mr-5">
-    
                     Tutor Login
                   </button>
                 </Link>

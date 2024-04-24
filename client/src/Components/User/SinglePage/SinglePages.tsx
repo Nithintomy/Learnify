@@ -13,6 +13,7 @@ import toast, { Toaster } from "react-hot-toast";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import { DotLoader } from "react-spinners";
 
 interface Rating {
   user: {
@@ -36,6 +37,7 @@ function SinglePages() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentVideoUrl, setCurrentVideoUrl] = useState<string>("");
   const [lessons, setLessons] = useState<Lesson[]>([]);
+  const [imageLoading, setImageLoading] = useState(true);
 
   console.log(userData, "userdata illa");
 
@@ -77,6 +79,7 @@ function SinglePages() {
         dispatch(setCourseDetails(response.data));
         // Check enrollment status for this course
         checkEnrollmentStatus(response.data._id);
+        setImageLoading(false);
       })
       .catch((error) => {
         console.error(error);
@@ -180,11 +183,17 @@ function SinglePages() {
       <section className="text-gray-600 dark:text-white body-font overflow-hidden">
         <div className="container px-5 py-24 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
-            <img
-              className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-              src={courseDetails?.photo}
-              alt="Course Image"
-            />
+          {imageLoading ? (
+               <div className="flex justify-center items-center h-64">
+               <DotLoader color="#6A64F1" size={30} />
+             </div>
+            ) : (
+              <img
+                className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
+                src={courseDetails?.photo}
+                alt="Course Image"
+              />
+            )}
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
               <h2 className="text-sm dark:text-white title-font text-gray-500 tracking-widest">
                 COURSE NAME

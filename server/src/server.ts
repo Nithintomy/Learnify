@@ -82,7 +82,7 @@ io.on('connection' , (socket) => {
   
       return socket.in(user).emit('message received', message);
     });
-  });
+  });      
   
   socket.on('disconnect' , () => {
       // console.log('disconnected');

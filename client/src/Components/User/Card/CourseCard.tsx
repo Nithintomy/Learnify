@@ -35,26 +35,36 @@ function CourseCard() {
       });
   }, []);
 
-  const handleAddToCart = (courseId: string) => {
+  const handleAddToCart = async (courseId: string) => {
     if (userData.user) {
-      axios
-        .post(`${UserBaseUrl}/add-to-cart`, {
-          courseId: courseId,
-          userId: userData.user._id,
-          quantity: 1,
-        })
-        .then((response) => {
-          console.log(response, "added to cart");
-          toast.success(response.data.message);
-        })
-        .catch((error) => {
-          console.error("Error occur while adding to cart", error);
-          toast.error(error.response.data.message);
-        });
+      try {
+        // Check enrollment status
+        const response = await axios.get(
+          `${UserBaseUrl}/check-enrollment/${userData.user._id}/${courseId}`
+        );
+        const isEnrolled = response.data.isEnrolled;
+        
+        if (isEnrolled) {
+          // Show toast indicating the course is already purchased
+          toast.error("You have already purchased this course.");
+        } else {
+          // Add the course to the cart
+          await axios.post(`${UserBaseUrl}/add-to-cart`, {
+            courseId: courseId,
+            userId: userData.user._id,
+            quantity: 1,
+          });
+          toast.success("Course added to cart successfully.");
+        }
+      } catch (error) {
+        console.error("Error checking enrollment status or adding to cart:", error);
+        toast.error("Something went wrong.");
+      }
     } else {
       toast.error("Please log in to add the course to your cart.");
     }
   };
+  
 
   const filteredCourses = showAllCourses ? courses : courses.slice(0, 3);
 

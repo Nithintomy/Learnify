@@ -4,6 +4,8 @@ import "react-image-crop/dist/ReactCrop.css";
 import setCanvasPreview from "./setCanvasPreview";
 import toast from 'react-hot-toast';
 import { DotLoader } from "react-spinners";
+import imageCompression from 'browser-image-compression';
+
 
 const ASPECT_RATIO = 1;
 const MIN_DIMENSION = 350;
@@ -67,10 +69,10 @@ function ImageCropper({ onChange }: ImageCropperProps) {
 
   const onCropImage = () => {
     if (!imgRef.current || !previewCanvasRef.current || !crop) return;
-
+  
     setLoading(true); // Set loading state to true
     setCropping(true); // Set cropping state to true
-
+  
     setCanvasPreview(
       imgRef.current,
       previewCanvasRef.current,
@@ -80,19 +82,33 @@ function ImageCropper({ onChange }: ImageCropperProps) {
         imgRef.current.height
       )
     );
-
-    previewCanvasRef.current.toBlob((blob) => {
+  
+    previewCanvasRef.current.toBlob(async (blob) => {
       setLoading(false); // Set loading state to false
       if (!blob) {
         console.error("Blob is null");
         return;
       }
-      const croppedImage = new File([blob], "cropped-image.png", { type: "image/png" });
-
-      onChange(URL.createObjectURL(croppedImage));
-      toast.success("Image cropped successfully!");
+  
+      try {
+        const options = {
+          maxSizeMB: 1, // Max size of the compressed image (adjust as needed)
+          maxWidthOrHeight: 1920, // Max width or height of the compressed image (adjust as needed)
+          useWebWorker: true,
+        };
+  
+        toast.success("Image cropped and compressed successfully!");
+        const compressedBlob = await imageCompression(blob as any, options);
+        const compressedImage = new File([compressedBlob], "cropped-compressed-image.png", { type: "image/png" } );
+  
+        onChange(URL.createObjectURL(compressedImage));
+      } catch (error) {
+        console.error("Error compressing image:", error);
+        toast.error("Error compressing image. Please try again.");
+      }
     }, "image/png");
   };
+  
 
 
   return (

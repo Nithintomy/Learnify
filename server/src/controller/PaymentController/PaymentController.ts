@@ -78,10 +78,13 @@ const verifyPayment = async (req: Request, res: Response) => {
 
       console.log("Order saved:", order);
     
-
-      res.redirect(
-        `https://learnify.website/paymentSuccess?reference=${razorpay_payment_id}`
-      );
+      let redirectUrl;
+      if (process.env.NODE_ENV === 'production') {
+        redirectUrl = `https://learnify.website/paymentSuccess?reference=${razorpay_payment_id}`;
+      } else {
+        redirectUrl = `http://localhost:3000/paymentSuccess?reference=${razorpay_payment_id}`;
+      }
+      res.redirect(redirectUrl);
     } else {
       res.status(400).json({
         success: false,
@@ -98,7 +101,8 @@ const key = (req: Request, res: Response) => {
 };
 
 const stripePayment = async (req: Request, res: Response) => {
-  try {
+  try {      
+    console.log("enter")
     console.log(req.body, "bodyyyy");
 
     const line_items = req.body.cartItems.map((item: any) => {
@@ -125,8 +129,9 @@ const stripePayment = async (req: Request, res: Response) => {
       },
       line_items,
       mode: "payment",
-      success_url: `${process.env.CLIENT_URL}/paymentSuccess`,
-      cancel_url: `${process.env.CLIENT_URL}/cart`,
+      success_url: process.env.NODE_ENV === 'production' ? `${process.env.CLIENT_URL}/paymentSuccess` : 'http://localhost:3000/paymentSuccess',
+
+      cancel_url: process.env.NODE_ENV === 'production' ? `${process.env.CLIENT_URL}/cart` : 'http://localhost:3000/cart'
     });
 
     console.log(session.payment_status, "status");
