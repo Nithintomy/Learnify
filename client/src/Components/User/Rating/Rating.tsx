@@ -4,7 +4,7 @@ import Rating from "react-rating-stars-component";
 import { UserBaseUrl } from "../../../Api";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../features/userSlice/userSlice";
-import { toast } from "react-toastify";
+import { toast, Toaster } from "react-hot-toast";
 
 interface Rating {
   rating: number;
@@ -15,34 +15,35 @@ const RatingComponent: React.FC<{ courseId: string }> = ({ courseId }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [ratings, setRatings] = useState<Rating[]>([]);
- 
+
   const user = useSelector(selectUser);
 
-  const handleStarClick = (starRating:any) => {
+  const handleStarClick = (starRating: any) => {
     setRating(starRating);
   };
 
   const submitRating = async () => {
     if (rating === 0 || comment === "") {
-      alert("fill both ");
+      toast.error("fill both ");
       return;
     }
     if (rating < 1 || rating > 5) {
-      alert("Rating must be between 1 and 5 stars.");
+      toast.error("Rating must be between 1 and 5 stars.");
       return;
     }
 
     if (comment.trim() === "") {
-      alert("Comment cannot be empty.");
+      toast.error("Comment cannot be empty.");
       return;
     }
 
     if (comment.length > 500) {
-      alert("Comment exceeds the character limit of 500.");
+      toast.error("Comment exceeds the character limit of 500.");
       return;
     }
 
-    console.log(ratings, "ratings ");
+    console.log(ratings)
+
     try {
       await axios.post(`${UserBaseUrl}/ratings`, {
         rating,
@@ -53,6 +54,7 @@ const RatingComponent: React.FC<{ courseId: string }> = ({ courseId }) => {
 
       setRating(0);
       setComment("");
+      toast.success("Rating submitted successfully.");
       fetchRatings();
     } catch (error: any) {
       toast.error(error.response.data);
@@ -98,10 +100,10 @@ const RatingComponent: React.FC<{ courseId: string }> = ({ courseId }) => {
       <button
         onClick={submitRating}
         className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        
       >
         Submit
       </button>
+      <Toaster position="top-right" containerClassName="p-8 m-8" />
     </div>
   );
 };

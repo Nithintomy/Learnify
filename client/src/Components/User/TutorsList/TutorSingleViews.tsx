@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { UserBaseUrl } from "../../../Api";
 import { RingLoader } from "react-spinners";
+import { Link } from "react-router-dom";
 
 interface TutorDetails {
   photo: string;
@@ -60,9 +61,12 @@ function TutorSingleViews({ tutorId }: any) {
                   <span className="absolute inline-block w-full bottom-0.5 h-2 "></span>
                   <span className="relative"> Have a question? </span>
                   <br />
+                  <Link to={'/courses'}>
+                  
                   <button className="btn btn-active btn-accent mt-5 text-sm font-medium text-white rounded-md">
                     Buy Our Course
                   </button>
+                  </Link>
                 </span>
               </p>
             </div>

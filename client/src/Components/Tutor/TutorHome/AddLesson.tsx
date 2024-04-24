@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { TutorBaseUrl } from "../../../Api";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { DotLoader } from "react-spinners";
 
 interface Category {
   _id: string;
@@ -19,6 +20,7 @@ function AddLesson() {
   const [category, setCategory] = useState("");
   const [categoryOptions, setCategoryOptions] = useState<Category[]>([]);
   const [cloudanaryURL, setCloudanaryURL] = useState("");
+  const [uploading, setUploading] = useState(false);
   const nav = useNavigate();
 
   const storedTutorData = localStorage.getItem("tutorData");
@@ -60,6 +62,7 @@ function AddLesson() {
   const handlevideoUpload = async () => {
     try {
       if (video) {
+        setUploading(true);
         const formData = new FormData();
         formData.append("file", video);
         formData.append("upload_preset", "Learnify_uploads");
@@ -88,6 +91,8 @@ function AddLesson() {
     } catch (error) {
       console.error("Error while Uploading Video:", error);
       toast.error("Error uploading Video: Please try again later");
+    } finally {
+      setUploading(false); // Set uploading state back to false when upload is complete
     }
   };
 
@@ -139,8 +144,8 @@ function AddLesson() {
       })
       .then((response) => {
         console.log(response.data);
+        toast.success("Lesson Added Successfully");
         setTimeout(() => {
-          toast.success("Lesson Added Successfully");
           nav("/my_courses");
         }, 3000);
       })
@@ -256,9 +261,16 @@ function AddLesson() {
           <div>
             <button
               type="submit"
-              className="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+              className="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none relative"
+              disabled={uploading}
             >
-              Add Lesson
+              {uploading ? (
+                <span className="absolute top-0 left-0 w-full h-full py-3 px-8 flex items-center justify-center">
+                  <DotLoader color="#fff" loading={true} size={15} />
+                </span>
+              ) : (
+                "Add Lesson"
+              )}
             </button>
           </div>
         </form>
