@@ -77,7 +77,14 @@ const verifyPayment = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 $push: { students: studentId },
             });
             console.log("Order saved:", order);
-            res.redirect(`https://learnify.website/paymentSuccess?reference=${razorpay_payment_id}`);
+            let redirectUrl;
+            if (process.env.NODE_ENV === 'production') {
+                redirectUrl = `https://learnify.website/paymentSuccess?reference=${razorpay_payment_id}`;
+            }
+            else {
+                redirectUrl = `http://localhost:3000/paymentSuccess?reference=${razorpay_payment_id}`;
+            }
+            res.redirect(redirectUrl);
         }
         else {
             res.status(400).json({
@@ -97,6 +104,7 @@ const key = (req, res) => {
 exports.key = key;
 const stripePayment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        console.log("enter");
         console.log(req.body, "bodyyyy");
         const line_items = req.body.cartItems.map((item) => {
             var _a, _b, _c, _d;
@@ -122,8 +130,8 @@ const stripePayment = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             },
             line_items,
             mode: "payment",
-            success_url: `${process.env.CLIENT_URL}/paymentSuccess`,
-            cancel_url: `${process.env.CLIENT_URL}/cart`,
+            success_url: process.env.NODE_ENV === 'production' ? `${process.env.CLIENT_URL}/paymentSuccess` : 'http://localhost:3000/paymentSuccess',
+            cancel_url: process.env.NODE_ENV === 'production' ? `${process.env.CLIENT_URL}/cart` : 'http://localhost:3000/cart'
         });
         console.log(session.payment_status, "status");
         if (session.payment_status === "unpaid") {
