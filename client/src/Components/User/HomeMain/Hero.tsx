@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 function Hero() {
   return (
     <div className="relative ">
-      <div className="hero min-h-screen dark:text-white dark:bg-black bg-base-200">
+      <div className="hero min-h-screen dark:text-white dark:bg-black ">
         <div className="hero-content lg:flex-row-reverse relative z-10">
           <div className="lg:w-full lg:h-full lg:max-h-screen lg:overflow-hidden gap-3 lg:flex lg:items-center">
             <div className="avatar hidden lg:block">

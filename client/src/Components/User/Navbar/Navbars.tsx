@@ -51,7 +51,7 @@ function Navbars() {
   };
 
   return (
-    <nav className="dark:text-white shadow-lg">
+    <nav className="dark:text-white bg-gray-200 shadow-xl">
       <div className="container mx-auto px-6 py-3 flex items-center justify-between">
         <div className="flex items-center">
           <Link

@@ -31,7 +31,7 @@ function Homepage() {
         <Hero />
       </div>
       <TrustedCompanies />
-      <div className="flex  dark:text-white dark:bg-black bg-gray-200 py-5 mx-10">
+      <div className="flex  dark:text-white dark:bg-black py-5 mx-10">
         <h2 className="dark:text-white dark:bg-black font-bold text-gray-800 mb-4 pb-2 text-3xl font-bitter">
           Let's start learning,
           <span className="text-black text-3xl font-bold font-bitter ml-4 dark:text-white">{userName}</span>
