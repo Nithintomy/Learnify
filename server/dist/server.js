@@ -21,7 +21,7 @@ const app = (0, express_1.default)();
 const server = http_1.default.createServer(app);
 exports.io = new socket_io_1.Server(server, {
     cors: {
-        origin: ['https://learnify.website', 'https://learnify.onrender.com'],
+        origin: ['https://learnify.website', 'https://learnify-1fp2.onrender.com'],
         methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
         credentials: true,
     },
